@@ -5,4 +5,3 @@ commit_message="$1"
 
 # use git-conventional-commits, see https://github.com/qoomon/git-conventional-commits
 git-conventional-commits commit-msg-hook "$commit_message"
-# test
