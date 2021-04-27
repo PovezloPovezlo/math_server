@@ -1,7 +1,3 @@
-//
-// Created by NolikTop on 20.04.2021.
-//
-
 #include "LongNumber.h"
 #include "LongNumberException.h"
 #include <vector>
@@ -51,8 +47,15 @@ DIGIT &LongNumber::operator[](size_t index) {
 }
 
 std::string LongNumber::toString() {
-	//todo
-	return std::string();
+	std::string result;
+	if(!this->isPositive){
+		result += "-";
+	}
+	for(auto i = this->digits.rbegin(); i < this->digits.rend(); i++){
+		result += std::to_string(*i);
+	}
+
+	return result;
 }
 
 LongNumber LongNumber::empty() {

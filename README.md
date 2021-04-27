@@ -10,25 +10,14 @@
 
 ## Установка
 
-Перед установкой убедитесь, что у вас стоит git, [cmake](https://cmake.org) и [nodejs](https://nodejs.org/en/) (нужен для проверки текстов коммитов)
-
-Необходимо поставить `git-conventional-commits`:
-```shell
-npm install --global git-conventional-commits
-```
+Перед установкой убедитесь, что у вас стоит git и [cmake](https://cmake.org)
 
 Далее клонируем сам репозиторий
 ```shell
 git clone git@github.com:PovezloPovezlo/math_server.git
 ```
 
-Появится папка `math_server`. 
-Заходим в нее и пишем 
-```shell
-git config core.hooksPath '.git-hooks'
-```
-
-Готово
+Появится папка `math_server`. Готово
 
 ## Как делать правки?
 [как делать коммиты](https://www.youtube.com/watch?v=DMQA0BhVDZk)

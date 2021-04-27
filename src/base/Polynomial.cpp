@@ -1,7 +1,3 @@
-//
-// Created by NolikTop on 27.04.2021.
-//
-
 #include "Polynomial.h"
 
 #include <utility>

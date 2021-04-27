@@ -1,7 +1,3 @@
-//
-// Created by NolikTop on 26.04.2021.
-//
-
 #include "RationalFraction.h"
 
 #include <utility>

@@ -1,8 +1,3 @@
-//
-// Created by NolikTop on 26.04.2021.
-//
-
-
 #pragma once
 
 #include "LongNumber.h"

@@ -1,7 +1,3 @@
-//
-// Created by NolikTop on 20.04.2021.
-//
-
 #include "LongNumberException.h"
 
 using namespace base;
