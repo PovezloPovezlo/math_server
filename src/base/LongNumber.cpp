@@ -17,7 +17,7 @@ LongNumber::LongNumber(std::string value) {
 	const size_t firstDigitIndex = this->isPositive ? 0 : 1;
 
 	if(value[firstDigitIndex] == '0' && value.length() > firstDigitIndex + 1){
-		throw LongNumberException("Number cant starts with 0 digit if its not equal 0");
+		throw LongNumberException("Number can't starts with 0 digit if its not equal 0");
 	}
 
 	for(
@@ -39,6 +39,7 @@ size_t LongNumber::length() const {
 }
 
 size_t LongNumber::lastElementIndex() const {
+	// гарантируется, что длина будет >= 1, поэтому нет необходимости писать проверку на нулевую длину
 	return this->length() - 1;
 }
 
