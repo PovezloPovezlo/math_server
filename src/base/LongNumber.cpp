@@ -34,6 +34,12 @@ LongNumber::LongNumber(std::string value) {
 
 }
 
+LongNumber::LongNumber(size_t size, bool isPositive) : isPositive(isPositive) {
+	for(int i = 0; i < size; ++i){
+		this->digits.push_back(0);
+	}
+}
+
 size_t LongNumber::length() const {
 	return this->digits.size();
 }
@@ -61,4 +67,8 @@ std::string LongNumber::toString() {
 
 LongNumber LongNumber::empty() {
 	return LongNumber("0");
+}
+
+LongNumber LongNumber::fromInt(int value) {
+	return LongNumber(std::to_string(value));
 }

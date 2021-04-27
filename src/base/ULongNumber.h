@@ -9,7 +9,7 @@ namespace base {
 		explicit ULongNumber(std::string value);
 
 		static ULongNumber empty();
-
+		static ULongNumber fromInt(unsigned int value);
 	};
 
 }

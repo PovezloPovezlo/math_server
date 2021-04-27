@@ -6,10 +6,13 @@
 namespace base {
 
 	class Polynomial {
-	public:
+	private:
 		std::vector<RationalFraction> coefficients;
 
+	public:
+
 		explicit Polynomial(std::vector<RationalFraction> coefficients);
+		explicit Polynomial(size_t size);
 
 		[[nodiscard]] size_t degree() const;
 

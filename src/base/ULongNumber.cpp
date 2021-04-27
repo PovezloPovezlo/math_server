@@ -14,3 +14,7 @@ ULongNumber::ULongNumber(std::string value) : LongNumber(std::move(value)) {
 ULongNumber ULongNumber::empty() {
 	return ULongNumber("0");
 }
+
+ULongNumber ULongNumber::fromInt(unsigned int value) {
+	return ULongNumber(std::to_string(value));
+}

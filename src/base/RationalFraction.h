@@ -13,6 +13,7 @@ namespace base {
 
 		RationalFraction(LongNumber numerator, NLongNumber denominator);
 
+		static RationalFraction empty();
 	};
 
 }

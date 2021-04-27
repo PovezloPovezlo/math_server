@@ -9,6 +9,7 @@ namespace base {
 	public:
 		explicit NLongNumber(std::string value);
 
+		static NLongNumber fromInt(unsigned int value);
 	};
 
 }
