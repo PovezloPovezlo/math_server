@@ -3,31 +3,58 @@
 //
 
 #include "LongNumber.h"
+#include "LongNumberException.h"
+#include <vector>
 
 using namespace base;
 
 LongNumber::LongNumber(std::string value) {
-	this->isPositive = value[0] != '-';
-	if(!this->isPositive) {
-		value = value.substr(1);
+	if(
+		value.length() == 0 ||
+		(value[0] == '-' && value.length() == 1)
+	){
+		throw LongNumberException("Value must be not empty");
 	}
 
-	//todo validation
-	this->data = value;
+	this->isPositive = value[0] != '-';
+
+	const size_t firstDigitIndex = this->isPositive ? 0 : 1;
+
+	if(value[firstDigitIndex] == '0' && value.length() > firstDigitIndex + 1){
+		throw LongNumberException("Number cant starts with 0 digit if its not equal 0");
+	}
+
+	for(
+		size_t i = firstDigitIndex;
+		i < value.length();
+		++i
+	){
+		if(value[i] >= '0' && value[i] <= '9') {
+			this->digits.push_back(value[i] - '0');
+		}else{
+			throw LongNumberException("Unknown symbol '" + std::to_string(value[i]) + "'");
+		}
+	}
+
 }
 
 size_t LongNumber::length() const {
-	return this->data.length();
+	return this->digits.size();
 }
 
-DIGIT LongNumber::getDigitAt(size_t pos) {
-	if(pos >= this->length()){
-		throw std::out_of_range("Out of range");
-	}
-
-	return this->data[this->length() - 1 - pos] - '0';
+size_t LongNumber::lastElementIndex() const {
+	return this->length() - 1;
 }
 
-DIGIT LongNumber::getDigitFromEndAt(size_t pos) {
-	return this->getDigitAt(this->length() - 1 - pos);
+DIGIT &LongNumber::operator[](size_t index) {
+	return this->digits[index];
+}
+
+std::string LongNumber::toString() {
+	//todo
+	return std::string();
+}
+
+LongNumber LongNumber::empty() {
+	return LongNumber("0");
 }
