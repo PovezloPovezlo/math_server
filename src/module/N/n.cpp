@@ -1,6 +1,6 @@
-#include <base/ULongNumber.h>
-#include <base/NotImplementedException.h>
 #include "n.h"
+#include <base/NLongNumber.h>
+#include <base/NotImplementedException.h>
 
 using namespace base;
 using namespace module;
@@ -9,6 +9,7 @@ using namespace module;
 // Собственно говоря поэтому в большинстве мест здесь ULongNumber (неотрицательное целое число), а не NLongNumber (натуральное число)
 
 /**
+ * @authors Имя Фамилия авторов
  * N-1
  *
  * Сравнение натуральных чисел
@@ -21,6 +22,7 @@ DIGIT COM_NN_D(const ULongNumber &a, const ULongNumber &b) {
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-2
  *
  * Проверка на ноль
@@ -32,17 +34,19 @@ bool NZER_N_B(const ULongNumber &a) {
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-3
  *
  * Добавление 1 к натуральному числу
  * @param a
  * @return
  */
-base::ULongNumber ADD_1N_N(const ULongNumber &a) {
+ULongNumber ADD_1N_N(const ULongNumber &a) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-4
  * Требуется: COM_NN_D
  *
@@ -51,11 +55,12 @@ base::ULongNumber ADD_1N_N(const ULongNumber &a) {
  * @param b
  * @return
  */
-base::ULongNumber ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
+ULongNumber ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-5
  * Требуется: COM_NN_D
  *
@@ -64,11 +69,12 @@ base::ULongNumber ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
  * @param b
  * @return разница чисел по модулю
  */
-base::ULongNumber SUB_NN_N(const ULongNumber &a, const ULongNumber &b) {
+ULongNumber SUB_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-6
  *
  * Умножение натурального числа на цифру
@@ -76,11 +82,12 @@ base::ULongNumber SUB_NN_N(const ULongNumber &a, const ULongNumber &b) {
  * @param b
  * @return
  */
-base::ULongNumber MUL_ND_N(const ULongNumber &a, DIGIT b) {
+ULongNumber MUL_ND_N(const ULongNumber &a, DIGIT b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-7
  *
  * Умножение натурального числа на 10^k
@@ -88,11 +95,12 @@ base::ULongNumber MUL_ND_N(const ULongNumber &a, DIGIT b) {
  * @param k
  * @return
  */
-base::ULongNumber MUL_Nk_N(const ULongNumber &a, const ULongNumber &k) {
+ULongNumber MUL_Nk_N(const ULongNumber &a, const ULongNumber &k) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-8
  * Требуется: MUL_ND_N, MUL_Nk_N, ADD_NN_N
  *
@@ -101,11 +109,12 @@ base::ULongNumber MUL_Nk_N(const ULongNumber &a, const ULongNumber &k) {
  * @param b
  * @return
  */
-base::ULongNumber MUL_NN_N(const ULongNumber &a, const ULongNumber &b) {
+ULongNumber MUL_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-9
  * Требуется: SUB_NN_N, MUL_ND_N, COM_NN_D
  *
@@ -115,11 +124,12 @@ base::ULongNumber MUL_NN_N(const ULongNumber &a, const ULongNumber &b) {
  * @param b
  * @return
  */
-base::ULongNumber SUB_NDN_N(const base::ULongNumber& a, DIGIT k, const base::ULongNumber& b) {
+ULongNumber SUB_NDN_N(const ULongNumber& a, DIGIT k, const ULongNumber& b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-10
  * Требуется: MUL_Nk_N, COM_NN_D
  *
@@ -128,11 +138,12 @@ base::ULongNumber SUB_NDN_N(const base::ULongNumber& a, DIGIT k, const base::ULo
  * @param b
  * @return
  */
-std::pair<DIGIT, size_t> DIV_NN_Dk(const base::NLongNumber& a, const base::NLongNumber& b) {
+std::pair<DIGIT, size_t> DIV_NN_Dk(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-11
  * Требуется: DIV_NN_Dk, SUB_NDN_N
  *
@@ -141,11 +152,12 @@ std::pair<DIGIT, size_t> DIV_NN_Dk(const base::NLongNumber& a, const base::NLong
  * @param b
  * @return
  */
-base::ULongNumber DIV_NN_N(const base::NLongNumber& a, const base::NLongNumber& b) {
+ULongNumber DIV_NN_N(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-12
  * Требуется: DIV_NN_N, SUB_NDN_N
  *
@@ -154,11 +166,12 @@ base::ULongNumber DIV_NN_N(const base::NLongNumber& a, const base::NLongNumber& 
  * @param b
  * @return
  */
-base::ULongNumber MOD_NN_N(const base::NLongNumber& a, const base::NLongNumber& b) {
+ULongNumber MOD_NN_N(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-13
  * Требуется: MOD_NN_N, COM_NN_D, NZER_N_B
  *
@@ -167,11 +180,12 @@ base::ULongNumber MOD_NN_N(const base::NLongNumber& a, const base::NLongNumber& 
  * @param b
  * @return
  */
-base::NLongNumber GCF_NN_N(const base::NLongNumber& a, const base::NLongNumber& b) {
+NLongNumber GCF_NN_N(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
 
 /**
+ * @authors Имя Фамилия авторов
  * N-14
  * Требуется: GCF_NN_N, MUL_NN_N
  *
@@ -180,6 +194,6 @@ base::NLongNumber GCF_NN_N(const base::NLongNumber& a, const base::NLongNumber& 
  * @param b
  * @return
  */
-base::NLongNumber LCM_NN_N(const base::NLongNumber& a, const base::NLongNumber& b) {
+NLongNumber LCM_NN_N(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
