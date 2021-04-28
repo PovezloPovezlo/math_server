@@ -4,6 +4,7 @@
 
 namespace base {
 
+	// Натуральное число с нулем (неотрицательное целое число)
 	class ULongNumber : public LongNumber {
 	public:
 		explicit ULongNumber(std::string value);

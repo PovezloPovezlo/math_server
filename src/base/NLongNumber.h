@@ -5,6 +5,7 @@
 
 namespace base {
 
+	// Натуральное число
 	class NLongNumber : public ULongNumber {
 	public:
 		explicit NLongNumber(std::string value);

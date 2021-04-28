@@ -7,6 +7,7 @@ typedef unsigned char DIGIT;
 
 namespace base {
 
+	// Целое число
 	class LongNumber {
 
 	protected:
