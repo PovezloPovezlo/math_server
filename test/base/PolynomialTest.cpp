@@ -1,11 +1,13 @@
 #include <gtest/gtest.h>
 #include <base/Polynomial.h>
+#include <tsl/ordered_map.h>
 
 TEST(Polynomial, inputCheck){
-	std::vector<base::RationalFraction> coefficients;
-	coefficients.push_back((base::RationalFraction)4);
-	coefficients.push_back((base::RationalFraction)6);
-	coefficients.push_back((base::RationalFraction)0);
+	tsl::ordered_map<std::string, base::RationalFraction> coefficients = {
+			{"0", (base::RationalFraction)1},
+			{"1", base::RationalFraction::fromTwoInt(6, 5)},
+			{"2", (base::RationalFraction)0}
+	};
 
 	try {
 		base::Polynomial p(coefficients);
@@ -16,10 +18,11 @@ TEST(Polynomial, inputCheck){
 }
 
 TEST(Polynomial, toString){
-	std::vector<base::RationalFraction> coefficients;
-	coefficients.push_back((base::RationalFraction)4);
-	coefficients.push_back(base::RationalFraction::fromTwoInt(6, 5));
-	coefficients.push_back((base::RationalFraction)1);
+	tsl::ordered_map<std::string, base::RationalFraction> coefficients = {
+			{"0", (base::RationalFraction)1},
+			{"1", base::RationalFraction::fromTwoInt(6, 5)},
+			{"2", (base::RationalFraction)1}
+	};
 
 	base::Polynomial p(coefficients);
 

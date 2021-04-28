@@ -82,7 +82,7 @@ RationalFraction LED_P_Q(const Polynomial& a) {
  * @param a
  * @return
  */
-NLongNumber DEG_P_N(const Polynomial& a) {
+ULongNumber DEG_P_N(const Polynomial& a) {
 	throw NotImplementedException();
 }
 

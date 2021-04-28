@@ -1,38 +1,26 @@
 #include "Polynomial.h"
-
+#include <module/P/p.h>
+#include <module/N/n.h>
+#include <module/Z/z.h>
 #include <utility>
 
 using namespace base;
 
-Polynomial::Polynomial(std::vector<RationalFraction> coefficients) : coefficients(std::move(coefficients)) {
-	if(this->degree() > 0 && this->coefficients.back().numerator.toString() == "0"){ // todo заменить вызовом NZER_N_B
+Polynomial::Polynomial(tsl::ordered_map<std::string, RationalFraction> coefficients) : coefficients(std::move(coefficients)) {
+	if(module::NZER_N_B(module::DEG_P_N(*this)) && module::POZ_Z_D(this->coefficients.back().second.numerator) == 0){
 		throw BaseException("Polynomial can't have zero at last coefficient");
 	}
 }
 
-Polynomial::Polynomial(size_t size) {
-	for(int i = 0; i < size; ++i){
-		coefficients.push_back(RationalFraction::empty());
-	}
-}
-
-size_t Polynomial::degree() const {
-	// гарантируется, что size >= 1, поэтому нет нужды проверять на 0
-	return coefficients.size() - 1;
-}
-
-RationalFraction &Polynomial::operator[](size_t index) {
-	return coefficients[index];
-}
+Polynomial::Polynomial() = default;
 
 std::string Polynomial::toString() const {
 	std::string result;
-	auto j = degree();
-	for(auto i = coefficients.rbegin(); i < (coefficients.rend()-1); ++i, --j){
-		result += i->toString() + "*x^" + std::to_string(j) + " ";
+	const auto one = NLongNumber::fromInt(1);
+	auto j = module::DEG_P_N(*this);
+	for(auto i = coefficients.rbegin(); i < coefficients.rend(); ++i, j = module::SUB_NN_N(j, one)){
+		result += i->second.toString() + "*x^" + j.toString() + " ";
 	}
-
-	result += coefficients[0].toString();
 
 	return result;
 }

@@ -9,7 +9,7 @@ namespace module {
 	base::Polynomial MUL_PQ_P(const base::Polynomial& a, const base::RationalFraction& b);
 	base::Polynomial MUL_Pxk_P(const base::Polynomial& a, const base::ULongNumber& k);
 	base::RationalFraction LED_P_Q(const base::Polynomial& a);
-	base::NLongNumber DEG_P_N(const base::Polynomial& a);
+	base::ULongNumber DEG_P_N(const base::Polynomial& a);
 	base::RationalFraction FAC_P_Q(const base::Polynomial& a);
 	base::Polynomial MUL_PP_P(const base::Polynomial& a, const base::Polynomial& b);
 	base::Polynomial DIV_PP_P(const base::Polynomial& a, const base::Polynomial& b);
