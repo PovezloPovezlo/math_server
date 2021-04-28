@@ -19,7 +19,7 @@ namespace base {
 
 		RationalFraction& operator[](size_t index);
 
-		std::string toString();
+		[[nodiscard]] std::string toString() const;
 
 	};
 

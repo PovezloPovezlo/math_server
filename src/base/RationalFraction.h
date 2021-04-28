@@ -12,10 +12,13 @@ namespace base {
 		NLongNumber denominator;
 
 		RationalFraction(LongNumber numerator, NLongNumber denominator);
+		explicit RationalFraction(int value);
 
-		std::string toString();
+		[[nodiscard]] std::string toString() const;
 
 		static RationalFraction empty();
+		static RationalFraction fromInt(int value);
+		static RationalFraction fromTwoInt(int numerator, unsigned int denominator);
 	};
 
 }

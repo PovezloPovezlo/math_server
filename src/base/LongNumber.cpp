@@ -1,5 +1,5 @@
 #include "LongNumber.h"
-#include "LongNumberException.h"
+#include "BaseException.h"
 #include <vector>
 
 using namespace base;
@@ -9,7 +9,7 @@ LongNumber::LongNumber(std::string value) {
 		value.length() == 0 ||
 		(value[0] == '-' && value.length() == 1)
 	){
-		throw LongNumberException("Value must be not empty");
+		throw BaseException("Value must be not empty");
 	}
 
 	this->isPositive = value[0] != '-';
@@ -17,7 +17,7 @@ LongNumber::LongNumber(std::string value) {
 	const size_t firstDigitIndex = this->isPositive ? 0 : 1;
 
 	if(value[firstDigitIndex] == '0' && value.length() > firstDigitIndex + 1){
-		throw LongNumberException("Number can't starts with 0 digit if its not equal 0");
+		throw BaseException("Number can't starts with 0 digit if its not equal 0");
 	}
 
 	for(
@@ -28,7 +28,7 @@ LongNumber::LongNumber(std::string value) {
 		if(value[i] >= '0' && value[i] <= '9') {
 			this->digits.push_back(value[i] - '0');
 		}else{
-			throw LongNumberException("Unknown symbol '" + std::to_string(value[i]) + "'");
+			throw BaseException("Unknown symbol '" + std::to_string(value[i]) + "'");
 		}
 	}
 
@@ -53,12 +53,12 @@ DIGIT &LongNumber::operator[](size_t index) {
 	return this->digits[index];
 }
 
-std::string LongNumber::toString() {
+std::string LongNumber::toString() const {
 	std::string result;
 	if(!this->isPositive){
 		result += "-";
 	}
-	for(auto i = this->digits.begin(); i < this->digits.end(); i++){
+	for(auto i = digits.begin(); i < digits.end(); ++i){
 		result += std::to_string(*i);
 	}
 
@@ -72,3 +72,6 @@ LongNumber LongNumber::empty() {
 LongNumber LongNumber::fromInt(int value) {
 	return LongNumber(std::to_string(value));
 }
+
+//todo optimize (избавиться от to_string())
+LongNumber::LongNumber(int value) : LongNumber(std::to_string(value)){}

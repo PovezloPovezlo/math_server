@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <base/LongNumber.h>
 #include <base/ULongNumber.h>
-#include <base/LongNumberException.h>
+#include <base/BaseException.h>
 #include <base/NLongNumber.h>
 
 TEST(LongNumber, getDigit){
@@ -44,7 +44,7 @@ TEST(LongNumber, inputCheck){
 		base::LongNumber negativeWrongNumber("-abc");
 
 		FAIL() << "LongNumber shouldn't contain non-digit symbols";
-	}catch(base::LongNumberException &exception){
+	}catch(base::BaseException &exception){
 		SUCCEED();
 	}
 
@@ -52,7 +52,7 @@ TEST(LongNumber, inputCheck){
 		base::LongNumber wrongNumber("");
 
 		FAIL() << "LongNumber shouldn't contain empty number";
-	}catch(base::LongNumberException &exception){
+	}catch(base::BaseException &exception){
 		SUCCEED();
 	}
 
@@ -60,7 +60,7 @@ TEST(LongNumber, inputCheck){
 		base::LongNumber wrongNumber("-");
 
 		FAIL() << "LongNumber shouldn't contain empty negative number (just \"-\")";
-	}catch(base::LongNumberException &exception){
+	}catch(base::BaseException &exception){
 		SUCCEED();
 	}
 
@@ -69,7 +69,7 @@ TEST(LongNumber, inputCheck){
 		base::LongNumber negativeWrongNumber("-01");
 
 		FAIL() << "Number shouldn't start with 0 digit if its not equal 0";
-	}catch(base::LongNumberException &exception){
+	}catch(base::BaseException &exception){
 		SUCCEED();
 	}
 }
@@ -79,7 +79,7 @@ TEST(ULongNumber, inputCheck){
 		base::ULongNumber wrongNumber("-1489294814");
 
 		FAIL() << "ULongNumber shouldn't accept negative numbers";
-	}catch(base::LongNumberException &exception){
+	}catch(base::BaseException &exception){
 		SUCCEED();
 	}
 }
@@ -89,7 +89,7 @@ TEST(NLongNumber, inputCheck){
 		base::NLongNumber wrongNumber("0");
 
 		FAIL() << "NLongNumber shouldn't accept zero number";
-	}catch(base::LongNumberException &exception){
+	}catch(base::BaseException &exception){
 		SUCCEED();
 	}
 }
