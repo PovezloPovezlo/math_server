@@ -7,4 +7,8 @@ include_directories(src)
 
 add_subdirectory(src)
 add_subdirectory(test)
+
+set(CMAKE_MACOSX_RPATH 1)
+
+add_subdirectory(lib/drogon)
 add_subdirectory(lib/googletest)

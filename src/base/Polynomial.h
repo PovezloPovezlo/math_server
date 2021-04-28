@@ -7,6 +7,7 @@ namespace base {
 
 	class Polynomial {
 	private:
+		// coefficients[n] - получить коэффициент при n степени
 		std::vector<RationalFraction> coefficients;
 
 	public:
@@ -15,6 +16,10 @@ namespace base {
 		explicit Polynomial(size_t size);
 
 		[[nodiscard]] size_t degree() const;
+
+		RationalFraction& operator[](size_t index);
+
+		std::string toString();
 
 	};
 

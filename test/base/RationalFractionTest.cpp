@@ -1,9 +1,8 @@
 #include <gtest/gtest.h>
 #include <base/RationalFraction.h>
 
-TEST(RationalFraction, inputCheck){
+TEST(RationalFraction, toString){
+	base::RationalFraction number(base::LongNumber::fromInt(6), base::NLongNumber::fromInt(4));
 
-	auto number = base::RationalFraction::empty();
-
-
+	EXPECT_EQ(number.toString(), "6/4");
 }

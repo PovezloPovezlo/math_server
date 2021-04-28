@@ -13,6 +13,8 @@ namespace base {
 
 		RationalFraction(LongNumber numerator, NLongNumber denominator);
 
+		std::string toString();
+
 		static RationalFraction empty();
 	};
 

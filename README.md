@@ -2,15 +2,15 @@
 
 ## Что нужно почитать перед разработкой?
 
-### Conventional commits
-[Правила оформления коммитов](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
-
 ### Google test
 [Написание тестов](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
 
 ## Установка
 
-Перед установкой убедитесь, что у вас стоит git и [cmake](https://cmake.org)
+Перед установкой убедитесь, что у вас стоит git, 
+[cmake](https://cmake.org), 
+jsoncpp (если у вас стоит Python или Visual Studio, он должен стоять),
+uuid
 
 Далее клонируем сам репозиторий
 ```shell

@@ -17,6 +17,27 @@ TEST(LongNumber, getDigit){
 	EXPECT_EQ(negativeNumber[negativeNumber.lastElementIndex() - 3], 4);
 }
 
+TEST(LongNumber, toString){
+	base::LongNumber positiveNumber("1489294814");
+
+	EXPECT_EQ(positiveNumber.toString(), "1489294814");
+
+	base::LongNumber negativeNumber("-1489294814");
+
+	EXPECT_EQ(negativeNumber.toString(), "-1489294814");
+}
+
+TEST(LongNumber, allocation){
+	base::LongNumber positiveNumber(10, true);
+
+	EXPECT_EQ(positiveNumber.length(), 10);
+	EXPECT_EQ(positiveNumber.isPositive, true);
+
+	base::LongNumber negativeNumber(10, false);
+	EXPECT_EQ(negativeNumber.length(), 10);
+	EXPECT_EQ(negativeNumber.isPositive, false);
+}
+
 TEST(LongNumber, inputCheck){
 	try {
 		base::LongNumber wrongNumber("abc");
@@ -68,7 +89,7 @@ TEST(NLongNumber, inputCheck){
 		base::NLongNumber wrongNumber("0");
 
 		FAIL() << "NLongNumber shouldn't accept zero number";
-	}catch(base::NLongNumber &exception){
+	}catch(base::LongNumberException &exception){
 		SUCCEED();
 	}
 }

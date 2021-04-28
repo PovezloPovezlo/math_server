@@ -58,7 +58,7 @@ std::string LongNumber::toString() {
 	if(!this->isPositive){
 		result += "-";
 	}
-	for(auto i = this->digits.rbegin(); i < this->digits.rend(); i++){
+	for(auto i = this->digits.begin(); i < this->digits.end(); i++){
 		result += std::to_string(*i);
 	}
 
