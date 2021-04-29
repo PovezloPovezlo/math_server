@@ -21,16 +21,22 @@ LongNumber::LongNumber(std::string value) {
 	}
 
 	for(
-		size_t i = firstDigitIndex;
-		i < value.length();
-		++i
+		size_t i = value.length() - 1;
+		;
+		--i
 	){
 		if(value[i] >= '0' && value[i] <= '9') {
 			this->digits.push_back(value[i] - '0');
 		}else{
 			throw BaseException("Unknown symbol '" + std::to_string(value[i]) + "'");
 		}
+
+		if(i == firstDigitIndex){ // условие здесь, а не в for, так как может произойти int overflow (i станет не -1, а очень большим положительным числом (uint64.MaxValue)
+			break;
+		}
 	}
+
+
 
 }
 
@@ -50,6 +56,7 @@ size_t LongNumber::lastElementIndex() const {
 }
 
 DIGIT &LongNumber::operator[](size_t index) {
+	//todo автоматическая аллокация в случае если index >= length()
 	return this->digits[index];
 }
 
@@ -58,7 +65,7 @@ std::string LongNumber::toString() const {
 	if(!this->isPositive){
 		result += "-";
 	}
-	for(auto i = digits.begin(); i < digits.end(); ++i){
+	for(auto i = digits.rbegin(); i < digits.rend(); ++i){
 		result += std::to_string(*i);
 	}
 

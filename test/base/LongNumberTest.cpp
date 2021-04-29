@@ -7,14 +7,14 @@
 TEST(LongNumber, getDigit){
 	base::LongNumber positiveNumber("1489294814");
 
-	EXPECT_EQ(positiveNumber[3], 9);
-	EXPECT_EQ(positiveNumber[positiveNumber.lastElementIndex() - 3], 4);
+	EXPECT_EQ(positiveNumber[3], 4);
+	EXPECT_EQ(positiveNumber[positiveNumber.lastElementIndex() - 3], 9);
 
 
 	base::LongNumber negativeNumber("-1489294814");
 
-	EXPECT_EQ(negativeNumber[3], 9);
-	EXPECT_EQ(negativeNumber[negativeNumber.lastElementIndex() - 3], 4);
+	EXPECT_EQ(negativeNumber[3], 4);
+	EXPECT_EQ(negativeNumber[negativeNumber.lastElementIndex() - 3], 9);
 }
 
 TEST(LongNumber, toString){

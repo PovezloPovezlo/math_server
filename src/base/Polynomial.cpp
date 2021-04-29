@@ -1,7 +1,7 @@
 #include "Polynomial.h"
-#include <module/P/p.h>
-#include <module/N/n.h>
-#include <module/Z/z.h>
+#include <module/p.h>
+#include <module/n.h>
+#include <module/z.h>
 #include <utility>
 
 using namespace base;
