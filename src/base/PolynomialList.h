@@ -1,6 +1,7 @@
 #pragma once
 
 #include <base/ULongNumber.h>
+#include <base/RationalFraction.h>
 
 #include <utility>
 
@@ -18,7 +19,7 @@ namespace base {
 		PolynomialList* lastElement();
 		PolynomialList* addElement(PolynomialList* element);
 
-		PolynomialList*& operator [](const ULongNumber& index);
+		PolynomialList* operator [](const ULongNumber& index);
 
 	};
 

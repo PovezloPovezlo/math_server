@@ -6,6 +6,7 @@
 
 using namespace base;
 
+/*
 Polynomial::Polynomial(tsl::ordered_map<std::string, RationalFraction> coefficients) : coefficients(std::move(coefficients)) {
 	if(module::NZER_N_B(module::DEG_P_N(*this)) && module::POZ_Z_D(this->coefficients.back().second.numerator) == 0){
 		throw BaseException("Polynomial can't have zero at last coefficient");
@@ -24,3 +25,4 @@ std::string Polynomial::toString() const {
 
 	return result;
 }
+*/

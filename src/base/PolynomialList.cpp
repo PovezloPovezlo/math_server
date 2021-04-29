@@ -20,15 +20,19 @@ PolynomialList *PolynomialList::addElement(PolynomialList *element) {
 		element->next = el;
 	}
 	if(el == nullptr){
-
+		//todo
 	}
 }
 
-PolynomialList*& PolynomialList::operator[](const ULongNumber& index) {
+PolynomialList* PolynomialList::operator[](const ULongNumber& index) {
 	PolynomialList* el = this;
-	for(; el != nullptr && el->value != index; el = el->next);
+	// поиск можно реализовать через бинарный поиск и сделать его не O(n) а O(log2(n))
+	for(; el != nullptr && el->degree != index; el = el->next);
 
 	if(el == nullptr){
-		addElement(new PolynomialList(index, RationalFraction::empty()));
+		el = new PolynomialList(index, RationalFraction::empty());
+		addElement(el);
 	}
+
+	return el;
 }
