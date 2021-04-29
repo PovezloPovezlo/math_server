@@ -1,16 +1,16 @@
 #pragma once
 
 #include "RationalFraction.h"
-#include <tsl/ordered_map.h>
+#include "PolynomialList.h"
+#include <list>
 
 namespace base {
 
 	class Polynomial {
 	public:
-		// todo может стоит сделать двусвязным списком?
-		tsl::ordered_map<std::string, RationalFraction> coefficients;
+		PolynomialList coefficients;
 
-		explicit Polynomial(tsl::ordered_map<std::string, RationalFraction> coefficients);
+		explicit Polynomial(PolynomialList coefficients);
 		explicit Polynomial();
 
 		[[nodiscard]] std::string toString() const;

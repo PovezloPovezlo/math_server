@@ -16,13 +16,15 @@ namespace base {
 		bool isPositive;
 
 		explicit LongNumber(std::string value);
-		explicit LongNumber(size_t size, bool isPositive);
+		LongNumber(size_t size, bool isPositive);
 		explicit LongNumber(int value);
 
 		[[nodiscard]] size_t length() const;
 		[[nodiscard]] size_t lastElementIndex() const;
 
 		DIGIT& operator[](size_t index);
+		bool operator ==(const LongNumber& number) const;
+		bool operator !=(const LongNumber& number) const;
 
 		[[nodiscard]] std::string toString() const;
 

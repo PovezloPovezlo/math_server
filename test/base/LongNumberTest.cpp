@@ -36,6 +36,22 @@ TEST(LongNumber, allocation){
 	base::LongNumber negativeNumber(10, false);
 	EXPECT_EQ(negativeNumber.length(), 10);
 	EXPECT_EQ(negativeNumber.isPositive, false);
+
+	base::LongNumber number("228");
+	number[3] = 5;
+	number[5] = 9;
+
+	EXPECT_EQ(number.toString(), "905228");
+}
+
+TEST(LongNumber, equals){
+	base::LongNumber number("1489294814");
+	base::LongNumber negativeNumber("-1489294814");
+
+	base::LongNumber similarNumber("1489294414");
+	base::LongNumber notSimilarNumber("228");
+
+	EXPECT_NE()
 }
 
 TEST(LongNumber, inputCheck){

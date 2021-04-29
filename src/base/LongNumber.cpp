@@ -56,8 +56,34 @@ size_t LongNumber::lastElementIndex() const {
 }
 
 DIGIT &LongNumber::operator[](size_t index) {
-	//todo автоматическая аллокация в случае если index >= length()
+	if(index >= length()){
+		if(index >= this->digits.capacity()){
+			this->digits.reserve(index);
+		}
+		for(size_t i = lastElementIndex(); i < index; ++i){
+			this->digits.push_back(0);
+		}
+	}
+
 	return this->digits[index];
+}
+
+bool LongNumber::operator==(const LongNumber& number) const {
+	if(this->isPositive != number.isPositive || this->length() != number.length()){
+		return false;
+	}
+
+	for(int i = 0; i < this->length(); ++i){
+		if(this->digits[i] != number.digits[i]){
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool LongNumber::operator!=(const LongNumber &number) const {
+	return !(*this == number);
 }
 
 std::string LongNumber::toString() const {
