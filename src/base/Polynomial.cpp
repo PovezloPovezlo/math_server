@@ -10,12 +10,13 @@ Polynomial::Polynomial(PolynomialList* coefficients) : coefficients(coefficients
     // чистка списка коэффициентов от нулевых (потому что их нет смысла хранить)
 
     for(auto i = coefficients; i != nullptr; i = i->next){
-        if(i->value)
+        if(i->value.numerator.toString() == "0"){ // todo заменить на NZER_N_B
+            if(i->prev == nullptr){ // к сожалению я не могу из конструктора вернуть указатель на следующий элемент
+                throw BaseException("Coefficient at x^0 must not be zero (or just not specify it)");
+            }
+            i->prev = i->next; // удаляем элемент i
+        }
     }
-
-	if(module::NZER_N_B(module::DEG_P_N(*this)) && module::POZ_Z_D(this->coefficients.back().second.numerator) == 0){
-		throw BaseException("Polynomial can't have zero at last coefficient");
-	}
 }
 
 Polynomial::Polynomial(): coefficients(new PolynomialList(ULongNumber::empty(), RationalFraction::empty())){}
@@ -24,8 +25,8 @@ std::string Polynomial::toString() const {
 	std::string result;
 	const auto one = NLongNumber::fromInt(1);
 	auto j = module::DEG_P_N(*this);
-	for(auto i = coefficients.rbegin(); i < coefficients.rend(); ++i, j = module::SUB_NN_N(j, one)){
-		result += i->second.toString() + "*x^" + j.toString() + " ";
+	for(auto i = coefficients->lastElement(); i != nullptr; i = i->prev, j = module::SUB_NN_N(j, one)){
+		result += i->value.toString() + "*x^" + j.toString() + " ";
 	}
 
 	return result;

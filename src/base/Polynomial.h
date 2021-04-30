@@ -9,6 +9,7 @@ namespace base {
 	class Polynomial {
 	public:
 		PolynomialList* coefficients;
+		//PolynomialList* coefficientsLastElement; todo может понадобится сделать?
 
 		explicit Polynomial(PolynomialList* coefficients);
 		explicit Polynomial();

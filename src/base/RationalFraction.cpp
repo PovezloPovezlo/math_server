@@ -9,7 +9,7 @@ RationalFraction::RationalFraction(LongNumber numerator, NLongNumber denominator
 RationalFraction::RationalFraction(int value) : numerator(value), denominator(1) {}
 
 std::string RationalFraction::toString() const {
-	if(this->denominator.toString() == "1"){ //todo заменить вызов на INT_Q_B после того как сделвют эту функцию
+	if(this->denominator.toString() == "1" || this->numerator.toString() == "0"){ //todo заменить вызов на INT_Q_B после того как сделвют эту функцию
 		return this->numerator.toString();
 	}
 	return this->numerator.toString() + "/" + this->denominator.toString();
