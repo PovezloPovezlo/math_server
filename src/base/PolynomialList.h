@@ -14,7 +14,7 @@ namespace base {
 		PolynomialList* prev;
 		PolynomialList* next;
 
-		PolynomialList(ULongNumber degree, RationalFraction value) : degree(std::move(degree)), value(std::move(value)), prev(nullptr), next(nullptr) {}
+		PolynomialList(ULongNumber degree, RationalFraction value);
 
 		PolynomialList* lastElement();
 		PolynomialList* addElement(PolynomialList* element);
