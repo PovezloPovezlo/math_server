@@ -47,7 +47,7 @@ ULongNumber module::ADD_1N_N(const ULongNumber &a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Кушко Даниил
  * N-4
  * Требуется: COM_NN_D
  *
@@ -83,13 +83,13 @@ ULongNumber module::ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	if (nextDigitPlus != 0) {
 		res[max.length()] = 1;
 	}
-
+	printf("a: %s\tb: %s\tsum: %s", a.toString(), b.toString(), res.toString());
 	return res;
 
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Кушко Даниил
  * N-5
  * Требуется: COM_NN_D
  *
@@ -100,10 +100,28 @@ ULongNumber module::ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
  */
 ULongNumber module::SUB_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
+	ULongNumber max = ULongNumber::empty();
+	ULongNumber min = ULongNumber::empty();
+	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
+	else { max = b; min = a; }
+
+
+	ULongNumber res = ULongNumber::empty();
+
+	for (int i = 0; i < max.length(); i++) {
+		if (max[i] > min[i])  res[i] = max[i] - min[i];
+		else {
+			if (i < max.length() - 1) {
+				max[i + 1] -= 1;
+				res[i] = (max[i] + 10) - min[i];
+			}
+		}
+	}
+	return res;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Кушко Даниил
  * N-6
  *
  * Умножение натурального числа на цифру
@@ -113,6 +131,11 @@ ULongNumber module::SUB_NN_N(const ULongNumber &a, const ULongNumber &b) {
  */
 ULongNumber module::MUL_ND_N(const ULongNumber &a, DIGIT b) {
 	throw NotImplementedException();
+	ULongNumber res = ULongNumber::empty();
+
+	res[0] = a[0];
+	
+
 }
 
 /**
