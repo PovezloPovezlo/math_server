@@ -15,7 +15,7 @@ using namespace module;
  * @param a
  * @return
  */
-ULongNumber module::ABS_Z_N(const LongNumber& a) {
+ULongNumber module::ABS_Z_N(LongNumber& a) {
 	throw NotImplementedException();
 }
 
@@ -27,7 +27,7 @@ ULongNumber module::ABS_Z_N(const LongNumber& a) {
  * @param a
  * @return 2 - положительное, 0 — равное нулю, 1 - отрицательное
  */
-DIGIT module::POZ_Z_D(const LongNumber& a) {
+DIGIT module::POZ_Z_D(LongNumber& a) {
 	throw NotImplementedException();
 }
 
@@ -39,7 +39,7 @@ DIGIT module::POZ_Z_D(const LongNumber& a) {
  * @param a
  * @return
  */
-LongNumber module::MUL_ZM_Z(const LongNumber& a) {
+LongNumber module::MUL_ZM_Z(LongNumber& a) {
 	throw NotImplementedException();
 }
 
@@ -51,7 +51,7 @@ LongNumber module::MUL_ZM_Z(const LongNumber& a) {
  * @param a
  * @return
  */
-LongNumber module::TRANS_N_Z(const NLongNumber& a) {
+LongNumber module::TRANS_N_Z(NLongNumber& a) {
 	throw NotImplementedException();
 }
 
@@ -63,7 +63,7 @@ LongNumber module::TRANS_N_Z(const NLongNumber& a) {
  * @param a
  * @return
  */
-NLongNumber module::TRANS_Z_N(const ULongNumber& a) {
+NLongNumber module::TRANS_Z_N(ULongNumber& a) {
 	throw NotImplementedException();
 }
 
@@ -77,7 +77,7 @@ NLongNumber module::TRANS_Z_N(const ULongNumber& a) {
  * @param b
  * @return
  */
-LongNumber module::ADD_ZZ_Z(const LongNumber& a, const LongNumber& b) {
+LongNumber module::ADD_ZZ_Z(LongNumber& a, LongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -91,7 +91,7 @@ LongNumber module::ADD_ZZ_Z(const LongNumber& a, const LongNumber& b) {
  * @param b
  * @return
  */
-LongNumber module::SUB_ZZ_Z(const LongNumber& a, const LongNumber& b) {
+LongNumber module::SUB_ZZ_Z(LongNumber& a, LongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -105,7 +105,7 @@ LongNumber module::SUB_ZZ_Z(const LongNumber& a, const LongNumber& b) {
  * @param b
  * @return
  */
-LongNumber module::MUL_ZZ_Z(const LongNumber& a, const LongNumber& b) {
+LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -119,7 +119,7 @@ LongNumber module::MUL_ZZ_Z(const LongNumber& a, const LongNumber& b) {
  * @param b
  * @return
  */
-LongNumber module::DIV_ZZ_Z(const LongNumber& a, const LongNumber& b) {
+LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -133,6 +133,6 @@ LongNumber module::DIV_ZZ_Z(const LongNumber& a, const LongNumber& b) {
  * @param b
  * @return
  */
-ULongNumber module::MOD_ZZ_Z(const LongNumber& a, const LongNumber& b) {
+ULongNumber module::MOD_ZZ_Z(LongNumber& a, LongNumber& b) {
 	throw NotImplementedException();
 }
