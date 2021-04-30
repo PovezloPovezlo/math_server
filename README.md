@@ -13,11 +13,28 @@ jsoncpp (если у вас стоит Python или Visual Studio, он дол�
 uuid
 
 Далее клонируем сам репозиторий
-```shell
+```shell script
 git clone git@github.com:PovezloPovezlo/math_server.git
 ```
 
-Появится папка `math_server`. Готово
+Появится папка `math_server`. 
+
+Заходим в `math_server/lib`
+
+Там пишем 
+```shell script
+git clone https://github.com/an-tao/drogon.git
+```
+
+Заходим в папку `drogon`
+И в ней прописываем 
+```shell script
+git submodule update --init --recursive
+```
+
+Возвращаемся в `math_server`
+
+Готово, можно приступать к работе 
 
 ## Как делать правки?
 [как делать коммиты](https://www.youtube.com/watch?v=DMQA0BhVDZk)
