@@ -8,9 +8,9 @@ namespace base {
 
 	class Polynomial {
 	public:
-		PolynomialList coefficients;
+		PolynomialList* coefficients;
 
-		explicit Polynomial(PolynomialList coefficients);
+		explicit Polynomial(PolynomialList* coefficients);
 		explicit Polynomial();
 
 		[[nodiscard]] std::string toString() const;

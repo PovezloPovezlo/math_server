@@ -8,6 +8,7 @@ using namespace module;
 // Натуральные числа с нулем
 // Собственно говоря поэтому в большинстве мест здесь ULongNumber (неотрицательное целое число), а не NLongNumber (натуральное число)
 
+
 /**
  * @authors Имя Фамилия авторов
  * N-1
@@ -17,7 +18,7 @@ using namespace module;
  * @param b
  * @return 2 - если первое больше второго, 0, если равно, 1 иначе
  */
-DIGIT COM_NN_D(const ULongNumber &a, const ULongNumber &b) {
+DIGIT module::COM_NN_D(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
 }
 
@@ -29,7 +30,7 @@ DIGIT COM_NN_D(const ULongNumber &a, const ULongNumber &b) {
  * @param a
  * @return если число не равно нулю, то «да» иначе «нет»
  */
-bool NZER_N_B(const ULongNumber &a) {
+bool module::NZER_N_B(const ULongNumber &a) {
 	throw NotImplementedException();
 }
 
@@ -41,7 +42,7 @@ bool NZER_N_B(const ULongNumber &a) {
  * @param a
  * @return
  */
-ULongNumber ADD_1N_N(const ULongNumber &a) {
+ULongNumber module::ADD_1N_N(const ULongNumber &a) {
 	throw NotImplementedException();
 }
 
@@ -55,7 +56,7 @@ ULongNumber ADD_1N_N(const ULongNumber &a) {
  * @param b
  * @return
  */
-ULongNumber ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
+ULongNumber module::ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
 }
 
@@ -69,7 +70,7 @@ ULongNumber ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
  * @param b
  * @return разница чисел по модулю
  */
-ULongNumber SUB_NN_N(const ULongNumber &a, const ULongNumber &b) {
+ULongNumber module::SUB_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
 }
 
@@ -82,7 +83,7 @@ ULongNumber SUB_NN_N(const ULongNumber &a, const ULongNumber &b) {
  * @param b
  * @return
  */
-ULongNumber MUL_ND_N(const ULongNumber &a, DIGIT b) {
+ULongNumber module::MUL_ND_N(const ULongNumber &a, DIGIT b) {
 	throw NotImplementedException();
 }
 
@@ -95,7 +96,7 @@ ULongNumber MUL_ND_N(const ULongNumber &a, DIGIT b) {
  * @param k
  * @return
  */
-ULongNumber MUL_Nk_N(const ULongNumber &a, const ULongNumber &k) {
+ULongNumber module::MUL_Nk_N(const ULongNumber &a, const ULongNumber &k) {
 	throw NotImplementedException();
 }
 
@@ -109,7 +110,7 @@ ULongNumber MUL_Nk_N(const ULongNumber &a, const ULongNumber &k) {
  * @param b
  * @return
  */
-ULongNumber MUL_NN_N(const ULongNumber &a, const ULongNumber &b) {
+ULongNumber module::MUL_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
 }
 
@@ -124,7 +125,7 @@ ULongNumber MUL_NN_N(const ULongNumber &a, const ULongNumber &b) {
  * @param b
  * @return
  */
-ULongNumber SUB_NDN_N(const ULongNumber& a, DIGIT k, const ULongNumber& b) {
+ULongNumber module::SUB_NDN_N(const ULongNumber& a, DIGIT k, const ULongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -138,7 +139,7 @@ ULongNumber SUB_NDN_N(const ULongNumber& a, DIGIT k, const ULongNumber& b) {
  * @param b
  * @return
  */
-std::pair<DIGIT, size_t> DIV_NN_Dk(const NLongNumber& a, const NLongNumber& b) {
+std::pair<DIGIT, size_t> module::DIV_NN_Dk(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -152,7 +153,7 @@ std::pair<DIGIT, size_t> DIV_NN_Dk(const NLongNumber& a, const NLongNumber& b) {
  * @param b
  * @return
  */
-ULongNumber DIV_NN_N(const NLongNumber& a, const NLongNumber& b) {
+ULongNumber module::DIV_NN_N(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -166,7 +167,7 @@ ULongNumber DIV_NN_N(const NLongNumber& a, const NLongNumber& b) {
  * @param b
  * @return
  */
-ULongNumber MOD_NN_N(const NLongNumber& a, const NLongNumber& b) {
+ULongNumber module::MOD_NN_N(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -180,7 +181,7 @@ ULongNumber MOD_NN_N(const NLongNumber& a, const NLongNumber& b) {
  * @param b
  * @return
  */
-NLongNumber GCF_NN_N(const NLongNumber& a, const NLongNumber& b) {
+NLongNumber module::GCF_NN_N(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
 
@@ -194,6 +195,6 @@ NLongNumber GCF_NN_N(const NLongNumber& a, const NLongNumber& b) {
  * @param b
  * @return
  */
-NLongNumber LCM_NN_N(const NLongNumber& a, const NLongNumber& b) {
+NLongNumber module::LCM_NN_N(const NLongNumber& a, const NLongNumber& b) {
 	throw NotImplementedException();
 }
