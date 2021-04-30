@@ -50,8 +50,12 @@ TEST(LongNumber, equals){
 
 	base::LongNumber similarNumber("1489294414");
 	base::LongNumber notSimilarNumber("228");
+    base::LongNumber sameNumber("1489294814");
 
-	//todo EXPECT_NE()
+    EXPECT_NE(number, negativeNumber);
+	EXPECT_NE(number, similarNumber);
+	EXPECT_NE(number, notSimilarNumber);
+	EXPECT_EQ(number, sameNumber);
 }
 
 TEST(LongNumber, inputCheck){
