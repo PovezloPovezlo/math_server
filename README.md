@@ -5,6 +5,9 @@
 ### Google test
 [Написание тестов](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
 
+### Структуры данных
+[Используемые в работе структуры данных](https://github.com/PovezloPovezlo/math_server/src/base/)
+
 ## Установка
 
 Перед установкой убедитесь, что у вас стоит git, 
