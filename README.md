@@ -12,8 +12,6 @@
 
 Перед установкой убедитесь, что у вас стоит git, 
 [cmake](https://cmake.org), 
-jsoncpp (если у вас стоит Python или Visual Studio, он должен стоять),
-uuid
 
 Далее клонируем сам репозиторий
 ```shell script
@@ -21,21 +19,6 @@ git clone git@github.com:PovezloPovezlo/math_server.git
 ```
 
 Появится папка `math_server`. 
-
-Заходим в `math_server/lib`
-
-Там пишем 
-```shell script
-git clone https://github.com/an-tao/drogon.git
-```
-
-Заходим в папку `drogon`
-И в ней прописываем 
-```shell script
-git submodule update --init --recursive
-```
-
-Возвращаемся в `math_server`
 
 Готово, можно приступать к работе 
 
