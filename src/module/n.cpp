@@ -58,6 +58,34 @@ ULongNumber module::ADD_1N_N(const ULongNumber &a) {
  */
 ULongNumber module::ADD_NN_N(const ULongNumber &a, const ULongNumber &b) {
 	throw NotImplementedException();
+
+	ULongNumber max = ULongNumber::empty();
+	ULongNumber min = ULongNumber::empty();
+	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
+	else { max = b; min = a; }
+
+	ULongNumber res = ULongNumber::empty();
+
+	int digit = 0;
+	int nextDigitPlus = 0;
+
+	for (int i = 0; i < max.length(); i++) {
+		digit = max[i] + min[i];
+		res[i] = (digit + nextDigitPlus) % 10;
+		if (digit > 9) {
+			nextDigitPlus = 1;
+		}
+		else {
+			nextDigitPlus = 0;
+		}
+	}
+	
+	if (nextDigitPlus != 0) {
+		res[max.length()] = 1;
+	}
+
+	return res;
+
 }
 
 /**
