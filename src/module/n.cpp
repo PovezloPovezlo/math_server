@@ -186,6 +186,7 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
  * @return
  */
 ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
+
 	ULongNumber res = ULongNumber::empty();
 	int count = k;//хз что с k!!!!!!
 
@@ -209,7 +210,6 @@ ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
  * @return
  */
 ULongNumber module::MUL_NN_N(ULongNumber &a, ULongNumber &b) {
-
 	ULongNumber res = ULongNumber::empty();
 	ULongNumber temp = ULongNumber::empty();
 	ULongNumber max = ULongNumber::empty();

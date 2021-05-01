@@ -21,7 +21,6 @@ TEST(N, COM_NN_D)
 }
 
 TEST(LongNumber, ADD_NN_N) {
-
 	ULongNumber t1(0), t2(0), r(0);
 	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
 	t1 = ULongNumber(0), t2 = ULongNumber(1), r = ULongNumber(1);
@@ -142,7 +141,6 @@ TEST(LongNumber, ADD_NN_N) {
 }
 
 TEST(LongNumber, SUB_NN_N) {
-
 	ULongNumber t1(0), t2(0), r(0);
 	EXPECT_EQ(module::SUB_NN_N(t1, t2), r);
 
@@ -175,7 +173,6 @@ TEST(LongNumber, SUB_NN_N) {
 }
 
 TEST(LongNumber, MUL_ND_N) {
-
 	ULongNumber t1(0), r(0);
 	DIGIT t2 = 0;
 	EXPECT_EQ(module::MUL_ND_N(t1, t2), r);
@@ -213,7 +210,6 @@ TEST(LongNumber, MUL_ND_N) {
 }
 
 TEST(LongNumber, MUL_Nk_N) {
-
 	ULongNumber t1(0);
 	size_t t2(0);
 	ULongNumber r(0);
@@ -249,7 +245,6 @@ TEST(LongNumber, MUL_Nk_N) {
 }
 
 TEST(LongNumber, MUL_NN_N) {
-
 	ULongNumber t1(0), t2(0), r(0);
 	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
 
