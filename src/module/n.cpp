@@ -96,7 +96,7 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
  * @param k
  * @return
  */
-ULongNumber module::MUL_Nk_N(ULongNumber &a, ULongNumber &k) {
+ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
 	throw NotImplementedException();
 }
 
