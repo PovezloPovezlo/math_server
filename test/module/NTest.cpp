@@ -161,3 +161,66 @@ TEST(LongNumber, MUL_ND_N) {
 	);
 	EXPECT_EQ(module::MUL_ND_N(t1, t2), r);
 }
+
+TEST(LongNumber, MUL_Nk_N) {
+
+	ULongNumber t1(0), t2(0), r(0);
+	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
+
+	t1 = ULongNumber(1), t2 = ULongNumber(1), r = ULongNumber(10);
+	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
+
+	t1 = ULongNumber(0), t2 = ULongNumber(1), r = ULongNumber(0);
+	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
+
+	t1 = ULongNumber(1), t2 = ULongNumber(0), r = ULongNumber(1);
+	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
+
+	t1 = ULongNumber(9), t2 = ULongNumber(2), r = ULongNumber(900);
+	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
+
+	t1 = ULongNumber("1239871298371263192678359273658173465081376"),
+		t2 = ULongNumber(50), r = ULongNumber(
+		"123987129837126319267835927365817346508137600000000000000000000000000000000000000000000000000"
+	);
+	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
+
+	t1 = ULongNumber("1239871298371263192678359273658173465081376"),
+		t2 = ULongNumber(0), r = ULongNumber(
+			"1239871298371263192678359273658173465081376"
+		);
+	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
+
+	t1 = ULongNumber(0),
+		t2 = ULongNumber(1239878612), r = ULongNumber(0);
+	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
+}
+
+TEST(LongNumber, MUL_NN_N) {
+
+	ULongNumber t1(0), t2(0), r(0);
+	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
+
+	ULongNumber t1(1), t2(0), r(0);
+	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
+
+	ULongNumber t1(1), t2(1), r(1);
+	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
+
+	ULongNumber t1(1), t2(10), r(10);
+	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
+
+	t1 = ULongNumber("34769842375093947602795057502"),
+	t2 = ULongNumber("934764306743025843920574307342"),
+	r = ULongNumber("32501607603318977089466611768694381335276525589084710779684");
+	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
+
+	t1 = ULongNumber("273453842375093947602795057502"),
+	t2 = ULongNumber("278354664306743025843920574307342"),
+	r = ULongNumber("76117152497708296792192449542441402109335276525589084710779684");
+	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
+
+	t1 = ULongNumber("273453842375093947602795057502"),
+	t2 = ULongNumber(0), r = ULongNumber(0);
+	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
+}

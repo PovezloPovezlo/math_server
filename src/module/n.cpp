@@ -146,7 +146,7 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Береза Кирилл
  * N-7
  *
  * Умножение натурального числа на 10^k
@@ -156,10 +156,20 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
  */
 ULongNumber module::MUL_Nk_N(ULongNumber &a, ULongNumber &k) {
 	throw NotImplementedException();
+	ULongNumber res = ULongNumber::empty();
+	int count = std::atoi(k.toString().c_str());//хз что с k!!!!!!
+
+	for (int i = 0; i < count; ++i) {
+		res[i] = 0;
+	}
+	for (int i = count; i < a.length(); ++i) {
+		res[i] = a[i - count];
+	}
+	return res;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Береза Кирилл
  * N-8
  * Требуется: MUL_ND_N, MUL_Nk_N, ADD_NN_N
  *
@@ -170,6 +180,18 @@ ULongNumber module::MUL_Nk_N(ULongNumber &a, ULongNumber &k) {
  */
 ULongNumber module::MUL_NN_N(ULongNumber &a, ULongNumber &b) {
 	throw NotImplementedException();
+	ULongNumber res = ULongNumber::empty();
+	ULongNumber temp = ULongNumber::empty();
+	ULongNumber max = ULongNumber::empty();
+	ULongNumber min = ULongNumber::empty();
+	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
+	else { max = b; min = a; }
+
+	for (int i = 0; i < min.length(); ++i) {
+		temp = MUL_Nk_N(MUL_ND_N(max, min[i]), ULongNumber(i));
+		res = ADD_NN_N(res, temp);
+	}
+	return res;
 }
 
 /**
