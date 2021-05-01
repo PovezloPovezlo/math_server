@@ -104,6 +104,7 @@ void LongNumber::deleteRedundantZeros() {
 	bool isZero = true;
 	for (int i = 0; i < this->length(); i++) {
 		isZero = isZero && (this->digits[i] == 0);
+		if (!isZero) break;
 	}
 	if (isZero) {
 		this->digits.clear();
