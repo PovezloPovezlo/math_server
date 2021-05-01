@@ -83,7 +83,6 @@ ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
 	if (nextDigitPlus != 0) {
 		res[max.length()] = 1;
 	}
-	printf("a: %s\tb: %s\tsum: %s", a.toString(), b.toString(), res.toString());
 	return res;
 
 }
@@ -133,9 +132,17 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
 	throw NotImplementedException();
 	ULongNumber res = ULongNumber::empty();
 
-	res[0] = a[0];
-	
+	int additional = 0;
 
+	for (int i = 0; i < a.length(); i++) {
+		res[i] = (a[i] * b + additional) % 10;
+		additional = (a[i] * b + additional) / 10;
+	}
+	if (additional != 0) {
+		res[a.length()] = additional;
+	}
+
+	return res;
 }
 
 /**
