@@ -1,6 +1,9 @@
 #include "q.h"
 #include <base/RationalFraction.h>
 #include <base/NotImplementedException.h>
+#include <module/n.h>
+#include <module/p.h>
+#include <module/z.h>
 
 using namespace base;
 using namespace module;
@@ -29,7 +32,12 @@ base::RationalFraction module::RED_Q_Q(const base::RationalFraction& a) {
  * @return если рациональное число является целым, то «да», иначе «нет»
  */
 bool module::INT_Q_B(const base::RationalFraction& a) {
-	throw NotImplementedException();
+	if(module::MOD_ZZ_Z(a.numerator, a.denominator) == LongNumber::empty()){
+		return true;
+	}
+	else return false;
+	
+	//throw NotImplementedException();
 }
 
 /**
@@ -49,7 +57,8 @@ base::RationalFraction module::TRANS_Z_Q(const base::LongNumber& a) {
  * Q-4
  *
  * Преобразование дробного в целое (если знаменатель равен 1)
- * Комментарий от архитектора: полагаю, что имелось в виду под "если знаменатель равен 1" уже после выполнения сокращения дробей. А то иначе у нас эта функция не сможет обработать например 6/2
+ * Комментарий от архитектора: полагаю, что имелось в виду под "если знаменатель равен 1" 
+ * уже после выполнения сокращения дробей. А то иначе у нас эта функция не сможет обработать например 6/2
  * @param a
  * @return
  */
