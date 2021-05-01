@@ -23,8 +23,9 @@ Polynomial::Polynomial(): coefficients(new PolynomialList(ULongNumber::empty(), 
 
 std::string Polynomial::toString() const {
 	std::string result;
-	const auto one = NLongNumber::fromInt(1);
-	auto j = module::DEG_P_N(*this);
+	auto one = NLongNumber::fromInt(1);
+	auto p = *this;
+	auto j = module::DEG_P_N(p);
 	for(auto i = coefficients->lastElement(); i != nullptr; i = i->prev, j = module::SUB_NN_N(j, one)){
 		result += i->value.toString() + "*x^" + j.toString() + " ";
 	}
