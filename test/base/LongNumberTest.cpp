@@ -27,6 +27,20 @@ TEST(LongNumber, toString){
 	EXPECT_EQ(negativeNumber.toString(), "-1489294814");
 }
 
+TEST(LongNumber, deleteRedundantZeros){
+	base::LongNumber number("123");
+	number[3] = 6;
+
+	number[4] = 0;
+	number[3] = 0;
+	number[2] = 0;
+	EXPECT_EQ(number.toString(), "23");
+
+	base::LongNumber number2("10004");
+	number2[4] = 0;
+	EXPECT_EQ(number2.toString(), "4");
+}
+
 TEST(LongNumber, allocation){
 	base::LongNumber positiveNumber(10, true);
 

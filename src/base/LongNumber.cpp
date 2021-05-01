@@ -86,7 +86,9 @@ bool LongNumber::operator!=(const LongNumber &number) const {
 	return !(*this == number);
 }
 
-std::string LongNumber::toString() const {
+std::string LongNumber::toString() {
+	this->deleteRedundantZeros();
+
 	std::string result;
 	if(!this->isPositive){
 		result += "-";
@@ -96,6 +98,17 @@ std::string LongNumber::toString() const {
 	}
 
 	return result;
+}
+
+void LongNumber::deleteRedundantZeros() {
+	for(auto i = this->digits.rbegin(); i != this->digits.rend() - 1; ++i){
+		auto d = *i;
+		if(d != 0){
+			return;
+		}
+
+		this->digits.erase(std::next(i).base());
+	}
 }
 
 LongNumber LongNumber::empty() {

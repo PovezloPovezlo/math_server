@@ -10,7 +10,7 @@ using namespace module;
 
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * N-1
  *
  * Сравнение натуральных чисел
@@ -19,11 +19,29 @@ using namespace module;
  * @return 2 - если первое больше второго, 0, если равно, 1 иначе
  */
 DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
-	throw NotImplementedException();
+	int aSize = a.length();
+    int bSize = b.length();
+
+    if (aSize > bSize)
+        return 2;
+    else if (aSize < bSize)
+        return 1;
+
+    int ind = aSize - 1;
+    while (ind >= 0)
+    {
+        if (a[ind] > b[ind])
+            return 2;
+        else if (a[ind] < b[ind])
+            return 1;
+        ind--;
+    }
+
+    return 0;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * N-2
  *
  * Проверка на ноль
@@ -31,11 +49,14 @@ DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
  * @return если число не равно нулю, то «да» иначе «нет»
  */
 bool module::NZER_N_B(ULongNumber &a) {
-	throw NotImplementedException();
+    if (a.length() == 1)
+        if (a[0] == 0)
+            return true;
+    return false;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * N-3
  *
  * Добавление 1 к натуральному числу
@@ -43,11 +64,34 @@ bool module::NZER_N_B(ULongNumber &a) {
  * @return
  */
 ULongNumber module::ADD_1N_N(ULongNumber &a) {
-	throw NotImplementedException();
+    
+    int aSize = a.length();
+
+    bool carry = false;
+    int i = 0;
+
+    short cell = a[i];
+    if (++cell > 9)
+        carry = true;
+    a[i] = cell % 10;
+
+    while (carry && i+1 < aSize)
+    {
+        i++;
+        cell = a[i];
+        if (++cell < 10)
+            carry = false;
+        a[i] = cell % 10;
+    }
+
+    if (carry)
+        a[aSize] = 1;
+
+    return a;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Кушко Даниил
  * N-4
  * Требуется: COM_NN_D
  *
@@ -57,11 +101,40 @@ ULongNumber module::ADD_1N_N(ULongNumber &a) {
  * @return
  */
 ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
-	throw NotImplementedException();
+
+
+	ULongNumber max = ULongNumber::empty();
+	ULongNumber min = ULongNumber::empty();
+	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
+	else { max = b; min = a; }
+
+	ULongNumber res = ULongNumber::empty();
+
+	int digit = 0;
+	int nextDigitPlus = 0;
+
+	for (int i = 0; i < max.length(); i++) {
+		digit = max[i] + min[i] + nextDigitPlus;
+		res[i] = (digit) % 10;
+		if (digit > 9) {
+			nextDigitPlus = 1;
+		}
+		else {
+			nextDigitPlus = 0;
+		}
+	}
+	
+	if (nextDigitPlus != 0) {
+		res[max.length()] = 1;
+
+	}
+	printf("%s + %s = %s\n", a.toString().c_str(), b.toString().c_str(), res.toString().c_str());
+	return res;
+
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Кушко Даниил
  * N-5
  * Требуется: COM_NN_D
  *
@@ -71,11 +144,41 @@ ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
  * @return разница чисел по модулю
  */
 ULongNumber module::SUB_NN_N(ULongNumber &a, ULongNumber &b) {
-	throw NotImplementedException();
+
+	ULongNumber max = ULongNumber::empty();
+	ULongNumber min = ULongNumber::empty();
+	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
+	else { max = b; min = a; }
+
+	printf("max: %s, min: %s\t", max.toString().c_str(), min.toString().c_str());
+
+	ULongNumber res = ULongNumber::empty();
+
+	for (int i = 0; i < max.length(); i++) {
+		if (max[i] >= min[i])  res[i] = max[i] - min[i];
+		else {
+			if (i < max.length() - 1) {
+				if (max[i + 1] > 0) max[i + 1] = max[i + 1] - 1;
+				else {
+					int t = i + 1;
+					while (max[t] == 0) {
+						max[t] = 9;
+						t++;
+					}
+					max[t] = max[t] - 1;
+				}
+				res[i] = (max[i] + 10) - min[i];
+				if (max[i + 1] == 0) break;
+			}
+		}
+		
+	}
+	printf("%s - %s = %s\n", max.toString().c_str(), min.toString().c_str(), res.toString().c_str());
+	return res;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Кушко Даниил
  * N-6
  *
  * Умножение натурального числа на цифру
@@ -84,11 +187,23 @@ ULongNumber module::SUB_NN_N(ULongNumber &a, ULongNumber &b) {
  * @return
  */
 ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
-	throw NotImplementedException();
+	ULongNumber res = ULongNumber::empty();
+
+	int additional = 0;
+
+	for (int i = 0; i < a.length(); i++) {
+		res[i] = (a[i] * b + additional) % 10;
+		additional = (a[i] * b + additional) / 10;
+	}
+	if (additional != 0) {
+		res[a.length()] = additional;
+	}
+
+	return res;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Береза Кирилл
  * N-7
  *
  * Умножение натурального числа на 10^k
@@ -97,11 +212,21 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
  * @return
  */
 ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
-	throw NotImplementedException();
+
+	ULongNumber res = ULongNumber::empty();
+	int count = k;//хз что с k!!!!!!
+
+	for (int i = 0; i < count; ++i) {
+		res[i] = 0;
+	}
+	for (int i = count; i < a.length(); ++i) {
+		res[i] = a[i - count];
+	}
+	return res;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Береза Кирилл
  * N-8
  * Требуется: MUL_ND_N, MUL_Nk_N, ADD_NN_N
  *
@@ -111,7 +236,19 @@ ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
  * @return
  */
 ULongNumber module::MUL_NN_N(ULongNumber &a, ULongNumber &b) {
-	throw NotImplementedException();
+	ULongNumber res = ULongNumber::empty();
+	ULongNumber temp = ULongNumber::empty();
+	ULongNumber max = ULongNumber::empty();
+	ULongNumber min = ULongNumber::empty();
+	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
+	else { max = b; min = a; }
+
+	for (int i = 0; i < min.length(); ++i) {
+		size_t newI = (i);
+		temp = MUL_Nk_N(MUL_ND_N(max, min[i]), newI);
+		res = ADD_NN_N(res, temp);
+	}
+	return res;
 }
 
 /**
