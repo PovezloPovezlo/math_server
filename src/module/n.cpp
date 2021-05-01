@@ -174,6 +174,7 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
  */
 ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
 	throw NotImplementedException();
+	/*
 	ULongNumber res = ULongNumber::empty();
 	int count = std::atoi(k.toString().c_str());//хз что с k!!!!!!
 
@@ -183,7 +184,7 @@ ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
 	for (int i = count; i < a.length(); ++i) {
 		res[i] = a[i - count];
 	}
-	return res;
+	return res;*/
 }
 
 /**
@@ -197,7 +198,7 @@ ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
  * @return
  */
 ULongNumber module::MUL_NN_N(ULongNumber &a, ULongNumber &b) {
-	throw NotImplementedException();
+	/*throw NotImplementedException();
 	ULongNumber res = ULongNumber::empty();
 	ULongNumber temp = ULongNumber::empty();
 	ULongNumber max = ULongNumber::empty();
@@ -209,7 +210,7 @@ ULongNumber module::MUL_NN_N(ULongNumber &a, ULongNumber &b) {
 		temp = MUL_Nk_N(MUL_ND_N(max, min[i]), ULongNumber(i));
 		res = ADD_NN_N(res, temp);
 	}
-	return res;
+	return res;*/
 }
 
 /**

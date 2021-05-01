@@ -14,7 +14,7 @@ namespace base {
 		RationalFraction(LongNumber numerator, NLongNumber denominator);
 		explicit RationalFraction(int value);
 
-		[[nodiscard]] std::string toString() const;
+		std::string toString();
 
 		static RationalFraction empty();
 		static RationalFraction fromInt(int value);
