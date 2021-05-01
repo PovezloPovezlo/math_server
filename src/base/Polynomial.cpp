@@ -21,7 +21,7 @@ Polynomial::Polynomial(PolynomialList* coefficients) : coefficients(coefficients
 
 Polynomial::Polynomial(): coefficients(new PolynomialList(ULongNumber::empty(), RationalFraction::empty())){}
 
-std::string Polynomial::toString() const {
+std::string Polynomial::toString() {
 	std::string result;
 	auto one = NLongNumber::fromInt(1);
 	auto p = *this;

@@ -26,7 +26,9 @@ namespace base {
 		bool operator ==(const LongNumber& number) const;
 		bool operator !=(const LongNumber& number) const;
 
-		[[nodiscard]] std::string toString() const;
+		[[nodiscard]] std::string toString();
+
+		void deleteRedundantZeros();
 
 		static LongNumber empty();
 		static LongNumber fromInt(int value);

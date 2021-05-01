@@ -14,7 +14,7 @@ namespace base {
 		explicit Polynomial(PolynomialList* coefficients);
 		explicit Polynomial();
 
-		[[nodiscard]] std::string toString() const;
+		std::string toString();
 
 	};
 
