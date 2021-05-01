@@ -17,7 +17,7 @@ using namespace module;
  * @param b
  * @return
  */
-Polynomial module::ADD_PP_P(const Polynomial& a, const Polynomial& b) {
+Polynomial module::ADD_PP_P(Polynomial& a, Polynomial& b) {
 	throw NotImplementedException();
 }
 
@@ -31,7 +31,7 @@ Polynomial module::ADD_PP_P(const Polynomial& a, const Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::SUB_PP_P(const Polynomial& a, const Polynomial& b) {
+Polynomial module::SUB_PP_P(Polynomial& a, Polynomial& b) {
 	throw NotImplementedException();
 }
 
@@ -45,7 +45,7 @@ Polynomial module::SUB_PP_P(const Polynomial& a, const Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::MUL_PQ_P(const Polynomial& a, const RationalFraction& b) {
+Polynomial module::MUL_PQ_P(Polynomial& a, RationalFraction& b) {
 	throw NotImplementedException();
 }
 
@@ -58,7 +58,7 @@ Polynomial module::MUL_PQ_P(const Polynomial& a, const RationalFraction& b) {
  * @param k
  * @return
  */
-Polynomial module::MUL_Pxk_P(const Polynomial& a, const ULongNumber& k) {
+Polynomial module::MUL_Pxk_P(Polynomial& a, ULongNumber& k) {
 	throw NotImplementedException();
 }
 
@@ -70,7 +70,7 @@ Polynomial module::MUL_Pxk_P(const Polynomial& a, const ULongNumber& k) {
  * @param a
  * @return
  */
-RationalFraction module::LED_P_Q(const Polynomial& a) {
+RationalFraction module::LED_P_Q(Polynomial& a) {
 	throw NotImplementedException();
 }
 
@@ -82,7 +82,7 @@ RationalFraction module::LED_P_Q(const Polynomial& a) {
  * @param a
  * @return
  */
-ULongNumber module::DEG_P_N(const Polynomial& a) {
+ULongNumber module::DEG_P_N(Polynomial& a) {
 	throw NotImplementedException();
 }
 
@@ -95,7 +95,7 @@ ULongNumber module::DEG_P_N(const Polynomial& a) {
  * @param a
  * @return
  */
-RationalFraction module::FAC_P_Q(const Polynomial& a) {
+RationalFraction module::FAC_P_Q(Polynomial& a) {
 	throw NotImplementedException();
 }
 
@@ -109,7 +109,7 @@ RationalFraction module::FAC_P_Q(const Polynomial& a) {
  * @param b
  * @return
  */
-Polynomial module::MUL_PP_P(const Polynomial& a, const Polynomial& b) {
+Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
 	throw NotImplementedException();
 }
 
@@ -123,7 +123,7 @@ Polynomial module::MUL_PP_P(const Polynomial& a, const Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::DIV_PP_P(const Polynomial& a, const Polynomial& b) {
+Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 	throw NotImplementedException();
 }
 
@@ -137,7 +137,7 @@ Polynomial module::DIV_PP_P(const Polynomial& a, const Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::MOD_PP_P(const Polynomial& a, const Polynomial& b) {
+Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b) {
 	throw NotImplementedException();
 }
 
@@ -151,7 +151,7 @@ Polynomial module::MOD_PP_P(const Polynomial& a, const Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::GCF_PP_P(const Polynomial& a, const Polynomial& b) {
+Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
 	throw NotImplementedException();
 }
 
@@ -164,7 +164,7 @@ Polynomial module::GCF_PP_P(const Polynomial& a, const Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::DER_P_P(const Polynomial& a, const Polynomial& b) {
+Polynomial module::DER_P_P(Polynomial& a, Polynomial& b) {
 	throw NotImplementedException();
 }
 
@@ -178,6 +178,6 @@ Polynomial module::DER_P_P(const Polynomial& a, const Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::NMR_P_P(const Polynomial& a, const Polynomial& b) {
+Polynomial module::NMR_P_P(Polynomial& a, Polynomial& b) {
 	throw NotImplementedException();
 }
