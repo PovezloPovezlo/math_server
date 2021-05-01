@@ -10,7 +10,7 @@ using namespace module;
 
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * N-1
  *
  * Сравнение натуральных чисел
@@ -41,7 +41,7 @@ DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * N-2
  *
  * Проверка на ноль
@@ -49,11 +49,14 @@ DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
  * @return если число не равно нулю, то «да» иначе «нет»
  */
 bool module::NZER_N_B(ULongNumber &a) {
-	throw NotImplementedException();
+    if (a.length() == 1)
+        if (a[0] == 0)
+            return true;
+    return false;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * N-3
  *
  * Добавление 1 к натуральному числу
@@ -61,7 +64,30 @@ bool module::NZER_N_B(ULongNumber &a) {
  * @return
  */
 ULongNumber module::ADD_1N_N(ULongNumber &a) {
-	throw NotImplementedException();
+    
+    int aSize = a.length();
+
+    bool carry = false;
+    int i = 0;
+
+    short cell = a[i];
+    if (++cell > 9)
+        carry = true;
+    a[i] = cell % 10;
+
+    while (carry && i+1 < aSize)
+    {
+        i++;
+        cell = a[i];
+        if (++cell < 10)
+            carry = false;
+        a[i] = cell % 10;
+    }
+
+    if (carry)
+        a[aSize] = 1;
+
+    return a;
 }
 
 /**
