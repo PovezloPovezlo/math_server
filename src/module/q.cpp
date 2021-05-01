@@ -19,7 +19,7 @@ using namespace module;
  * @param a
  * @return
  */
-base::RationalFraction module::RED_Q_Q(const base::RationalFraction& a) {
+RationalFraction module::RED_Q_Q(RationalFraction& a) {
 	throw NotImplementedException();
 }
 
@@ -48,7 +48,7 @@ bool module::INT_Q_B(const base::RationalFraction& a) {
  * @param a
  * @return
  */
-base::RationalFraction module::TRANS_Z_Q(const base::LongNumber& a) {
+RationalFraction module::TRANS_Z_Q(LongNumber& a) {
 	throw NotImplementedException();
 }
 
@@ -62,7 +62,7 @@ base::RationalFraction module::TRANS_Z_Q(const base::LongNumber& a) {
  * @param a
  * @return
  */
-base::LongNumber module::TRANS_Q_Z(const base::RationalFraction& a) {
+LongNumber module::TRANS_Q_Z(RationalFraction& a) {
 	throw NotImplementedException();
 }
 
@@ -76,7 +76,7 @@ base::LongNumber module::TRANS_Q_Z(const base::RationalFraction& a) {
  * @param b
  * @return
  */
-base::RationalFraction module::ADD_QQ_Q(const base::RationalFraction& a, const base::RationalFraction& b) {
+RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	throw NotImplementedException();
 }
 
@@ -90,7 +90,7 @@ base::RationalFraction module::ADD_QQ_Q(const base::RationalFraction& a, const b
  * @param b
  * @return
  */
-base::RationalFraction module::SUB_QQ_Q(const base::RationalFraction& a, const base::RationalFraction& b) {
+RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	throw NotImplementedException();
 }
 
@@ -104,7 +104,7 @@ base::RationalFraction module::SUB_QQ_Q(const base::RationalFraction& a, const b
  * @param b
  * @return
  */
-base::RationalFraction module::MUL_QQ_Q(const base::RationalFraction& a, const base::RationalFraction& b) {
+RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	throw NotImplementedException();
 }
 
@@ -119,6 +119,6 @@ base::RationalFraction module::MUL_QQ_Q(const base::RationalFraction& a, const b
  * @param b
  * @return
  */
-base::RationalFraction module::DIV_QQ_Q(const base::RationalFraction& a, const base::RationalFraction& b) {
+RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	throw NotImplementedException();
 }
