@@ -101,13 +101,20 @@ std::string LongNumber::toString() {
 }
 
 void LongNumber::deleteRedundantZeros() {
-	for(auto i = this->digits.rbegin(); i != this->digits.rend() - 1; ++i){
-		auto d = *i;
-		if(d != 0){
-			return;
+	bool isZero = true;
+	for (int i = 0; i < this->length(); i++) {
+		isZero = isZero && (this->digits[i] == 0);
+	}
+	if (isZero) {
+		this->digits.clear();
+		this->digits.push_back(0);
+	}
+	else {
+		int tempIterator = this->length() - 1;
+		while (this->digits[tempIterator] == 0) {
+			this->digits.pop_back();
+			tempIterator--;
 		}
-
-		this->digits.erase(std::next(i).base());
 	}
 }
 
