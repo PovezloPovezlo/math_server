@@ -154,7 +154,7 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
  * @param k
  * @return
  */
-ULongNumber module::MUL_Nk_N(ULongNumber &a, ULongNumber &k) {
+ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
 	throw NotImplementedException();
 	ULongNumber res = ULongNumber::empty();
 	int count = std::atoi(k.toString().c_str());//хз что с k!!!!!!
