@@ -110,10 +110,16 @@ ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
 
 	ULongNumber res = ULongNumber::empty();
 
+
+
 	int digit = 0;
 	int nextDigitPlus = 0;
 
-	for (int i = 0; i < max.length(); i++) {
+	int maxLength = max.length();
+
+	res[maxLength - 1] = 0;
+
+	for (int i = 0; i < maxLength; i++) {
 		digit = max[i] + min[i] + nextDigitPlus;
 		res[i] = (digit) % 10;
 		if (digit > 9) {
@@ -125,8 +131,7 @@ ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
 	}
 	
 	if (nextDigitPlus != 0) {
-		res[max.length()] = 1;
-
+		res[maxLength] = 1;
 	}
 
 	return res;
