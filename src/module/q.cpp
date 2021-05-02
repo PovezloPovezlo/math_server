@@ -56,7 +56,7 @@ RationalFraction module::TRANS_Z_Q(LongNumber& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Денис Медведев
  * Q-4
  *
  * Преобразование дробного в целое (если знаменатель равен 1)
@@ -66,7 +66,11 @@ RationalFraction module::TRANS_Z_Q(LongNumber& a) {
  * @return
  */
 LongNumber module::TRANS_Q_Z(RationalFraction& a) {
-	throw NotImplementedException();
+	
+	module::RED_Q_Q(a);
+	if (a.denominator == NLongNumber(1)) return a.numerator;
+
+	//throw NotImplementedException();
 }
 
 /**
