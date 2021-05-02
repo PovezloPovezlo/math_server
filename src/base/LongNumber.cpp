@@ -110,11 +110,13 @@ std::string LongNumber::toString() {
 	this->deleteRedundantZeros();
 
 	std::string result;
-	if(!this->isPositive){
-		result += "-";
+	
+	for(auto i = 0; i < length(); ++i){
+		result = std::to_string(this->operator[](i)) + result;
 	}
-	for(auto i = digits.rbegin(); i < digits.rend(); ++i){
-		result += std::to_string(*i);
+
+	if (!this->isPositive) {
+		result = "-" + result;
 	}
 
 	return result;
