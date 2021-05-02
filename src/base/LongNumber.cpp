@@ -76,7 +76,7 @@ size_t LongNumber::lastElementIndex() const {
 }
 
 DIGIT &LongNumber::operator[](size_t index) {
-	if(index >= length()){
+	if(index >= realLength()){
 		if(index >= this->digits.capacity()){
 			this->digits.reserve(index);
 		}
@@ -93,7 +93,9 @@ bool LongNumber::operator==(const LongNumber& number) const {
 		return false;
 	}
 
-	for(int i = 0; i < this->length(); ++i){
+	auto l = this->length();
+
+	for(int i = 0; i < l; ++i){
 		if(this->digits[i] != number.digits[i]){
 			return false;
 		}
@@ -110,8 +112,10 @@ std::string LongNumber::toString() {
 	this->deleteRedundantZeros();
 
 	std::string result;
+
+	auto l = length();
 	
-	for(auto i = 0; i < length(); ++i){
+	for(auto i = 0; i < l; ++i){
 		result = std::to_string(this->operator[](i)) + result;
 	}
 
