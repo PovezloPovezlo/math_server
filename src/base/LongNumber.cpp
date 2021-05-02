@@ -47,7 +47,27 @@ LongNumber::LongNumber(size_t size, bool isPositive) : isPositive(isPositive) {
 }
 
 size_t LongNumber::length() const {
-	return this->digits.size();
+    size_t c = 0;
+
+    bool deleteZeros = true;
+
+    for(auto i = this->digits.rbegin(); i != this->digits.rend(); ++i){
+        if(deleteZeros) {
+            if (*i != 0) {
+                deleteZeros = false;
+            }else{
+                continue;
+            }
+        }
+
+        ++c;
+    }
+
+    return c > 1 ? c : 1;
+}
+
+size_t LongNumber::realLength() const {
+    return this->digits.size();
 }
 
 size_t LongNumber::lastElementIndex() const {
@@ -101,7 +121,7 @@ std::string LongNumber::toString() {
 }
 
 void LongNumber::deleteRedundantZeros() {
-	for(auto i = this->digits.rbegin(); i != this->digits.rend() - 1; ++i){
+	for(auto i = this->digits.rbegin(); i != std::prev(this->digits.rend()); ++i){
 		auto d = *i;
 		if(d != 0){
 			return;

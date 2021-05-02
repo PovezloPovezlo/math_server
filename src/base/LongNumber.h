@@ -20,6 +20,7 @@ namespace base {
 		explicit LongNumber(int value);
 
 		[[nodiscard]] size_t length() const;
+		[[nodiscard]] size_t realLength() const;
 		[[nodiscard]] size_t lastElementIndex() const;
 
 		DIGIT& operator[](size_t index);
