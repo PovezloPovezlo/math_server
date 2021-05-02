@@ -222,7 +222,7 @@ ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
 	for (int i = 0; i < k; ++i) {
 		res[i] = 0;
 	}
-	for (int i = k; i < a.length(); ++i) {
+	for (int i = k; i < a.length() + k; ++i) {
 		res[i] = a[i - k];
 	}
 	return res;
