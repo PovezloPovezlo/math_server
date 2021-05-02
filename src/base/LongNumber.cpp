@@ -126,8 +126,6 @@ void LongNumber::deleteRedundantZeros() {
 		if(d != 0){
 			return;
 		}
-
-		this->digits.erase(std::next(i).base());
 	}
 }
 
