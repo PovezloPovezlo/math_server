@@ -1,4 +1,5 @@
 #include "z.h"
+#include "n.h"
 #include <base/RationalFraction.h>
 #include <base/NotImplementedException.h>
 
@@ -96,7 +97,7 @@ LongNumber module::SUB_ZZ_Z(LongNumber& a, LongNumber& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Лях Глеб
  * Z-8
  * Требуется: POZ_Z_D, ABS_Z_N, MUL_NN_N, MUL_ZN_Z
  *
@@ -106,7 +107,14 @@ LongNumber module::SUB_ZZ_Z(LongNumber& a, LongNumber& b) {
  * @return
  */
 LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
-	throw NotImplementedException();
+	bool sign = false;
+	if (module::POZ_Z_D(a) == '1') sign = !sign;
+	if (module::POZ_Z_D(b) == '1') sign = !sign;
+	LongNumber produced = MUL_NN_N(module::ABS_Z_N(a), module::ABS_Z_N(b));
+	if(sign)
+		produced = module::MUL_ZM_Z(produced); 
+	return produced;
+	// throw NotImplementedException();
 }
 
 /**

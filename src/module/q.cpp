@@ -24,14 +24,14 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Глеб Лях
  * Q-2
  *
  * Проверка на целое
  * @param a
  * @return если рациональное число является целым, то «да», иначе «нет»
  */
-bool module::INT_Q_B(const base::RationalFraction& a) {
+bool module::INT_Q_B(base::RationalFraction& a) {
 	if(module::MOD_ZZ_Z(a.numerator, a.denominator) == LongNumber::empty()){
 		return true;
 	}
