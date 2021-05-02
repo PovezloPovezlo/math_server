@@ -38,8 +38,8 @@ DIGIT module::POZ_Z_D(LongNumber& a) {
 				return 0;
 		return 2;
 	}
-	else
-		return 1;
+	
+	return 1;
 }
 
 /**
@@ -51,6 +51,9 @@ DIGIT module::POZ_Z_D(LongNumber& a) {
  * @return
  */
 LongNumber module::MUL_ZM_Z(LongNumber& a) {
+	if (a.length() == 1 && a[0] == 0)
+		return a;
+
 	a.isPositive = !a.isPositive;
 	return a;
 }
@@ -77,7 +80,13 @@ LongNumber module::TRANS_N_Z(NLongNumber& a) {
  * @return
  */
 NLongNumber module::TRANS_Z_N(ULongNumber& a) {
-	// Если ноль?
+	
+	if (a.length() == 1 && a[0] == 0)
+	{
+		//При нуле вылетает ошибка
+		throw BaseException("zero is not natural number");
+	}
+
 	NLongNumber b(a.toString());
 	return b;
 

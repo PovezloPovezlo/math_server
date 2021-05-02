@@ -10,35 +10,49 @@ using namespace module;
 // тесты
 TEST(Z, ABS_Z_N)
 {
-	LongNumber a("12345");
-	ULongNumber b("12345");
+	LongNumber a("36454362134243");
+	ULongNumber b("36454362134243");
 	EXPECT_EQ(ABS_Z_N(a), b);
 
-	a = LongNumber("-12345");
-	b= ULongNumber("12345");
+	a = LongNumber("-54343545543");
+	b= ULongNumber("54343545543");
+	EXPECT_EQ(ABS_Z_N(a), b);
+
+	a = LongNumber("0");
+	b = ULongNumber("0");
 	EXPECT_EQ(ABS_Z_N(a), b);
 }
 
 TEST(Z, POZ_Z_D)
 {
-	LongNumber a("12345");
+	LongNumber a("653756334643234");
 	EXPECT_EQ(POZ_Z_D(a), 2);
 
-	a = LongNumber("-12345");
+	a = LongNumber("-7658413245233457");
 	EXPECT_EQ(POZ_Z_D(a), 1);
 
 	a = LongNumber("0");
 	EXPECT_EQ(POZ_Z_D(a), 0);
+
+	a = LongNumber("5");
+	EXPECT_EQ(POZ_Z_D(a), 2);
+
+	a = LongNumber("-7");
+	EXPECT_EQ(POZ_Z_D(a), 1);
 }
 
 TEST(Z, MUL_ZM_Z)
 {
-	LongNumber a("543354");
-	LongNumber b("-543354");
+	LongNumber a("3545343563456635");
+	LongNumber b("-3545343563456635");
 	EXPECT_EQ(MUL_ZM_Z(a), b);
 
-	a = LongNumber("-457457458");
-	b = LongNumber("457457458");
+	a = LongNumber("-46746574567746647");
+	b = LongNumber("46746574567746647");
+	EXPECT_EQ(MUL_ZM_Z(a), b);
+
+	a = LongNumber("0");
+	b = LongNumber("0");
 	EXPECT_EQ(MUL_ZM_Z(a), b);
 
 }
@@ -53,6 +67,10 @@ TEST(Z, TRANS_N_Z)
 	b = LongNumber("457457458");
 	EXPECT_EQ(TRANS_N_Z(a), b);
 
+	a = NLongNumber("4");
+	b = LongNumber("4");
+	EXPECT_EQ(TRANS_N_Z(a), b);
+
 }
 
 TEST(Z, TRANS_Z_N)
@@ -64,5 +82,15 @@ TEST(Z, TRANS_Z_N)
 	a = ULongNumber("457457458");
 	b = NLongNumber("457457458");
 	EXPECT_EQ(TRANS_Z_N(a), b);
+
+	a = ULongNumber("3");
+	b = NLongNumber("3");
+	EXPECT_EQ(TRANS_Z_N(a), b);
+	
+	//При нуле вылетает ошибка
+	//a = ULongNumber("0");
+	//b = NLongNumber("0");
+	//EXPECT_EQ(MUL_ZM_Z(a), "zero is not natural number"); 
+
 
 }
