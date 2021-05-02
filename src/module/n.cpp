@@ -220,14 +220,16 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
 ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
 
 	ULongNumber res = ULongNumber::empty();
-	int count = k;//хз что с k!!!!!!
+	int count = k;
 
-	for (int i = 0; i < count; ++i) {
-		res[i] = 0;
+	res[a.length() + k - 1] = 0;
+
+	int aLength = a.length();
+
+	for (int i = 0; i < aLength; ++i) {
+		res[i + count] = a[i];
 	}
-	for (int i = count; i < a.length(); ++i) {
-		res[i] = a[i - count];
-	}
+
 	return res;
 }
 
