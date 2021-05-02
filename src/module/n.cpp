@@ -243,7 +243,8 @@ ULongNumber module::MUL_NN_N(ULongNumber &a, ULongNumber &b) {
 
 	for (int i = 0; i < min.length(); ++i) {
 		size_t newI = (i);
-		temp = MUL_Nk_N(MUL_ND_N(max, min[i]), newI);
+		auto t = MUL_ND_N(max, min[i]);
+		temp = MUL_Nk_N(t, newI);
 		res = ADD_NN_N(res, temp);
 	}
 	return res;
