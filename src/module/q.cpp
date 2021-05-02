@@ -24,14 +24,14 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
 }
 
 /**
- * @authors Глеб Лях
+ * @authors Имя Фамилия авторов
  * Q-2
  *
  * Проверка на целое
  * @param a
  * @return если рациональное число является целым, то «да», иначе «нет»
  */
-bool module::INT_Q_B(base::RationalFraction& a) {
+bool module::INT_Q_B(const base::RationalFraction& a) {
 	if(module::MOD_ZZ_Z(a.numerator, a.denominator) == LongNumber::empty()){
 		return true;
 	}
@@ -49,7 +49,10 @@ bool module::INT_Q_B(base::RationalFraction& a) {
  * @return
  */
 RationalFraction module::TRANS_Z_Q(LongNumber& a) {
-	throw NotImplementedException();
+	
+	return RationalFraction(a, 1);
+	
+	//throw NotImplementedException();
 }
 
 /**
@@ -105,7 +108,10 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @return
  */
 RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	throw NotImplementedException();
+	
+	return RationalFraction(MUL_ZZ_Z(a.numerator, b.numerator), MUL_ZZ_Z(a.denominator, b.denominator));
+	
+	//throw NotImplementedException();
 }
 
 /**
@@ -119,6 +125,11 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @param b
  * @return
  */
-RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	throw NotImplementedException();
+RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {\
+	
+	if (b.numerator !=0) {
+		return RatoinalFraction(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(a.denominator, b.numerator));
+	}
+	
+	//throw NotImplementedException();
 }
