@@ -44,11 +44,11 @@ TEST(LongNumber, deleteRedundantZeros){
 TEST(LongNumber, allocation){
 	base::LongNumber positiveNumber(10, true);
 
-	EXPECT_EQ(positiveNumber.length(), 10);
+	EXPECT_EQ(positiveNumber.realLength(), 10);
 	EXPECT_EQ(positiveNumber.isPositive, true);
 
 	base::LongNumber negativeNumber(10, false);
-	EXPECT_EQ(negativeNumber.length(), 10);
+	EXPECT_EQ(negativeNumber.realLength(), 10);
 	EXPECT_EQ(negativeNumber.isPositive, false);
 
 	base::LongNumber number("228");
