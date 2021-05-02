@@ -110,10 +110,16 @@ ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
 
 	ULongNumber res = ULongNumber::empty();
 
+
+
 	int digit = 0;
 	int nextDigitPlus = 0;
 
-	for (int i = 0; i < max.length(); i++) {
+	int maxLength = max.length();
+
+	res[maxLength - 1] = 0;
+
+	for (int i = 0; i < maxLength; i++) {
 		digit = max[i] + min[i] + nextDigitPlus;
 		res[i] = (digit) % 10;
 		if (digit > 9) {
@@ -125,8 +131,7 @@ ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
 	}
 	
 	if (nextDigitPlus != 0) {
-		res[max.length()] = 1;
-
+		res[maxLength] = 1;
 	}
 
 	return res;
@@ -150,7 +155,8 @@ ULongNumber module::SUB_NN_N(ULongNumber &a, ULongNumber &b) {
 	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
 	else { max = b; min = a; }
 
-
+	//printf("%s - %s = ", max.toString().c_str(), min.toString().c_str());
+	
 	ULongNumber res = ULongNumber::empty();
 
 	for (int i = 0; i < max.length(); i++) {
@@ -172,6 +178,8 @@ ULongNumber module::SUB_NN_N(ULongNumber &a, ULongNumber &b) {
 		}
 		
 	}
+
+	//printf("%s\n", res.toString().c_str());
 	return res;
 }
 
@@ -240,7 +248,8 @@ ULongNumber module::MUL_NN_N(ULongNumber &a, ULongNumber &b) {
 
 	for (int i = 0; i < min.length(); ++i) {
 		size_t newI = (i);
-		temp = MUL_Nk_N(MUL_ND_N(max, min[i]), newI);
+		auto t = MUL_ND_N(max, min[i]);
+		temp = MUL_Nk_N(t, newI);
 		res = ADD_NN_N(res, temp);
 	}
 	return res;

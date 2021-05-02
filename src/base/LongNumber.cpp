@@ -47,7 +47,27 @@ LongNumber::LongNumber(size_t size, bool isPositive) : isPositive(isPositive) {
 }
 
 size_t LongNumber::length() const {
-	return this->digits.size();
+    size_t c = 0;
+
+    bool deleteZeros = true;
+
+    for(auto i = this->digits.rbegin(); i != this->digits.rend(); ++i){
+        if(deleteZeros) {
+            if (*i != 0) {
+                deleteZeros = false;
+            }else{
+                continue;
+            }
+        }
+
+        ++c;
+    }
+
+    return c > 1 ? c : 1;
+}
+
+size_t LongNumber::realLength() const {
+    return this->digits.size();
 }
 
 size_t LongNumber::lastElementIndex() const {
@@ -56,7 +76,7 @@ size_t LongNumber::lastElementIndex() const {
 }
 
 DIGIT &LongNumber::operator[](size_t index) {
-	if(index >= length()){
+	if(index >= realLength()){
 		if(index >= this->digits.capacity()){
 			this->digits.reserve(index);
 		}
@@ -73,7 +93,9 @@ bool LongNumber::operator==(const LongNumber& number) const {
 		return false;
 	}
 
-	for(int i = 0; i < this->length(); ++i){
+	auto l = this->length();
+
+	for(int i = 0; i < l; ++i){
 		if(this->digits[i] != number.digits[i]){
 			return false;
 		}
@@ -90,31 +112,25 @@ std::string LongNumber::toString() {
 	this->deleteRedundantZeros();
 
 	std::string result;
-	if(!this->isPositive){
-		result += "-";
+
+	auto l = length();
+	
+	for(auto i = 0; i < l; ++i){
+		result = std::to_string(this->operator[](i)) + result;
 	}
-	for(auto i = digits.rbegin(); i < digits.rend(); ++i){
-		result += std::to_string(*i);
+
+	if (!this->isPositive) {
+		result = "-" + result;
 	}
 
 	return result;
 }
 
 void LongNumber::deleteRedundantZeros() {
-	bool isZero = true;
-	for (int i = 0; i < this->length(); i++) {
-		isZero = isZero && (this->digits[i] == 0);
-		if (!isZero) break;
-	}
-	if (isZero) {
-		this->digits.clear();
-		this->digits.push_back(0);
-	}
-	else {
-		int tempIterator = this->length() - 1;
-		while (this->digits[tempIterator] == 0) {
-			this->digits.pop_back();
-			tempIterator--;
+	for(auto i = this->digits.rbegin(); i != std::prev(this->digits.rend()); ++i){
+		auto d = *i;
+		if(d != 0){
+			return;
 		}
 	}
 }
