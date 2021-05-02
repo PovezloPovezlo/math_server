@@ -150,7 +150,8 @@ ULongNumber module::SUB_NN_N(ULongNumber &a, ULongNumber &b) {
 	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
 	else { max = b; min = a; }
 
-
+	//printf("%s - %s = ", max.toString().c_str(), min.toString().c_str());
+	
 	ULongNumber res = ULongNumber::empty();
 
 	for (int i = 0; i < max.length(); i++) {
@@ -172,6 +173,8 @@ ULongNumber module::SUB_NN_N(ULongNumber &a, ULongNumber &b) {
 		}
 		
 	}
+
+	//printf("%s\n", res.toString().c_str());
 	return res;
 }
 
