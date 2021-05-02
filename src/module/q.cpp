@@ -31,7 +31,7 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
  * @param a
  * @return если рациональное число является целым, то «да», иначе «нет»
  */
-bool module::INT_Q_B(const base::RationalFraction& a) {
+bool module::INT_Q_B(base::RationalFraction& a) {
 	if(module::MOD_ZZ_Z(a.numerator, a.denominator) == LongNumber::empty()){
 		return true;
 	}
@@ -50,7 +50,7 @@ bool module::INT_Q_B(const base::RationalFraction& a) {
  */
 RationalFraction module::TRANS_Z_Q(LongNumber& a) {
 	
-	return RationalFraction(a, 1);
+	return RationalFraction(a, NLongNumber(1));
 	
 	//throw NotImplementedException();
 }
@@ -109,7 +109,8 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
  */
 RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	
-	return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator), module::MUL_ZZ_Z(a.denominator, b.denominator));
+	return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator),
+		(NLongNumber)module::TRANS_Z_N(module::MUL_NN_N(a.denominator, b.denominator)));
 	
 	//throw NotImplementedException();
 }
@@ -127,8 +128,13 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
  */
 RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {\
 	
-	if (b.numerator !=0) {
-		return RatoinalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator), module::MUL_ZZ_Z(a.denominator, b.numerator));
+	if (b.numerator != LongNumber(0)) {
+		if (module::POZ_Z_D(b.numerator) == '1'){
+			b.numerator = module::MUL_ZM_Z(b.numerator);
+		}
+		NLongNumber additional = module::TRANS_Z_N(b.numerator);
+		return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator), 
+			(NLongNumber)module::TRANS_Z_N(module::MUL_NN_N(a.denominator, (ULongNumber)additional)));
 	}
 	
 	//throw NotImplementedException();
