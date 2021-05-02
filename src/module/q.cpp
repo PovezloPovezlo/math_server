@@ -24,7 +24,7 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Глеб Лях
  * Q-2
  *
  * Проверка на целое
@@ -41,7 +41,7 @@ bool module::INT_Q_B(const base::RationalFraction& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * Q-3
  *
  * Преобразование целого в дробное
@@ -98,7 +98,7 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * Q-7
  * Требуется: MUL_ZZ_Z
  *
@@ -109,13 +109,13 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
  */
 RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	
-	return RationalFraction(MUL_ZZ_Z(a.numerator, b.numerator), MUL_ZZ_Z(a.denominator, b.denominator));
+	return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator), module::MUL_ZZ_Z(a.denominator, b.denominator));
 	
 	//throw NotImplementedException();
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * Q-8
  * Требуется: MUL_ZZ_Z
  *
@@ -128,7 +128,7 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {\
 	
 	if (b.numerator !=0) {
-		return RatoinalFraction(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(a.denominator, b.numerator));
+		return RatoinalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator), module::MUL_ZZ_Z(a.denominator, b.numerator));
 	}
 	
 	//throw NotImplementedException();
