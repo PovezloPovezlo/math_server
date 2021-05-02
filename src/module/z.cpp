@@ -8,7 +8,7 @@ using namespace module;
 // Целые числа
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * Z-1
  *
  * Абсолютная величина числа
@@ -16,11 +16,14 @@ using namespace module;
  * @return
  */
 ULongNumber module::ABS_Z_N(LongNumber& a) {
-	throw NotImplementedException();
+	if (!a.isPositive)
+		a.isPositive = true;
+	ULongNumber b(a.toString());
+	return b;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * Z-2
  *
  * Определение положительности числа
@@ -28,11 +31,19 @@ ULongNumber module::ABS_Z_N(LongNumber& a) {
  * @return 2 - положительное, 0 — равное нулю, 1 - отрицательное
  */
 DIGIT module::POZ_Z_D(LongNumber& a) {
-	throw NotImplementedException();
+	if (a.isPositive)
+	{
+		if (a.length() == 1)
+			if (a[0] == 0)
+				return 0;
+		return 2;
+	}
+	else
+		return 1;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * Z-3
  *
  * Умножение целого на (-1)
@@ -40,11 +51,12 @@ DIGIT module::POZ_Z_D(LongNumber& a) {
  * @return
  */
 LongNumber module::MUL_ZM_Z(LongNumber& a) {
-	throw NotImplementedException();
+	a.isPositive = !a.isPositive;
+	return a;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * Z-4
  *
  * Преобразование натурального в целое
@@ -52,11 +64,12 @@ LongNumber module::MUL_ZM_Z(LongNumber& a) {
  * @return
  */
 LongNumber module::TRANS_N_Z(NLongNumber& a) {
-	throw NotImplementedException();
+	LongNumber b(a.toString());
+	return b;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Багаев Даниил
  * Z-5
  *
  * Преобразование целого неотрицательного в натуральное
@@ -64,7 +77,10 @@ LongNumber module::TRANS_N_Z(NLongNumber& a) {
  * @return
  */
 NLongNumber module::TRANS_Z_N(ULongNumber& a) {
-	throw NotImplementedException();
+	// Если ноль?
+	NLongNumber b(a.toString());
+	return b;
+
 }
 
 /**
