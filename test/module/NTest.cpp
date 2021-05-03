@@ -39,6 +39,9 @@ TEST(N, ADD_NN_N) {
 	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
 	t1 = ULongNumber(999), t2 = ULongNumber(999), r = ULongNumber(2000-2);
 	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+
+	t1 = ULongNumber(914), t2 = ULongNumber(135), r = ULongNumber(779);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
 	//this is fucking hardcore...
 	t1 = ULongNumber(
 		"123123123123123123123123123123123123123123123123123123123123"
@@ -206,7 +209,7 @@ TEST(N, MUL_ND_N) {
 		 "4216553716148716644845288722264462840255132"
 		 "5303461078"
 	);
-	EXPECT_EQ(module::MUL_ND_N(t1, t2), r);*/
+	EXPECT_EQ(module::MUL_ND_N(t1, t2), r);
 }
 
 TEST(N, MUL_Nk_N) {
@@ -266,7 +269,7 @@ TEST(N, MUL_NN_N) {
 
 	t1 = ULongNumber("273453842375093947602795057502"),
 	t2 = ULongNumber(0), r = ULongNumber(0);
-	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);*/
+	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
 }
 
 TEST(N, NZER_N_B)

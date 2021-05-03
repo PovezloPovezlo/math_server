@@ -173,7 +173,7 @@ ULongNumber module::SUB_NN_N(ULongNumber &a, ULongNumber &b) {
 					max[t] = max[t] - 1;
 				}
 				res[i] = (max[i] + 10) - min[i];
-				if (max[i + 1] == 0) break;
+
 			}
 		}
 		
