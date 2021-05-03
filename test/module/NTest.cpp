@@ -20,7 +20,7 @@ TEST(N, COM_NN_D)
 	EXPECT_EQ(COM_NN_D(c, d), 1);
 }
 
-TEST(LongNumber, ADD_NN_N) {
+TEST(N, ADD_NN_N) {
 	ULongNumber t1(0), t2(0), r(0);
 	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
 	t1 = ULongNumber(0), t2 = ULongNumber(1), r = ULongNumber(1);
@@ -140,7 +140,7 @@ TEST(LongNumber, ADD_NN_N) {
 	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
 }
 
-TEST(LongNumber, SUB_NN_N) {
+TEST(N, SUB_NN_N) {
 	ULongNumber t1(0), t2(0), r(0);
 	EXPECT_EQ(module::SUB_NN_N(t1, t2), r);
 
@@ -172,8 +172,8 @@ TEST(LongNumber, SUB_NN_N) {
 	EXPECT_EQ(module::SUB_NN_N(t1, t2), r);
 }
 
-TEST(LongNumber, MUL_ND_N) {
-	/*ULongNumber t1(0), r(0);
+TEST(N, MUL_ND_N) {
+	ULongNumber t1(0), r(0);
 	DIGIT t2 = 0;
 	EXPECT_EQ(module::MUL_ND_N(t1, t2), r);
 
@@ -209,7 +209,7 @@ TEST(LongNumber, MUL_ND_N) {
 	EXPECT_EQ(module::MUL_ND_N(t1, t2), r);*/
 }
 
-TEST(LongNumber, MUL_Nk_N) {/*
+TEST(N, MUL_Nk_N) {
 	ULongNumber t1(0);
 	size_t t2(0);
 	ULongNumber r(0);
@@ -229,7 +229,8 @@ TEST(LongNumber, MUL_Nk_N) {/*
 
 	t1 = ULongNumber("1239871298371263192678359273658173465081376"),
 		t2 = size_t(50), r = ULongNumber(
-		"123987129837126319267835927365817346508137600000000000000000000000000000000000000000000000000"
+		"1239871298371263192678359273658173465081376"
+		"00000000000000000000000000000000000000000000000000"
 	);
 	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
 
@@ -238,13 +239,9 @@ TEST(LongNumber, MUL_Nk_N) {/*
 			"1239871298371263192678359273658173465081376"
 		);
 	EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);
-
-	//t1 = ULongNumber(0),
-	//	t2 = size_t(1239878612), r = ULongNumber(0);
-	//EXPECT_EQ(module::MUL_Nk_N(t1, t2), r);*/
 }
 
-TEST(LongNumber, MUL_NN_N) {/*
+TEST(N, MUL_NN_N) {
 	ULongNumber t1(0), t2(0), r(0);
 	EXPECT_EQ(module::MUL_NN_N(t1, t2), r);
 
