@@ -133,10 +133,10 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {\
 	
 	if (b.numerator != LongNumber(0)) {
-		if (module::POZ_Z_D(b.numerator) == '1'){
+		if (module::POZ_Z_D(b.numerator) == 1){
 			b.numerator = module::MUL_ZM_Z(b.numerator);
 		}
-		NLongNumber additional = module::TRANS_Z_N(b.numerator);
+		NLongNumber additional = NLongNumber::fromLongNumber(b.numerator);
 		return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator), 
 			(NLongNumber)module::TRANS_Z_N(module::MUL_NN_N(a.denominator, (ULongNumber)additional)));
 	}
