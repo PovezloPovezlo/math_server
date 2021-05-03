@@ -1,6 +1,9 @@
 #include "q.h"
 #include <base/RationalFraction.h>
 #include <base/NotImplementedException.h>
+#include <module/n.h>
+#include <module/p.h>
+#include <module/z.h>
 
 using namespace base;
 using namespace module;
@@ -21,19 +24,24 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Глеб Лях
  * Q-2
  *
  * Проверка на целое
  * @param a
  * @return если рациональное число является целым, то «да», иначе «нет»
  */
-bool module::INT_Q_B(RationalFraction& a) {
-	throw NotImplementedException();
+bool module::INT_Q_B(base::RationalFraction& a) {
+	if(module::MOD_ZZ_Z(a.numerator, a.denominator) == LongNumber::empty()){
+		return true;
+	}
+	else return false;
+	
+	//throw NotImplementedException();
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * Q-3
  *
  * Преобразование целого в дробное
@@ -41,20 +49,28 @@ bool module::INT_Q_B(RationalFraction& a) {
  * @return
  */
 RationalFraction module::TRANS_Z_Q(LongNumber& a) {
-	throw NotImplementedException();
+	
+	return RationalFraction(a, NLongNumber(1));
+	
+	//throw NotImplementedException();
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Денис Медведев
  * Q-4
  *
  * Преобразование дробного в целое (если знаменатель равен 1)
- * Комментарий от архитектора: полагаю, что имелось в виду под "если знаменатель равен 1" уже после выполнения сокращения дробей. А то иначе у нас эта функция не сможет обработать например 6/2
+ * Комментарий от архитектора: полагаю, что имелось в виду под "если знаменатель равен 1" 
+ * уже после выполнения сокращения дробей. А то иначе у нас эта функция не сможет обработать например 6/2
  * @param a
  * @return
  */
 LongNumber module::TRANS_Q_Z(RationalFraction& a) {
-	throw NotImplementedException();
+	
+	module::RED_Q_Q(a);
+	if (a.denominator == NLongNumber(1)) return a.numerator;
+
+	//throw NotImplementedException();
 }
 
 /**
@@ -86,7 +102,7 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * Q-7
  * Требуется: MUL_ZZ_Z
  *
@@ -96,11 +112,15 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @return
  */
 RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	throw NotImplementedException();
+	
+	return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator),
+		(NLongNumber)module::TRANS_Z_N(module::MUL_NN_N(a.denominator, b.denominator)));
+	
+	//throw NotImplementedException();
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * Q-8
  * Требуется: MUL_ZZ_Z
  *
@@ -110,6 +130,16 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @param b
  * @return
  */
-RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	throw NotImplementedException();
+RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {\
+	
+	if (b.numerator != LongNumber(0)) {
+		if (module::POZ_Z_D(b.numerator) == '1'){
+			b.numerator = module::MUL_ZM_Z(b.numerator);
+		}
+		NLongNumber additional = module::TRANS_Z_N(b.numerator);
+		return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator), 
+			(NLongNumber)module::TRANS_Z_N(module::MUL_NN_N(a.denominator, (ULongNumber)additional)));
+	}
+	
+	//throw NotImplementedException();
 }
