@@ -275,11 +275,11 @@ TEST(N, MUL_NN_N) {
 TEST(N, NZER_N_B)
 {
 	ULongNumber a("321656");
-	EXPECT_EQ(NZER_N_B(a), false);
-	a = ULongNumber("3405053653600854343430");
-	EXPECT_EQ(NZER_N_B(a), false);
-	a = ULongNumber("0");
 	EXPECT_EQ(NZER_N_B(a), true);
+	a = ULongNumber("3405053653600854343430");
+	EXPECT_EQ(NZER_N_B(a), true);
+	a = ULongNumber("0");
+	EXPECT_EQ(NZER_N_B(a), false);
 }
 
 TEST(N, ADD_1N_N)

@@ -1,21 +1,32 @@
 #pragma once
 
 #include "RationalFraction.h"
-#include "PolynomialList.h"
-#include <list>
+#include "PolynomialPair.h"
+#include <set>
 
 namespace base {
 
+    typedef std::set<PolynomialPair*, PolynomialPairComparator> PolynomialSet;
+
 	class Polynomial {
 	public:
-		PolynomialList* coefficients;
-		//PolynomialList* coefficientsLastElement; todo может понадобится сделать?
+        PolynomialSet coefficients;
 
-		explicit Polynomial(PolynomialList* coefficients);
+		explicit Polynomial(PolynomialSet& coefficients);
 		explicit Polynomial();
 
-		std::string toString();
+        PolynomialPair* firstElement();
+        PolynomialPair* lastElement();
+        void addElement(PolynomialPair* element);
+        void addElement(size_t degree, RationalFraction val);
 
-	};
+        PolynomialPair* get(size_t index);
+        RationalFraction getCoefficient(size_t index);
+
+        void set(size_t index, RationalFraction val);
+        void remove(size_t index);
+
+		std::string toString();
+    };
 
 }
