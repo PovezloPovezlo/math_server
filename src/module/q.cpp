@@ -133,7 +133,7 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {\
 	
 	if (b.numerator != LongNumber(0)) {
-		if (module::POZ_Z_D(b.numerator) == '1'){
+		if (module::POZ_Z_D(b.numerator) == 1){
 			b.numerator = module::MUL_ZM_Z(b.numerator);
 		}
 		auto additional = (ULongNumber)module::TRANS_Z_N(b.numerator);
