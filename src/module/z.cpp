@@ -132,12 +132,12 @@ LongNumber module::SUB_ZZ_Z(LongNumber& a, LongNumber& b) {
  * @return
  */
 LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
-	// bool sign = false;
-	// if (module::POZ_Z_D(a) == 1) sign = !sign;
-	// if (module::POZ_Z_D(b) == 1) sign = !sign;
-	short sig(module::POZ_Z_D(a) + module::POZ_Z_D(b)%2);
-	LongNumber produced = MUL_NN_N(module::ABS_Z_N(a), module::ABS_Z_N(b));
-	if(sig)
+	DIGIT sign = (module::POZ_Z_D(a) + module::POZ_Z_D(b)) % 2; // 0 - положительное, 1 - отрицательное
+	auto t1 = module::ABS_Z_N(a);
+	auto t2 = module::ABS_Z_N(b);
+
+	LongNumber produced = MUL_NN_N(t1, t2);
+	if(sign)
 		produced = module::MUL_ZM_Z(produced); 
 	return produced;
 	// throw NotImplementedException();
