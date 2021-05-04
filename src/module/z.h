@@ -2,6 +2,7 @@
 
 #include <base/NLongNumber.h>
 #include <base/ULongNumber.h>
+#include <base/LongNumber.h>
 
 namespace module {
 

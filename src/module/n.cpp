@@ -101,8 +101,6 @@ ULongNumber module::ADD_1N_N(ULongNumber &a) {
  * @return
  */
 ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
-
-
 	ULongNumber max = ULongNumber::empty();
 	ULongNumber min = ULongNumber::empty();
 	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
