@@ -121,7 +121,7 @@ LongNumber module::SUB_ZZ_Z(LongNumber& a, LongNumber& b) {
  * @return
  */
 LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
-	DIGIT sign = (module::POZ_Z_D(a) + module::POZ_Z_D(b)) % 2; // 0 - положительное, 1 - отрицательное
+  DIGIT sign = (module::POZ_Z_D(a) + module::POZ_Z_D(b)) % 2; // 0 - положительное, 1 - отрицательное
 	auto t1 = module::ABS_Z_N(a);
 	auto t2 = module::ABS_Z_N(b);
 
