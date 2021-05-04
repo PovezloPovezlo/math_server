@@ -145,3 +145,7 @@ LongNumber LongNumber::fromInt(int value) {
 
 //todo optimize (избавиться от to_string())
 LongNumber::LongNumber(int value) : LongNumber(std::to_string(value)){}
+
+bool LongNumber::isZero() const {
+    return this->length() == 1 && this->digits[0] == 0;
+}
