@@ -92,43 +92,60 @@ NLongNumber module::TRANS_Z_N(LongNumber& a) {
  * @param b
  * @return
  */
-LongNumber ADD_ZZ_Z(LongNumber& a, LongNumber& b) {
-	int poz_a = POZ_Z_D(a), poz_b = POZ_Z_D(b);
+LongNumber module::ADD_ZZ_Z(LongNumber& a, LongNumber& b) {
+	DIGIT poz_a = POZ_Z_D(a), poz_b = POZ_Z_D(b);
 	if (poz_a == 0) return b;
 	if (poz_b == 0) return a;
 	if (poz_a * poz_b == 4)
 	{
-		LongNumber c((ADD_NN_N(ABS_Z_N(a), ABS_Z_N(b))).toString());
+	    auto t1 = ABS_Z_N(a);
+	    auto t2 = ABS_Z_N(b);
+
+		auto c = (LongNumber)ADD_NN_N(t1, t2);
 		return c;
 	}
 	if (poz_a * poz_b == 2) {
 		if (poz_a == 1) {
-			if (COM_NN_D(ABS_Z_N(a), ABS_Z_N(b)) == 2)
+		    auto t1 = ABS_Z_N(a);
+		    auto t2 = ABS_Z_N(b);
+			if (COM_NN_D(t1, t2) == 2)
 			{
-				LongNumber c((SUB_NN_N(ABS_Z_N(a), ABS_Z_N(b)).toString()));
+			    t1 = ABS_Z_N(a);
+			    t2 = ABS_Z_N(b);
+				auto c = (LongNumber)SUB_NN_N(t1, t2);
 				return MUL_ZM_Z(c);
 			}
 			else
 			{
-				LongNumber c(SUB_NN_N(ABS_Z_N(a), ABS_Z_N(b)).toString());
+			    t1 = ABS_Z_N(a);
+			    t2 = ABS_Z_N(b);
+				auto c = (LongNumber)SUB_NN_N(t1, t2);
 				return c;
 			}
 		}
 		else {//poz_b == 1
-			if (COM_NN_D(ABS_Z_N(a), ABS_Z_N(b)) == 2)
+		    auto t1 = ABS_Z_N(a);
+		    auto t2 = ABS_Z_N(b);
+			if (COM_NN_D(t1, t2) == 2)
 			{
-				LongNumber c(SUB_NN_N(ABS_Z_N(a), ABS_Z_N(b)).toString());
+			    t1 = ABS_Z_N(a);
+			    t2 = ABS_Z_N(b);
+				auto c = (LongNumber)SUB_NN_N(t1, t2);
 				return c;
 			}
 			else
 			{
-				LongNumber c((SUB_NN_N(ABS_Z_N(a), ABS_Z_N(b)).toString()));
+			    t1 = ABS_Z_N(a);
+			    t2 = ABS_Z_N(b);
+				auto c = (LongNumber)SUB_NN_N(t1, t2);
 				return MUL_ZM_Z(c);
 			}
 		}
 	}
 	//poz_a * poz_b == 1;
-	LongNumber c((ADD_NN_N(ABS_Z_N(a), ABS_Z_N(b)).toString()));
+	auto t1 = ABS_Z_N(a);
+	auto t2 = ABS_Z_N(b);
+	auto c = (LongNumber)ADD_NN_N(t1, t2);
 	return MUL_ZM_Z(c);
 }
 
