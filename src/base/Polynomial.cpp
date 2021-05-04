@@ -44,7 +44,9 @@ void Polynomial::addElement(PolynomialPair *element) {
 
 // ВНИМАНИЕ! Оно может вернуть nullptr (что может привести к полному *** программы если вы не уследите за этим)
 PolynomialPair* Polynomial::get(size_t index) {
-    return *coefficients.find(new PolynomialPair(index, RationalFraction::empty()));
+    auto t = coefficients.find(new PolynomialPair(index, RationalFraction::empty()));
+    if(t == coefficients.end()) return nullptr; // элемент не найден
+    return *t;
 }
 
 RationalFraction Polynomial::getCoefficient(size_t index){
@@ -54,7 +56,7 @@ RationalFraction Polynomial::getCoefficient(size_t index){
     return t->value;
 }
 
-void Polynomial::set(size_t index, RationalFraction &val) {
+void Polynomial::set(size_t index, RationalFraction val) {
     if(index != this->firstElement()->degree && val.numerator.isZero()) {
         this->remove(index);
     }else{
@@ -97,4 +99,8 @@ std::string Polynomial::toString() {
 	}
 
 	return result;
+}
+
+void Polynomial::addElement(size_t degree, RationalFraction val) {
+    this->addElement(new PolynomialPair(degree, std::move(val)));
 }

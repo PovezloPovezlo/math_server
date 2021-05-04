@@ -18,11 +18,12 @@ namespace base {
         PolynomialPair* firstElement();
         PolynomialPair* lastElement();
         void addElement(PolynomialPair* element);
+        void addElement(size_t degree, RationalFraction val);
 
         PolynomialPair* get(size_t index);
         RationalFraction getCoefficient(size_t index);
 
-        void set(size_t index, RationalFraction& val);
+        void set(size_t index, RationalFraction val);
         void remove(size_t index);
 
 		std::string toString();

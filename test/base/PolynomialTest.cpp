@@ -103,10 +103,10 @@ TEST(Polynomial, remove){
     PolynomialSet s;
     s.insert(new PolynomialPair(0, (RationalFraction)5));
     Polynomial p(s);
-    p.addElement(new PolynomialPair(1, (RationalFraction)4));
-    p.addElement(new PolynomialPair(2, (RationalFraction)3));
-    p.addElement(new PolynomialPair(3, (RationalFraction)2));
-    p.addElement(new PolynomialPair(4, (RationalFraction)1));
+    p.addElement(1, (RationalFraction)4);
+    p.addElement(2, (RationalFraction)3);
+    p.addElement(3, (RationalFraction)2);
+    p.addElement(4, (RationalFraction)1);
 
     p.remove(3);
 

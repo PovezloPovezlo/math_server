@@ -142,4 +142,132 @@ num.toString(); // "2/3"
 
 ## Полином (многочлен): Polynomial
 
-После первой волны разработки будет дополнено
+### Создание 
+```c++
+Polynomial p();
+p.addElement(0, (RationalFraction)4); // добавляем элементы
+p.addElement(1, (RationalFraction)4); 
+p.addElement(2, (RationalFraction)3);
+p.addElement(3, (RationalFraction)2);
+
+// еще можно так
+p.addElement(new PolynomialPair(4, (RationalFraction)1));
+```
+
+### Свойства
+
+#### Прямой доступ к упорядоченному массиву коэффициентов
+```c++
+Polynomial p();
+
+p.coefficients; // <--
+```
+
+### Функции
+
+#### Превратить в строку
+
+Если многочлен нулевой (есть только константа и она равна нулю), то будет просто "0"
+```c++
+Polynomial p();
+
+p.toString(); // "0"
+```
+
+Если многочлен имеет константу равную нулю, но имеет ненулевые коэффициенты при x, то будет так
+```c++
+Polynomial p();
+p.addElement(4, (RationalFraction)6);
+
+p.toString(); // "6*x^4"
+```
+
+Если многочлен состоит из нескольких частей, то получится следующее
+(обратите внимание что там нет знака +, там просто пробел)
+```c++
+Polynomial p();
+p.addElement(0, (RationalFraction)4);
+p.addElement(2, (RationalFraction)3);
+
+p.toString(); // "3*x^2 4"
+```
+
+### Добавление элемента
+```c++
+Polynomial p();
+p.addElement(0, (RationalFraction)4); 
+p.addElement(степень, коэффициент); 
+```
+
+### Первый и последний элементы
+Прежде чем ознакомиться с этими функциями, нужно ознакомиться 
+со структурой `PolynomailPair*`
+
+Это просто структура с полями `degree` (size_t) и `value` (RationalFraction)
+Эти значения можно спокойно менять
+
+```c++
+Polynomial p();
+p.addElement(0, (RationalFraction)4); 
+p.addElement(1, (RationalFraction)5); 
+p.addElement(2, (RationalFraction)6); 
+
+p.firstElement(); // Будет PolynomialPair* с degree=0 и value=4
+p.firstElement().degree; // 0
+p.firstElement().value; // RationalFraction(numerator=4, denominator=1)
+
+p.lastElement(); // Будет PolynomialPair* с degree=2 и value=6
+p.lastElement().degree; // 2
+p.lastElement().value; // RationalFraction(numerator=6, denominator=1)
+```
+
+### Получить элемент 
+Обратите внимание, что если попытаетесь получить 
+несуществующий элемент, то получите nullptr. 
+
+Крайне не советую использовать метод `get`. Если захотите
+его использовать, посоветуйтесь с архитектором
+```c++
+Polynomial p();
+p.addElement(0, (RationalFraction)4); 
+p.addElement(1, (RationalFraction)5); 
+p.addElement(2, (RationalFraction)6); 
+
+p.get(2); // PolynomialElement* с degree=2 и value=6
+p.get(3); // nullptr
+```
+
+Есть более безопасный метод `getCoefficient`, используйте его. 
+Он возвращает непосредственно коэффициент
+```c++
+Polynomial p();
+p.addElement(0, (RationalFraction)4); 
+p.addElement(1, (RationalFraction)5); 
+p.addElement(2, (RationalFraction)6); 
+
+p.getCoefficient(2); // RationalFraction(numerator=6, denominator=1)
+```
+
+### Обновление значения
+Обратите внимание, что если вы установите нулевой 
+коэффициент, то элемент будет удален
+(но лучше для удаления использовать `remove`)
+
+```c++
+Polynomial p();
+p.addElement(0, (RationalFraction)4); 
+p.addElement(1, (RationalFraction)5); 
+p.addElement(2, (RationalFraction)6); 
+
+p.set(1, (RationalFraction)7);
+```
+
+### Удаление элемента
+```c++
+Polynomial p();
+p.addElement(0, (RationalFraction)4); 
+p.addElement(1, (RationalFraction)5); 
+p.addElement(2, (RationalFraction)6); 
+
+p.remove(1); // удалится 5*x^1
+```
