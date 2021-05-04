@@ -10,9 +10,8 @@ namespace base {
 	// Целое число
 	class LongNumber {
 
-	protected:
-		std::vector<DIGIT> digits;
-	public:
+    public:
+        std::vector<DIGIT> digits;
 		bool isPositive;
 
 		explicit LongNumber(std::string value);
@@ -26,6 +25,8 @@ namespace base {
 		DIGIT& operator[](size_t index);
 		bool operator ==(const LongNumber& number) const;
 		bool operator !=(const LongNumber& number) const;
+
+		bool isZero() const;
 
 		[[nodiscard]] std::string toString();
 

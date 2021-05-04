@@ -10,7 +10,7 @@ namespace module {
 	base::ULongNumber ADD_NN_N(base::ULongNumber& a, base::ULongNumber& b);
 	base::ULongNumber SUB_NN_N(base::ULongNumber& a, base::ULongNumber& b);
 	base::ULongNumber MUL_ND_N(base::ULongNumber& a, DIGIT b);
-	base::ULongNumber MUL_Nk_N(base::ULongNumber& a, size_t& k);
+	base::ULongNumber MUL_Nk_N(base::ULongNumber& a, size_t k);
 	base::ULongNumber MUL_NN_N(base::ULongNumber& a, base::ULongNumber& b);
 	base::ULongNumber SUB_NDN_N(base::ULongNumber& a, DIGIT k, base::ULongNumber& b);
 	std::pair<DIGIT, size_t> DIV_NN_Dk(base::NLongNumber& a, base::NLongNumber& b);

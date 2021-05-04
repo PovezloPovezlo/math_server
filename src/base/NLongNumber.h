@@ -12,6 +12,7 @@ namespace base {
 		explicit NLongNumber(unsigned int value);
 
 		static NLongNumber fromInt(unsigned int value);
-	};
+		static NLongNumber fromLongNumber(LongNumber &value);
+    };
 
 }

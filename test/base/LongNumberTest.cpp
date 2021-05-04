@@ -41,6 +41,19 @@ TEST(LongNumber, deleteRedundantZeros){
 	EXPECT_EQ(number2.toString(), "4");
 }
 
+TEST(LongNumber, isZero){
+    base::LongNumber number("5");
+    base::LongNumber zeroNumber("0");
+    base::LongNumber almostZeroNumber("10");
+
+    EXPECT_EQ(number.isZero(), false);
+    EXPECT_EQ(zeroNumber.isZero(), true);
+
+    almostZeroNumber[1] = 0;
+
+    EXPECT_EQ(almostZeroNumber.isZero(), true);
+}
+
 TEST(LongNumber, allocation){
 	base::LongNumber positiveNumber(10, true);
 
