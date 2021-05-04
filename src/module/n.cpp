@@ -51,8 +51,8 @@ DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
 bool module::NZER_N_B(ULongNumber &a) {
     if (a.length() == 1)
         if (a[0] == 0)
-            return true;
-    return false;
+            return false;
+    return true;
 }
 
 /**
@@ -217,7 +217,7 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
  * @param k
  * @return
  */
-ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t &k) {
+ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t k) {
 	ULongNumber res = ULongNumber::empty();
 	for (int i = 0; i < k; ++i) {
 		res[i] = 0;

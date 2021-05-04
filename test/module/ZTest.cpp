@@ -14,25 +14,32 @@ TEST(Z, MUL_ZZ_Z){
     LongNumber b("222222222222222222222222222222");
     LongNumber c("-111111111111111111111111111111");
     LongNumber k("3");
-    EXPECT_EQ(MUL_ZZ_Z(a, b), LongNumber("24691358024691358024691358024641975308641975308641975308642"));
-    EXPECT_EQ(MUL_ZZ_Z(b, c), LongNumber("-24691358024691358024691358024641975308641975308641975308642"));
-    EXPECT_EQ(MUL_ZZ_Z(a, k), LongNumber("333333333333333333333333333333"));
-    EXPECT_EQ(MUL_ZZ_Z(c, k), LongNumber("-333333333333333333333333333333"));
+
+    auto t1 = MUL_ZZ_Z(a, b);
+    auto t2 = MUL_ZZ_Z(b, c);
+    auto t3 = MUL_ZZ_Z(a, k);
+
+    auto t4 = MUL_ZZ_Z(c, k);
+
+    EXPECT_EQ(t1.toString(), "24691358024691358024691358024641975308641975308641975308642");
+    EXPECT_EQ(t2.toString(), "-24691358024691358024691358024641975308641975308641975308642");
+    EXPECT_EQ(t3.toString(), "333333333333333333333333333333");
+    EXPECT_EQ(t4.toString(), "-333333333333333333333333333333");
 }
 
 TEST(Z, ABS_Z_N)
 {
 	LongNumber a("36454362134243");
 	ULongNumber b("36454362134243");
-	EXPECT_EQ(ABS_Z_N(a), b);
+	EXPECT_EQ(ABS_Z_N(a).toString(), b.toString());
 
 	a = LongNumber("-54343545543");
 	b= ULongNumber("54343545543");
-	EXPECT_EQ(ABS_Z_N(a), b);
+	EXPECT_EQ(ABS_Z_N(a).toString(), b.toString());
 
 	a = LongNumber("0");
 	b = ULongNumber("0");
-	EXPECT_EQ(ABS_Z_N(a), b);
+	EXPECT_EQ(ABS_Z_N(a).toString(), b.toString());
 }
 
 TEST(Z, POZ_Z_D)
@@ -57,15 +64,15 @@ TEST(Z, MUL_ZM_Z)
 {
 	LongNumber a("3545343563456635");
 	LongNumber b("-3545343563456635");
-	EXPECT_EQ(MUL_ZM_Z(a), b);
+	EXPECT_EQ(MUL_ZM_Z(a).toString(), b.toString());
 
 	a = LongNumber("-46746574567746647");
 	b = LongNumber("46746574567746647");
-	EXPECT_EQ(MUL_ZM_Z(a), b);
+	EXPECT_EQ(MUL_ZM_Z(a).toString(), b.toString());
 
 	a = LongNumber("0");
 	b = LongNumber("0");
-	EXPECT_EQ(MUL_ZM_Z(a), b);
+	EXPECT_EQ(MUL_ZM_Z(a).toString(), b.toString());
 
 }
 
@@ -73,15 +80,15 @@ TEST(Z, TRANS_N_Z)
 {
 	NLongNumber a("543354");
 	LongNumber b("543354");
-	EXPECT_EQ(TRANS_N_Z(a), b);
+	EXPECT_EQ(TRANS_N_Z(a).toString(), b.toString());
 
 	a = NLongNumber("457457458");
 	b = LongNumber("457457458");
-	EXPECT_EQ(TRANS_N_Z(a), b);
+	EXPECT_EQ(TRANS_N_Z(a).toString(), b.toString());
 
 	a = NLongNumber("4");
 	b = LongNumber("4");
-	EXPECT_EQ(TRANS_N_Z(a), b);
+	EXPECT_EQ(TRANS_N_Z(a).toString(), b.toString());
 
 }
 
@@ -89,15 +96,15 @@ TEST(Z, TRANS_Z_N)
 {
 	ULongNumber a("543354");
 	NLongNumber b("543354");
-	EXPECT_EQ(TRANS_Z_N(a), b);
+	EXPECT_EQ(TRANS_Z_N(a).toString(), b.toString());
 
 	a = ULongNumber("457457458");
 	b = NLongNumber("457457458");
-	EXPECT_EQ(TRANS_Z_N(a), b);
+	EXPECT_EQ(TRANS_Z_N(a).toString(), b.toString());
 
 	a = ULongNumber("3");
 	b = NLongNumber("3");
-	EXPECT_EQ(TRANS_Z_N(a), b);
+	EXPECT_EQ(TRANS_Z_N(a).toString(), b.toString());
 	
 	//При нуле вылетает ошибка
 	//a = ULongNumber("0");

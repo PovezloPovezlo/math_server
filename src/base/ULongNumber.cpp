@@ -20,3 +20,15 @@ ULongNumber ULongNumber::empty() {
 ULongNumber ULongNumber::fromInt(unsigned int value) {
 	return ULongNumber(std::to_string(value));
 }
+
+ULongNumber ULongNumber::fromLongNumber(LongNumber &value) {
+    if(!value.isPositive){
+        throw BaseException("Cant convert negative LongNumber to ULongNumber");
+    }
+    ULongNumber number(0);
+    number.digits.erase(number.digits.begin());
+
+    std::copy(value.digits.begin(), value.digits.end(), std::back_inserter(number.digits));
+
+    return number;
+}
