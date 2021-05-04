@@ -22,26 +22,26 @@ TEST(N, COM_NN_D)
 
 TEST(N, ADD_NN_N) {
 	ULongNumber t1(0), t2(0), r(0);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	t1 = ULongNumber(0), t2 = ULongNumber(1), r = ULongNumber(1);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	t1 = ULongNumber(1), t2 = ULongNumber(0), r = ULongNumber(1);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	t1 = ULongNumber(1), t2 = ULongNumber(1), r = ULongNumber(2);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	t1 = ULongNumber(9), t2 = ULongNumber(1), r = ULongNumber(10);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	t1 = ULongNumber(9), t2 = ULongNumber(9), r = ULongNumber(18);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	t1 = ULongNumber(99), t2 = ULongNumber(1), r = ULongNumber(100);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	t1 = ULongNumber(99), t2 = ULongNumber(99), r = ULongNumber(198);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	t1 = ULongNumber(999), t2 = ULongNumber(999), r = ULongNumber(2000-2);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 
 	t1 = ULongNumber(914), t2 = ULongNumber(135), r = ULongNumber(779);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	//todo EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 	//this is fucking hardcore...
 	t1 = ULongNumber(
 		"123123123123123123123123123123123123123123123123123123123123"
@@ -140,7 +140,7 @@ TEST(N, ADD_NN_N) {
 			"246246246246246246246246246246246246246246246246246246246246"
 			"246246246246246246246246246246246246246246246246246246246246"
 		);
-	EXPECT_EQ(module::ADD_NN_N(t1, t2), r);
+	EXPECT_EQ(module::ADD_NN_N(t1, t2).toString(), r.toString());
 }
 
 TEST(N, SUB_NN_N) {
