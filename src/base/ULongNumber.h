@@ -12,6 +12,7 @@ namespace base {
 
 		static ULongNumber empty();
 		static ULongNumber fromInt(unsigned int value);
+		static ULongNumber fromLongNumber(LongNumber &value);
 	};
 
 }

@@ -16,11 +16,9 @@ using namespace module;
  * @param a
  * @return
  */
-ULongNumber module::ABS_Z_N(LongNumber& a) {
-	if (!a.isPositive)
-		a.isPositive = true;
-	ULongNumber b(a.toString());
-	return b;
+ULongNumber module::ABS_Z_N(LongNumber a) {
+    a.isPositive = true;
+	return ULongNumber::fromLongNumber(a);
 }
 
 /**
@@ -32,11 +30,11 @@ ULongNumber module::ABS_Z_N(LongNumber& a) {
  * @return 2 - положительное, 0 — равное нулю, 1 - отрицательное
  */
 DIGIT module::POZ_Z_D(LongNumber& a) {
-	if (a.isPositive)
-	{
-		if (a.length() == 1)
-			if (a[0] == 0)
-				return 0;
+    if (a.length() == 1 && a[0] == 0) {
+        return 0;
+    }
+
+    if (a.isPositive) {
 		return 2;
 	}
 	
@@ -68,8 +66,7 @@ LongNumber module::MUL_ZM_Z(LongNumber& a) {
  * @return
  */
 LongNumber module::TRANS_N_Z(NLongNumber& a) {
-	LongNumber b(a.toString());
-	return b;
+	return a;
 }
 
 /**
@@ -80,17 +77,9 @@ LongNumber module::TRANS_N_Z(NLongNumber& a) {
  * @param a
  * @return
  */
-NLongNumber module::TRANS_Z_N(ULongNumber& a) {
-	
-	if (a.length() == 1 && a[0] == 0)
-	{
-		//При нуле вылетает ошибка
-		throw BaseException("zero is not natural number");
-	}
-
-	NLongNumber b(a.toString());
-	return b;
-
+NLongNumber module::TRANS_Z_N(LongNumber& a) {
+    // код модуля был вынесен в ниже указанную функцию
+	return NLongNumber::fromLongNumber(a);
 }
 
 /**

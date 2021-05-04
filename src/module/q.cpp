@@ -70,7 +70,7 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
 	module::RED_Q_Q(a);
 	if (a.denominator == NLongNumber(1)) return a.numerator;
 
-	//throw NotImplementedException();
+	throw NotImplementedException();
 }
 
 /**
@@ -112,9 +112,9 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @return
  */
 RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	
+	auto t = module::MUL_NN_N(a.denominator, b.denominator);
 	return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator),
-		(NLongNumber)module::TRANS_Z_N(module::MUL_NN_N(a.denominator, b.denominator)));
+		(NLongNumber)module::TRANS_Z_N(t));
 	
 	//throw NotImplementedException();
 }
@@ -142,5 +142,5 @@ RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
 			(NLongNumber)module::TRANS_Z_N(t));
 	}
 	
-	//throw NotImplementedException();
+	throw NotImplementedException();
 }
