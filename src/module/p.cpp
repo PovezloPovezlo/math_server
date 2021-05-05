@@ -1,4 +1,5 @@
 #include "p.h"
+#include "q.h"
 #include <base/Polynomial.h>
 #include <base/NotImplementedException.h>
 
@@ -156,7 +157,7 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Лях Глеб
  * P-12
  *
  * Производная многочлена
@@ -164,8 +165,21 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::DER_P_P(Polynomial& a, Polynomial& b) {
-	throw NotImplementedException();
+Polynomial module::DER_P_P(Polynomial& a) {
+	
+	Polynomial temporary;
+
+	for(size_t i = 0; i < a.lastElement()->degree; i++){
+		if(a.get(i+1)){
+			RationalFraction newval = 
+				module::MUL_QQ_Q((RationalFraction)a.get(i+1)->degree, a.get(i+1)->value);
+			temporary.addElement(i, newval);
+		}
+	}
+
+	return temporary;
+
+	//throw NotImplementedException();
 }
 
 /**
@@ -178,6 +192,6 @@ Polynomial module::DER_P_P(Polynomial& a, Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::NMR_P_P(Polynomial& a, Polynomial& b) {
+Polynomial module::NMR_P_P(Polynomial& a) {
 	throw NotImplementedException();
 }
