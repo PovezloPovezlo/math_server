@@ -96,7 +96,9 @@ Polynomial module::MUL_Pxk_P(Polynomial& a, ULongNumber& k) {
  * @return
  */
 RationalFraction module::LED_P_Q(Polynomial& a) {
-	throw NotImplementedException();
+	
+	return a.lastElement().value;
+	//throw NotImplementedException();
 }
 
 /**
@@ -108,7 +110,8 @@ RationalFraction module::LED_P_Q(Polynomial& a) {
  * @return
  */
 ULongNumber module::DEG_P_N(Polynomial& a) {
-	throw NotImplementedException();
+	return (ULongNumber)a.lastElement().degree;
+	//throw NotImplementedException();
 }
 
 /**
@@ -177,7 +180,25 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b) {
  * @return
  */
 Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
-	throw NotImplementedException();
+	
+	auto first = a;
+	auto second = b;
+	if(module::DEG_P_N(a) < module::DEG_P_N(b)){
+		auto first = b;
+		auto second = a;
+	}
+	auto ost = module::MOD_PP_P(first,second);
+	first = second;
+	second = ost;
+	auto result = ost;
+	while (ost != 0) {
+		result = ost;
+		ost = module::MOD_PP_P(first, second);
+		first = second;
+		second = ost;
+	}
+	return result;
+	//throw NotImplementedException();
 }
 
 /**
