@@ -191,7 +191,7 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
 	first = second;
 	second = ost;
 	auto result = ost;
-	while (ost != 0) {
+	while (module::COM_NN_D(ost.lastElement().value.numerator, (LongNumber) 0) == 0) {
 		result = ost;
 		ost = module::MOD_PP_P(first, second);
 		first = second;
