@@ -150,7 +150,7 @@ LongNumber module::ADD_ZZ_Z(LongNumber& a, LongNumber& b) {
 }
 
 /**
- * @authors Петрова Алиса
+ * @authors Имя Фамилия авторов
  * Z-7
  * Требуется: POZ_Z_D, ABS_Z_N, COM_NN_D, ADD_NN_N, SUB_NN_N, MUL_ZM_Z
  *

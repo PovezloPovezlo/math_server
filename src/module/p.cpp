@@ -169,17 +169,17 @@ Polynomial module::DER_P_P(Polynomial& a) {
 	
 	Polynomial temporary;
 
-	for(auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++){
-		auto el = *i;
-		if(el->degree != 0) {
-			auto t = RationalFraction::fromInt(el->degree);
-			RationalFraction newval = module::MUL_QQ_Q(t, el->value);
-
-			temporary.addElement(el->degree - 1, newval);
+	for(size_t i = 0; i < a.lastElement()->degree; i++){
+		if(a.get(i+1)){
+			RationalFraction newval = 
+				module::MUL_QQ_Q((RationalFraction)a.get(i+1)->degree, a.get(i+1)->value);
+			temporary.addElement(i, newval);
 		}
 	}
 
 	return temporary;
+
+	//throw NotImplementedException();
 }
 
 /**
