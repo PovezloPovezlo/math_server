@@ -11,7 +11,7 @@ using namespace module;
 // Рациональные числа (дроби)
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Басин Илья, Петрова Алиса (правки)
  * Q-1
  * Требуется: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z
  *
@@ -20,7 +20,18 @@ using namespace module;
  * @return
  */
 RationalFraction module::RED_Q_Q(RationalFraction& a) {
-	throw NotImplementedException();
+
+    auto num_n = ABS_Z_N(a.numerator); //создаём натуральные копии числителя и знаменателя
+    auto den_n = ABS_Z_N(a.denominator);
+
+    auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
+
+    a.numenator = DIV_ZZ_Z(a.numenator, nod); //делим числитель и знаменатель на нод
+    auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
+    a.denumenator = (NLongNumber)DIV_ZZ_Z(den_z, nod);
+
+    return a;
+	//throw NotImplementedException();
 }
 
 /**

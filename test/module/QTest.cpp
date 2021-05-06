@@ -16,3 +16,18 @@ TEST(Q, INT_Q_B){
     //EXPECT_EQ(INT_Q_B(c), true);
     //EXPECT_EQ(INT_Q_B(d), true);
 }
+
+TEST(Q, RED_Q_Q){
+    RationalFraction a(LongNumber(-15), NLongNumber(25));
+    RationalFraction b(LongNumber(-3), NLongNumber(5));
+
+    RationalFraction c(LongNumber(16), NLongNumber(24));
+    RationalFraction d(LongNumber(2), NLongNumber(3));
+
+    EXPECT_EQ(RED_Q_Q(a), b);
+    EXPECT_EQ(RED_Q_Q(c), d);
+
+
+}
+
+
