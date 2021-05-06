@@ -187,7 +187,7 @@ LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Петрова Алиса
  * Z-9
  * Требуется: ABS_Z_N, POZ_Z_D, DIV_NN_N, ADD_1N_N
  *
@@ -197,11 +197,29 @@ LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
  * @return
  */
 LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
-	throw NotImplementedException();
+    DIGIT poz_a = POZ_Z_D(a), poz_b = POZ_Z_D(b);
+    if (poz_b == 0) throw "Second number can't be 0!";
+    if (poz_a == 0) {
+        LongNumber tmp = (LongNumber)0;
+        return tmp;
+    }
+
+    auto t1 = ABS_Z_N(a);
+    auto t2 = ABS_Z_N(b);
+
+    if (t1 < t2) {
+        LongNumber tmp = (LongNumber)0;
+        return tmp;
+    } else {
+        auto c = (LongNumber)DIV_NN_N(t1, t2);
+        if (poz_a * poz_b == 2){ //- * + Итог отрицательный.
+            return MUL_ZM_Z(c);
+        } else return c;
+    }
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Петрова Алиса
  * Z-10
  *
  * Остаток от деления целого на целое(делитель отличен от нуля).
@@ -211,5 +229,8 @@ LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
  * @return
  */
 ULongNumber module::MOD_ZZ_Z(LongNumber& a, LongNumber& b) {
-	throw NotImplementedException();
+    auto c = DIV_ZZ_Z(a, b);
+    auto tmp = MUL_ZZ_Z(c, b);
+    auto rem = SUB_ZZ_Z(a, tmp);
+    return rem;
 }
