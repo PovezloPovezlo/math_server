@@ -51,7 +51,7 @@ Polynomial module::SUB_PP_P(Polynomial& a, Polynomial& b) {
  */
 Polynomial module::MUL_PQ_P(Polynomial& a, RationalFraction& b) {
 	Polynomial temporary;
-	if (b.numerator == NLongNumber(0)) {
+	if (b.numerator == LongNumber(0)) {
 		temporary.addElement(0, (RationalFraction)0);
 		return temporary;
 	}
@@ -183,7 +183,9 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
 	
 	auto first = a;
 	auto second = b;
-	if(module::COM_NN_D(module::DEG_P_N(a), module::DEG_P_N(b)) == 1){
+	auto lhs1 = module::DEG_P_N(a);
+	auto rhs1 = module::DEG_P_N(b);
+	if(module::COM_NN_D(lhs1, rhs1) == 1){
 		auto first = b;
 		auto second = a;
 	}
@@ -191,7 +193,8 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
 	first = second;
 	second = ost;
 	auto result = ost;
-	while (module::COM_NN_D(ost.lastElement().value.numerator, (LongNumber) 0) == 0) {
+	auto lhs2 = ULongNumber::fromLongNumber(ost.lastElement()->value.numerator);
+	while (module::COM_NN_D(lhs2, (ULongNumber)0) == 0) {
 		result = ost;
 		ost = module::MOD_PP_P(first, second);
 		first = second;
