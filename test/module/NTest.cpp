@@ -302,5 +302,47 @@ TEST(N, ADD_1N_N)
 	a = ULongNumber("12345670000000000000000000000089999");
 	b = ULongNumber("12345670000000000000000000000090000");
 	EXPECT_EQ(ADD_1N_N(a), b);
+}
 
+TEST(N, SUB_NDN_N) {
+    ULongNumber t1 = ULongNumber("2476056797356347596392562367");
+    ULongNumber t2 = ULongNumber("572376895736895");
+    ULongNumber res = ULongNumber("2476056797353485711913877892");
+    DIGIT k = 5;
+    EXPECT_EQ(SUB_NDN_N(t1, k, t2), res);
+    t1 = ULongNumber("619836423180240458169153");
+    t2 = ULongNumber("56348765743658223469923");
+    res = ULongNumber("0");
+    k = 11;
+    EXPECT_EQ(SUB_NDN_N(t1, k, t2), res);
+    t1 = ULongNumber("2578387974963763587");
+    t2 = ULongNumber("1896546596493659816589463572436592068923");
+    k = 225; // тест выбрасывает ошибку, если вычитаемое больше уменьшаемого (чтобы тест не крашился, можно убрать нижнюю строку)
+    //EXPECT_EQ(SUB_NDN_N(t1, k, t2), res);
+}
+
+TEST(N, DIV_NN_Dk) {
+    ULongNumber t1 = ULongNumber("77894387680438047568"); // 555899
+    ULongNumber t2 = ULongNumber("135");    // 135
+    ULongNumber res = ULongNumber("50000000000000000");  // 4000
+    EXPECT_EQ(DIV_NN_Dk(t1, t2), res);
+    t1 = ULongNumber("12345678912345678912345678912345678912345678912345678912345678974637568574853836572736587");
+    t2 = ULongNumber("911173657583654569465694376594367968943657463756471865874165764175604136584365974635963");
+    res = ULongNumber("10");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2), res);
+    t1 = ULongNumber("25266254736776");
+    t2 = ULongNumber("1234567890634476375675757");
+    res = ULongNumber("20000");
+    //EXPECT_EQ(DIV_NN_Dk(t1, t2), res); - бросает ошибку, тк делитель больше делимого
+    t1 = ULongNumber("25266254736776");
+    t2 = ULongNumber("25266254736776");
+    res = ULongNumber("1");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2), res);
+    t1 = ULongNumber("4532652364385340438578947957432569435");
+    t2 = ULongNumber("0");
+    //EXPECT_EQ(DIV_NN_Dk(t1, t2), res); - бросает ошибку, тк делим на ноль
+    t1 = ULongNumber("945894358932593459438594835943859839584395439689346936362356");
+    t2 = ULongNumber("532454654444652364582354875285872354823548213548235489");
+    res = ULongNumber("1000000");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2), res);
 }
