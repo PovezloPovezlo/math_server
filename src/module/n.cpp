@@ -19,8 +19,8 @@ using namespace module;
  * @return 2 - если первое больше второго, 0, если равно, 1 иначе
  */
 DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
-	int aSize = a.length();
-    int bSize = b.length();
+	  size_t aSize = a.length();
+    size_t bSize = b.length();
 
     if (aSize > bSize)
         return 2;
@@ -34,7 +34,9 @@ DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
             return 2;
         else if (a[ind] < b[ind])
             return 1;
-        ind--;
+        if(ind-- == 0){
+        	break;
+        }
     }
 
     return 0;
