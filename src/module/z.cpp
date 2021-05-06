@@ -197,7 +197,7 @@ LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
  * @return
  */
 LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
-    DIGIT poz_a = POZ_Z_D(a), poz_b = POZ_Z_D(b);
+    /*DIGIT poz_a = POZ_Z_D(a), poz_b = POZ_Z_D(b);
     if (poz_b == 0) throw "Second number can't be 0!";
     if (poz_a == 0) {
         LongNumber tmp = (LongNumber)0;
@@ -215,7 +215,8 @@ LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
         if (poz_a * poz_b == 2){ //- * + Итог отрицательный.
             return MUL_ZM_Z(c);
         } else return c;
-    }
+    }*/
+	throw NotImplementedException();
 }
 
 /**
@@ -229,8 +230,9 @@ LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
  * @return
  */
 ULongNumber module::MOD_ZZ_Z(LongNumber& a, LongNumber& b) {
-    auto c = DIV_ZZ_Z(a, b);
+    /*auto c = DIV_ZZ_Z(a, b);
     auto tmp = MUL_ZZ_Z(c, b);
     auto rem = SUB_ZZ_Z(a, tmp);
-    return rem;
+    return rem;*/
+	throw NotImplementedException();
 }
