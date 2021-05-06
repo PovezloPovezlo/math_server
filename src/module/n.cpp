@@ -34,7 +34,7 @@ DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
             return 2;
         else if (a[ind] < b[ind])
             return 1;
-        ind--;
+        if(ind-- == 0) break;
     }
 
     return 0;
