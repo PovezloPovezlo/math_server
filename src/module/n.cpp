@@ -34,7 +34,9 @@ DIGIT module::COM_NN_D(ULongNumber &a, ULongNumber &b) {
             return 2;
         else if (a[ind] < b[ind])
             return 1;
-        ind--;
+        if(ind-- == 0){
+        	break;
+        }
     }
 
     return 0;
@@ -65,7 +67,7 @@ bool module::NZER_N_B(ULongNumber &a) {
  */
 ULongNumber module::ADD_1N_N(ULongNumber &a) {
     
-    int aSize = a.length();
+    auto aSize = a.length();
 
     bool carry = false;
     int i = 0;
@@ -113,7 +115,7 @@ ULongNumber module::ADD_NN_N(ULongNumber &a, ULongNumber &b) {
 	int digit = 0;
 	int nextDigitPlus = 0;
 
-	int maxLength = max.length();
+	auto maxLength = max.length();
 
 	res[maxLength - 1] = 0;
 
@@ -217,10 +219,10 @@ ULongNumber module::MUL_ND_N(ULongNumber &a, DIGIT b) {
  */
 ULongNumber module::MUL_Nk_N(ULongNumber &a, size_t k) {
 	ULongNumber res = ULongNumber::empty();
-	for (int i = 0; i < k; ++i) {
+	for (auto i = 0; i < k; ++i) {
 		res[i] = 0;
 	}
-	for (int i = k; i < a.length() + k; ++i) {
+	for (auto i = k; i < a.length() + k; ++i) {
 		res[i] = a[i - k];
 	}
 	return res;
