@@ -1,6 +1,7 @@
 #include "q.h"
 #include <base/RationalFraction.h>
 #include <base/NotImplementedException.h>
+#include <base/BaseException.h>
 #include <module/n.h>
 #include <module/p.h>
 #include <module/z.h>
@@ -69,8 +70,9 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
 	
 	module::RED_Q_Q(a);
 	if (a.denominator == NLongNumber(1)) return a.numerator;
+	throw BaseException("Denominator != 1");
 
-	throw NotImplementedException();
+	//throw NotImplementedException();
 }
 
 /**

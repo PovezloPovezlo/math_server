@@ -1,7 +1,10 @@
 #include "p.h"
 #include "q.h"
+#include "z.h"
+#include "n.h"
 #include <base/Polynomial.h>
 #include <base/NotImplementedException.h>
+#include <base/LongNumber.h>
 
 using namespace base;
 using namespace module;
@@ -37,7 +40,7 @@ Polynomial module::SUB_PP_P(Polynomial& a, Polynomial& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Денис Медведев
  * P-3
  * Требуется: MUL_QQ_Q
  *
@@ -47,11 +50,21 @@ Polynomial module::SUB_PP_P(Polynomial& a, Polynomial& b) {
  * @return
  */
 Polynomial module::MUL_PQ_P(Polynomial& a, RationalFraction& b) {
-	throw NotImplementedException();
+	Polynomial temporary;
+	if (b.numerator == NLongNumber(0)) {
+		temporary.addElement(0, (RationalFraction)0);
+		return temporary;
+	}
+	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
+		auto el = *i;
+		RationalFraction newval = module::MUL_QQ_Q(el->value, b);
+		temporary.addElement(el->degree, newval);
+	}
+	return temporary;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Денис Медведев
  * P-4
  *
  * Умножение многочлена на x^k
@@ -60,7 +73,18 @@ Polynomial module::MUL_PQ_P(Polynomial& a, RationalFraction& b) {
  * @return
  */
 Polynomial module::MUL_Pxk_P(Polynomial& a, ULongNumber& k) {
-	throw NotImplementedException();
+	Polynomial temporary;
+	if ((module::COM_NN_D(k, (ULongNumber)0)) == 0) return a;
+	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
+		auto el = *i;
+		ULongNumber udeg = ULongNumber::fromInt(el->degree);
+		ULongNumber newdeg = module::ADD_NN_N(udeg, k);
+		std::string nds = newdeg.toString();
+		const char* ndcc = nds.c_str();
+		size_t ndn = atoi(ndcc);
+		temporary.addElement(ndn, el->value);
+	}
+	return temporary;
 }
 
 /**
@@ -169,18 +193,17 @@ Polynomial module::DER_P_P(Polynomial& a) {
 	
 	Polynomial temporary;
 
-	for(auto i = a.coefficients.rbegin(); i < a.coefficients.rend(); i++){
+	for(auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++){
 		auto el = *i;
-		if(el->degree != 0){
+		if(el->degree != 0) {
 			auto t = RationalFraction::fromInt(el->degree);
 			RationalFraction newval = module::MUL_QQ_Q(t, el->value);
+
 			temporary.addElement(el->degree - 1, newval);
 		}
 	}
 
 	return temporary;
-
-	//throw NotImplementedException();
 }
 
 /**
