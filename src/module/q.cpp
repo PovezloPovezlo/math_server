@@ -130,7 +130,7 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @param b
  * @return
  */
-RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {\
+RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	
 	if (b.numerator != LongNumber(0)) {
 		if (module::POZ_Z_D(b.numerator) == 1){

@@ -109,9 +109,7 @@ TEST(Z, TRANS_Z_N)
 	//При нуле вылетает ошибка
 	//a = ULongNumber("0");
 	//b = NLongNumber("0");
-	//EXPECT_EQ(MUL_ZM_Z(a), "zero is not natural number"); 
-
-
+	//EXPECT_EQ(MUL_ZM_Z(a), "zero is not natural number");
 }
 
 TEST(Z, ADD_ZZ_Z)
@@ -119,4 +117,18 @@ TEST(Z, ADD_ZZ_Z)
 	LongNumber a("123");
 	LongNumber b("456");
 	//EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "579");
+}
+
+TEST(Z, DIV_ZZ_Z)
+{
+    LongNumber a("4444");
+    LongNumber b("-2222");
+    //EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "-2");
+}
+
+TEST(Z, MOD_ZZ_Z)
+{
+    LongNumber a("4448");
+    LongNumber b("2222");
+    //EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "4");
 }

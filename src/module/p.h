@@ -15,7 +15,7 @@ namespace module {
 	base::Polynomial DIV_PP_P(base::Polynomial& a, base::Polynomial& b);
 	base::Polynomial MOD_PP_P(base::Polynomial& a, base::Polynomial& b);
 	base::Polynomial GCF_PP_P(base::Polynomial& a, base::Polynomial& b);
-	base::Polynomial DER_P_P(base::Polynomial& a, base::Polynomial& b);
-	base::Polynomial NMR_P_P(base::Polynomial& a, base::Polynomial& b);
+	base::Polynomial DER_P_P(base::Polynomial& a);
+	base::Polynomial NMR_P_P(base::Polynomial& a);
 
 }

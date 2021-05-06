@@ -143,6 +143,10 @@ LongNumber LongNumber::fromInt(int value) {
 	return LongNumber(std::to_string(value));
 }
 
+LongNumber LongNumber::fromInt(size_t value) {
+	return LongNumber(std::to_string(value));
+}
+
 //todo optimize (избавиться от to_string())
 LongNumber::LongNumber(int value) : LongNumber(std::to_string(value)){}
 

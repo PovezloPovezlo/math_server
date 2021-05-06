@@ -34,6 +34,7 @@ namespace base {
 
 		static LongNumber empty();
 		static LongNumber fromInt(int value);
+		static LongNumber fromInt(size_t value);
 	};
 
 }

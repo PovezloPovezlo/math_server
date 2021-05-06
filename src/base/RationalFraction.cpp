@@ -23,6 +23,10 @@ RationalFraction RationalFraction::fromInt(int value) {
 	return RationalFraction(LongNumber::fromInt(value), NLongNumber::fromInt(1));
 }
 
+RationalFraction RationalFraction::fromInt(size_t value) {
+	return RationalFraction(LongNumber::fromInt(value), NLongNumber::fromInt(1));
+}
+
 RationalFraction RationalFraction::fromTwoInt(int numerator, unsigned int denominator) {
 	return RationalFraction((base::LongNumber)numerator, (base::NLongNumber)denominator);
 }
