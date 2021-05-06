@@ -47,7 +47,13 @@ Polynomial module::SUB_PP_P(Polynomial& a, Polynomial& b) {
  * @return
  */
 Polynomial module::MUL_PQ_P(Polynomial& a, RationalFraction& b) {
-	throw NotImplementedException();
+	Polynomial temporary;
+	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
+		auto el = *i;
+		RationalFraction newval = module::MUL_QQ_Q(el->value, b);
+		temporary.addElement(el->degree, newval);
+	}
+	return temporary;
 }
 
 /**
