@@ -306,7 +306,7 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
 
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Кушко Даниил
  * N-11
  * Требуется: DIV_NN_Dk, SUB_NDN_N
  *
@@ -316,11 +316,21 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
  * @return
  */
 ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
-	throw NotImplementedException();
+	ULongNumber nA = ULongNumber::fromLongNumber(a);
+	ULongNumber nB = ULongNumber::fromLongNumber(b);
+	ULongNumber res = ULongNumber("0");
+	if (COM_NN_D(nA, nB) == 1) throw BaseException("Делимое меньше делителя");
+	while (COM_NN_D(nA, nB) == 2) {
+		ULongNumber temp = DIV_NN_Dk(nA, nB);
+
+		res = ADD_NN_N(res, temp);
+		nA = SUB_NN_N(nA, MUL_NN_N(temp, nB));
+	}
+	return res;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Кушко Даниил
  * N-12
  * Требуется: DIV_NN_N, SUB_NDN_N
  *
@@ -330,7 +340,11 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
  * @return
  */
 ULongNumber module::MOD_NN_N(NLongNumber& a, NLongNumber& b) {
-	throw NotImplementedException();
+	ULongNumber nA = ULongNumber::fromLongNumber(a);
+	ULongNumber nB = ULongNumber::fromLongNumber(b);
+	if (COM_NN_D(nA, nB) == 1) return nA;
+	ULongNumber temp = DIV_NN_N(a, b);
+	return SUB_NN_N(nA, MUL_NN_N(temp, nB));
 }
 
 /**
