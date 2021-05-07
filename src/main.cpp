@@ -7,6 +7,8 @@
 #include <module/z.h>
 #include <module/q.h>
 #include <base/RationalFraction.h>
+#include <module/p.h>
+#include <base/Polynomial.h>
 
 using namespace drogon;
 #else
@@ -333,26 +335,26 @@ void initZModule(){
 void initQModule(){
 	app()
 	.registerHandler(
-		"/RED_Q_Q?numerator={n}&denominator={d}",
+		"/RED_Q_Q?a={a}",
 		[](const HttpRequestPtr& req,
 		   std::function<void (const HttpResponsePtr &)> &&callback,
-		   const std::string &n, const std::string &d) {
-			base::RationalFraction number((base::LongNumber(n)), base::NLongNumber(d));
+		   const std::string &a) {
+			auto vA = base::RationalFraction::fromString(a);
 
 			Json::Value json;
-			json["response"] = module::RED_Q_Q(number).toString();
+			json["response"] = module::RED_Q_Q(vA).toString();
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
 	.registerHandler(
-		"/INT_Q_B?numerator={n}&denominator={d}",
+		"/INT_Q_B?a={a}",
 		[](const HttpRequestPtr& req,
 		   std::function<void (const HttpResponsePtr &)> &&callback,
-		   const std::string &n, const std::string &d) {
-			base::RationalFraction number((base::LongNumber(n)), base::NLongNumber(d));
+		   const std::string &a) {
+			auto vA = base::RationalFraction::fromString(a);
 
 			Json::Value json;
-			json["response"] = module::INT_Q_B(number);
+			json["response"] = module::INT_Q_B(vA);
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
@@ -369,70 +371,70 @@ void initQModule(){
 		},{Get}
 	)
 	.registerHandler(
-		"/TRANS_Q_Z?numerator={n}&denominator={d}",
+		"/TRANS_Q_Z?a={a}",
 		[](const HttpRequestPtr& req,
 		   std::function<void (const HttpResponsePtr &)> &&callback,
-		   const std::string &n, const std::string &d) {
-			base::RationalFraction number((base::LongNumber(n)), base::NLongNumber(d));
+		   const std::string &a) {
+			auto vA = base::RationalFraction::fromString(a);
 
 			Json::Value json;
-			json["response"] = module::TRANS_Q_Z(number).toString();
+			json["response"] = module::TRANS_Q_Z(vA).toString();
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
 	.registerHandler(
-		"/ADD_QQ_Q?numerator1={n1}&denominator1={d1}&numerator2={n2}&denominator2={d2}",
+		"/ADD_QQ_Q?a={a}&b={b}",
 		[](const HttpRequestPtr& req,
 		   std::function<void (const HttpResponsePtr &)> &&callback,
-		   const std::string &n1, const std::string &d1, const std::string &n2, const std::string &d2
-		   ) {
-			base::RationalFraction number1((base::LongNumber(n1)), base::NLongNumber(d1));
-			base::RationalFraction number2((base::LongNumber(n2)), base::NLongNumber(d2));
+		   const std::string &a, const std::string &b
+		) {
+			auto vA = base::RationalFraction::fromString(a);
+			auto vB = base::RationalFraction::fromString(b);
 
 			Json::Value json;
-			json["response"] = module::ADD_QQ_Q(number1, number2).toString();
+			json["response"] = module::ADD_QQ_Q(vA, vB).toString();
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
 	.registerHandler(
-		"/SUB_QQ_Q?numerator1={n1}&denominator1={d1}&numerator2={n2}&denominator2={d2}",
+		"/SUB_QQ_Q?a={a}&b={b}",
 		[](const HttpRequestPtr& req,
 		   std::function<void (const HttpResponsePtr &)> &&callback,
-		   const std::string &n1, const std::string &d1, const std::string &n2, const std::string &d2
-		   ) {
-			base::RationalFraction number1((base::LongNumber(n1)), base::NLongNumber(d1));
-			base::RationalFraction number2((base::LongNumber(n2)), base::NLongNumber(d2));
+		   const std::string &a, const std::string &b
+		) {
+			auto vA = base::RationalFraction::fromString(a);
+			auto vB = base::RationalFraction::fromString(b);
 
 			Json::Value json;
-			json["response"] = module::SUB_QQ_Q(number1, number2).toString();
+			json["response"] = module::SUB_QQ_Q(vA, vB).toString();
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
 	.registerHandler(
-		"/MUL_QQ_Q?numerator1={n1}&denominator1={d1}&numerator2={n2}&denominator2={d2}",
+		"/MUL_QQ_Q?a={a}&b={b}",
 		[](const HttpRequestPtr& req,
 		   std::function<void (const HttpResponsePtr &)> &&callback,
-		   const std::string &n1, const std::string &d1, const std::string &n2, const std::string &d2
-		   ) {
-			base::RationalFraction number1((base::LongNumber(n1)), base::NLongNumber(d1));
-			base::RationalFraction number2((base::LongNumber(n2)), base::NLongNumber(d2));
+		   const std::string &a, const std::string &b
+		) {
+			auto vA = base::RationalFraction::fromString(a);
+			auto vB = base::RationalFraction::fromString(b);
 
 			Json::Value json;
-			json["response"] = module::MUL_QQ_Q(number1, number2).toString();
+			json["response"] = module::MUL_QQ_Q(vA, vB).toString();
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
 	.registerHandler(
-		"/DIV_QQ_Q?numerator1={n1}&denominator1={d1}&numerator2={n2}&denominator2={d2}",
+		"/DIV_QQ_Q?a={a}&b={b}",
 		[](const HttpRequestPtr& req,
 		   std::function<void (const HttpResponsePtr &)> &&callback,
-		   const std::string &n1, const std::string &d1, const std::string &n2, const std::string &d2
+		   const std::string &a, const std::string &b
 		   ) {
-			base::RationalFraction number1((base::LongNumber(n1)), base::NLongNumber(d1));
-			base::RationalFraction number2((base::LongNumber(n2)), base::NLongNumber(d2));
+			auto vA = base::RationalFraction::fromString(a);
+			auto vB = base::RationalFraction::fromString(b);
 
 			Json::Value json;
-			json["response"] = module::DIV_QQ_Q(number1, number2).toString();
+			json["response"] = module::DIV_QQ_Q(vA, vB).toString();
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
@@ -440,7 +442,185 @@ void initQModule(){
 }
 
 void initPModule(){
+	app()
+	.registerHandler(
+		"/ADD_PP_P?a={a}&b={b}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &b) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vB = base::Polynomial::fromString(b);
 
+			Json::Value json;
+			json["response"] = module::ADD_PP_P(vA, vB).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/SUB_PP_P?a={a}&b={b}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &b) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vB = base::Polynomial::fromString(b);
+
+			Json::Value json;
+			json["response"] = module::SUB_PP_P(vA, vB).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/MUL_PQ_P?a={a}&b={b}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &b) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vB = base::RationalFraction::fromString(b);
+
+			Json::Value json;
+			json["response"] = module::MUL_PQ_P(vA, vB).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/MUL_Pxk_P?a={a}&k={k}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &k) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vK = base::ULongNumber(k);
+
+			Json::Value json;
+			json["response"] = module::MUL_Pxk_P(vA, vK).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/LED_P_Q?a={a}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a) {
+			auto vA = base::Polynomial::fromString(a);
+
+			Json::Value json;
+			json["response"] = module::LED_P_Q(vA).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/DEG_P_N?a={a}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a) {
+			auto vA = base::Polynomial::fromString(a);
+
+			Json::Value json;
+			json["response"] = module::DEG_P_N(vA).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/FAC_P_Q?a={a}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a) {
+			auto vA = base::Polynomial::fromString(a);
+
+			Json::Value json;
+			json["response"] = module::FAC_P_Q(vA).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/MUL_PP_P?a={a}&b={b}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &b) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vB = base::Polynomial::fromString(b);
+
+			Json::Value json;
+			json["response"] = module::MUL_PP_P(vA, vB).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/DIV_PP_P?a={a}&b={b}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &b) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vB = base::Polynomial::fromString(b);
+
+			Json::Value json;
+			json["response"] = module::DIV_PP_P(vA, vB).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/MOD_PP_P?a={a}&b={b}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &b) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vB = base::Polynomial::fromString(b);
+
+			Json::Value json;
+			json["response"] = module::MOD_PP_P(vA, vB).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/GCF_PP_P?a={a}&b={b}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &b) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vB = base::Polynomial::fromString(b);
+
+			Json::Value json;
+			json["response"] = module::GCF_PP_P(vA, vB).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/GCF_PP_P?a={a}&b={b}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a, const std::string &b) {
+			auto vA = base::Polynomial::fromString(a);
+			auto vB = base::Polynomial::fromString(b);
+
+			Json::Value json;
+			json["response"] = module::GCF_PP_P(vA, vB).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/DER_P_P?a={a}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a) {
+			auto vA = base::Polynomial::fromString(a);
+
+			Json::Value json;
+			json["response"] = module::DER_P_P(vA).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	.registerHandler(
+		"/NMR_P_P?a={a}",
+		[](const HttpRequestPtr& req,
+		   std::function<void (const HttpResponsePtr &)> &&callback,
+		   const std::string &a) {
+			auto vA = base::Polynomial::fromString(a);
+
+			Json::Value json;
+			json["response"] = module::NMR_P_P(vA).toString();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		},{Get}
+	)
+	;
 }
 
 #endif

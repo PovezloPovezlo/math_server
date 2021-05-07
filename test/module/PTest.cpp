@@ -19,4 +19,8 @@ TEST(P, DER_P_P){
     p.addElement(3, (RationalFraction)4);
     p.addElement(4, (RationalFraction)5);
     EXPECT_EQ(DER_P_P(p).toString(), "20*x^3 12*x^2 6*x^1");
+
+    /*Polynomial p2;
+    p2.addElement(0, (RationalFraction)5);
+    EXPECT_EQ(DER_P_P(p2).toString(), "0");*/
 }
