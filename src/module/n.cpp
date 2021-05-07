@@ -285,71 +285,25 @@ ULongNumber module::SUB_NDN_N(ULongNumber& a, DIGIT k, ULongNumber& b) {
  * @return
  */
 ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
-    ULongNumber param = ULongNumber::empty();
-    ULongNumber answer = ULongNumber::empty();
-    if (COM_NN_D(b, param) == 0) {throw BaseException("Деление на ноль");}
-
-    if (COM_NN_D(a, b) == 0) {param = ULongNumber("1"); return MUL_Nk_N(param, 0);}
-    else if (COM_NN_D(a, b) == 1) {throw BaseException("Делитель больше делимого");}
-    else {
-        ULongNumber temp = ULongNumber::empty();
-        ULongNumber longdigit = ULongNumber::empty();
-        ULongNumber newa = a;
-        size_t tempquotient = 0;
-        size_t quotient = 0;
-        size_t tendegree = 0;
-        size_t pos = 0;
-
-        while(COM_NN_D(newa, b) == 2) {
-
-            tempquotient = 0;
-            temp = ULongNumber("0");
-            param = ULongNumber("0");
-            longdigit = ULongNumber("0");
-
-            for (size_t i = 0; i < b.length(); i++) { temp[b.length() - i - 1] = newa[newa.length() - i - 1]; }
-            if (COM_NN_D(temp, b) == 1) {
-                size_t digit = newa[newa.length() - b.length() - 1];
-                longdigit = (ULongNumber) digit;
-                temp = MUL_Nk_N(temp, 1);
-                temp = ADD_NN_N(temp, longdigit);
-                if (COM_NN_D(newa, a) == 0) {pos--;}
-            }
-
-            tendegree = (newa.length() - temp.length());
-
-            while (COM_NN_D(temp, param) == 2) {
-                param = MUL_ND_N(b, tempquotient);
-                tempquotient++;
-            }
-            tempquotient = tempquotient - 2;
-            param = MUL_ND_N(b, tempquotient);
-            param = MUL_Nk_N(param, tendegree);
-
-            quotient = quotient * 10 + tempquotient;
-            newa = SUB_NN_N(newa, param);
-            //test output
-            /*
-            printf("%s\n", temp.toString().c_str()); // test temp
-            printf("%s\n", param.toString().c_str()); // test substrahend
-            param = (ULongNumber) quotient;
-            printf("%s\n", param.toString().c_str()); // test quotient
-            param = (ULongNumber) tempquotient;
-            printf("%s\n", param.toString().c_str()); // test tempquotient
-            printf("%s\n", newa.toString().c_str()); // test newa
-            */
-        }
-        while (quotient > 0) {
-            param = (ULongNumber)(quotient % 10);
-            quotient = quotient / 10;
-            pos++;
-        }
-        if (a[a.length()] == b[b.length()] && a.length() == b.length()) {pos--;}
-        answer = MUL_Nk_N(param, pos);
-        return answer;
+    ULongNumber firstdigit = ULongNumber::empty();   // первая цифра частного
+    ULongNumber temp = ULongNumber::empty();
+    for (size_t i = 0; i < b.length(); i++) { temp[b.length() - i - 1] = a[a.length() - i - 1]; }
+    if (COM_NN_D(temp, b) == 1) {
+        temp = MUL_Nk_N(temp, 1);
+        ULongNumber digit = (ULongNumber) a[a.length() - b.length() - 1]; // занимаем следующую цифру от делимого
+        temp = ADD_NN_N(temp, digit);
     }
 
+    size_t rank = a.length() - temp.length();     // степень
+
+    while (COM_NN_D(temp, b) != 1) {
+        ADD_1N_N(firstdigit);
+        temp = SUB_NN_N(temp, b);
+    }
+
+    return MUL_Nk_N(firstdigit, rank);
 }
+
 
 /**
  * @authors Имя Фамилия авторов

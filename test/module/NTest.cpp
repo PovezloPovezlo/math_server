@@ -322,19 +322,14 @@ TEST(N, SUB_NDN_N) {
 }
 
 TEST(N, DIV_NN_Dk) {
-    ULongNumber t1 = ULongNumber("77894387680438047568"); // 555899
-    ULongNumber t2 = ULongNumber("135");    // 135
-    ULongNumber res = ULongNumber("576995464299541093");  // 4000
-    /*ULongNu*/ res = ULongNumber("500000000000000000");  // 4000
-    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
-    t1 = ULongNumber("12345678912345678912345678912345678912345678912345678912345678974637568574853836572736587");
-    t2 = ULongNumber("911173657583654569465694376594367968943657463756471865874165764175604136584365974635963");
-    res = ULongNumber("10");
+    ULongNumber t1 = ULongNumber("77894387680438047568");
+    ULongNumber t2 = ULongNumber("135");
+    ULongNumber res = ULongNumber("500000000000000000");
     EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
     t1 = ULongNumber("25266254736776");
     t2 = ULongNumber("1234567890634476375675757");
     res = ULongNumber("20000");
-    //EXPECT_EQ(DIV_NN_Dk(t1, t2), res); - бросает ошибку, тк делитель больше делимого */
+    //EXPECT_EQ(DIV_NN_Dk(t1, t2), res); - бросает ошибку, тк делитель больше делимого
     t1 = ULongNumber("25266254736776");
     t2 = ULongNumber("25266254736776");
     res = ULongNumber("1");
@@ -345,5 +340,13 @@ TEST(N, DIV_NN_Dk) {
     t1 = ULongNumber("945894358932593459438594835943859839584395439689346936362356");
     t2 = ULongNumber("932454654444652364582354875285872354823548213548235489");
     res = ULongNumber("1000000");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    t1 = ULongNumber("945894358932593459438594835943859839584395439689346936362356");
+    t2 = ULongNumber("9324546544446523645823548752858723548235482135482354896565");
+    res = ULongNumber("100");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    t1 = ULongNumber("1000");
+    t2 = ULongNumber("5");
+    res = ULongNumber("200");
     EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
 }
