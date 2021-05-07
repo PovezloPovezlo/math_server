@@ -298,6 +298,7 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
         size_t tempquotient = 0;
         size_t quotient = 0;
         size_t tendegree = 0;
+        size_t pos = 0;
 
         while(COM_NN_D(newa, b) == 2) {
 
@@ -312,6 +313,7 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
                 longdigit = (ULongNumber) digit;
                 temp = MUL_Nk_N(temp, 1);
                 temp = ADD_NN_N(temp, longdigit);
+                if (COM_NN_D(newa, a) == 0) {pos--;}
             }
 
             tendegree = (newa.length() - temp.length());
@@ -325,9 +327,7 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
             param = MUL_Nk_N(param, tendegree);
 
             quotient = quotient * 10 + tempquotient;
-
             newa = SUB_NN_N(newa, param);
-
             //test output
             /*
             printf("%s\n", temp.toString().c_str()); // test temp
@@ -339,13 +339,12 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
             printf("%s\n", newa.toString().c_str()); // test newa
             */
         }
-        size_t pos = 0;
         while (quotient > 0) {
+            pos++;
             param = (ULongNumber)(quotient % 10);
             quotient = quotient / 10;
-            pos++;
+
         }
-        pos = pos - 1;
         answer = MUL_Nk_N(param, pos);
         return answer;
     }
