@@ -340,11 +340,11 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
             */
         }
         while (quotient > 0) {
-            pos++;
             param = (ULongNumber)(quotient % 10);
             quotient = quotient / 10;
-
+            pos++;
         }
+        if (a[a.length()] == b[b.length()] && a.length() == b.length()) {pos--;}
         answer = MUL_Nk_N(param, pos);
         return answer;
     }
