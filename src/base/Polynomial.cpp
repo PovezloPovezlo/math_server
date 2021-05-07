@@ -4,6 +4,9 @@
 #include <module/z.h>
 #include <utility>
 #include <set>
+#include <sstream>
+#include <iostream>
+#include <vector>
 
 using namespace base;
 
@@ -103,4 +106,38 @@ std::string Polynomial::toString() {
 
 void Polynomial::addElement(size_t degree, RationalFraction val) {
     this->addElement(new PolynomialPair(degree, std::move(val)));
+}
+
+//todo make tests
+Polynomial Polynomial::fromString(std::string val) {
+	Polynomial p;
+	std::stringstream ss;
+
+	std::istringstream f(val);
+	std::string s;
+
+	size_t degree;
+
+	while(std::getline(f, s, ' ')){
+		auto endOfCoefficient = s.find('*');
+		if(endOfCoefficient == std::string::npos){
+			auto coefficient = RationalFraction::fromString(s);
+			p.addElement(0, coefficient);
+		}else{
+			auto coefficientStr = s.substr(0, endOfCoefficient);
+			auto coefficient = RationalFraction::fromString(coefficientStr);
+
+			auto startOfDegree = s.find('^')+1;
+			auto degreeStr = s.substr(startOfDegree);
+
+			ss << degreeStr;
+			ss >> degree;
+
+			p.addElement(degree, coefficient);
+		}
+
+		ss.clear();
+	}
+
+	return p;
 }
