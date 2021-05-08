@@ -16,7 +16,7 @@ namespace module {
 	base::ULongNumber DIV_NN_Dk(base::ULongNumber& a, base::ULongNumber& b);
 	base::ULongNumber DIV_NN_N(base::NLongNumber& a, base::NLongNumber& b);
 	base::ULongNumber MOD_NN_N(base::NLongNumber& a, base::NLongNumber& b);
-	base::NLongNumber GCF_NN_N(base::NLongNumber& a, base::NLongNumber& b);
+	base::ULongNumber GCF_NN_N(base::ULongNumber& a, base::ULongNumber& b);
 	base::NLongNumber LCM_NN_N(base::NLongNumber& a, base::NLongNumber& b);
 
 }

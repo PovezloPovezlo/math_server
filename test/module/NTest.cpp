@@ -383,3 +383,35 @@ TEST(N, MOD_NN_N) {
 	t1 = NLongNumber("19348793456987398676293847698762239487"), t2 = NLongNumber("23876827364876"), res = ULongNumber("4717636538795");
 	EXPECT_EQ(MOD_NN_N(t1, t2).toString(), res.toString());
 }
+
+TEST(N, GCF_NN_N) {
+	ULongNumber t1 = ULongNumber("6"), t2 = ULongNumber("9");
+	ULongNumber res = ULongNumber("3");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber("1"), t2 = ULongNumber("0"); res = ULongNumber("1");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber("1"), t2 = ULongNumber("1"); res = ULongNumber("1");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber("15"), t2 = ULongNumber("5"); res = ULongNumber("5");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber("100"), t2 = ULongNumber("50"); res = ULongNumber("50");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber(
+		"128756324958643234583538564738338658"
+		"283756398586868686868634655938866369"
+		"387458668663845765385346583863483856"),
+	t2 = ULongNumber("1"); res = ULongNumber("1");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber(
+		"32659237493987349324984656949235684659629698495643075097"
+		"3409657079549546769573949867485929057067057057634964"),
+	t2 = ULongNumber("5732894686594587632784454678568237456438655754");
+	res = ULongNumber("22");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+}
