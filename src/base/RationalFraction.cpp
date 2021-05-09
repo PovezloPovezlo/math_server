@@ -39,7 +39,7 @@ RationalFraction RationalFraction::fromString(std::string val) {
 	}
 
 	auto numeratorStr = val.substr(0, endOfNumerator);
-	auto denominatorStr = val.substr(endOfNumerator);
+	auto denominatorStr = val.substr(endOfNumerator+1);
 
 	auto numerator = LongNumber(numeratorStr);
 	auto denominator = NLongNumber(denominatorStr);

@@ -634,7 +634,7 @@ int main() {
 	std::cout << "Running web server..." << std::endl;
 	app()
 	.addListener("0.0.0.0", 3041)
-	.setThreadNum(1)
+	.setThreadNum(8)
 	//.enableRunAsDaemon()
 	//.enableReusePort()
 	.run();
