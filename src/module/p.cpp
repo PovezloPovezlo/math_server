@@ -224,6 +224,10 @@ Polynomial module::DER_P_P(Polynomial& a) {
 			RationalFraction newval = module::MUL_QQ_Q(t, el->value);
 
 			temporary.addElement(el->degree - 1, newval);
+		}else{
+			if(temporary.coefficients.empty()){
+				temporary.addElement(0, RationalFraction::empty());
+			}
 		}
 	}
 

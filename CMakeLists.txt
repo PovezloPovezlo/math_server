@@ -10,5 +10,11 @@ add_subdirectory(test)
 
 set(CMAKE_MACOSX_RPATH 1)
 
-#add_subdirectory(lib/drogon)
+IF(EXISTS lib/drogon)
+    message(STATUS "Drogon library found. You will be able to run web server")
+    add_subdirectory(lib/drogon)
+ELSE()
+    message(WARNING "Drogon library not found. It will compile, but you will not be able to run web server")
+ENDIF()
+
 add_subdirectory(lib/googletest)
