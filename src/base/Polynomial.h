@@ -27,6 +27,8 @@ namespace base {
         void remove(size_t index);
 
 		std::string toString();
+
+		static Polynomial fromString(std::string val);
     };
 
 }

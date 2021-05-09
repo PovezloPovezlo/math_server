@@ -30,3 +30,19 @@ RationalFraction RationalFraction::fromInt(size_t value) {
 RationalFraction RationalFraction::fromTwoInt(int numerator, unsigned int denominator) {
 	return RationalFraction((base::LongNumber)numerator, (base::NLongNumber)denominator);
 }
+
+//todo make tests
+RationalFraction RationalFraction::fromString(std::string val) {
+	auto endOfNumerator = val.find('/');
+	if(endOfNumerator == std::string::npos){
+		return RationalFraction(LongNumber(val), NLongNumber::fromInt(1));
+	}
+
+	auto numeratorStr = val.substr(0, endOfNumerator);
+	auto denominatorStr = val.substr(endOfNumerator+1);
+
+	auto numerator = LongNumber(numeratorStr);
+	auto denominator = NLongNumber(denominatorStr);
+
+	return RationalFraction(numerator, denominator);
+}
