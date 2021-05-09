@@ -302,5 +302,116 @@ TEST(N, ADD_1N_N)
 	a = ULongNumber("12345670000000000000000000000089999");
 	b = ULongNumber("12345670000000000000000000000090000");
 	EXPECT_EQ(ADD_1N_N(a), b);
+}
 
+TEST(N, SUB_NDN_N) {
+    ULongNumber t1 = ULongNumber("2476056797356347596392562367");
+    ULongNumber t2 = ULongNumber("572376895736895");
+    ULongNumber res = ULongNumber("2476056797353485711913877892");
+    DIGIT k = 5;
+    EXPECT_EQ(SUB_NDN_N(t1, k, t2), res);
+    t1 = ULongNumber("619836423180240458169153");
+    t2 = ULongNumber("56348765743658223469923");
+    res = ULongNumber("0");
+    k = 11;
+    EXPECT_EQ(SUB_NDN_N(t1, k, t2), res);
+    t1 = ULongNumber("2578387974963763587");
+    t2 = ULongNumber("1896546596493659816589463572436592068923");
+    k = 225; // тест выбрасывает ошибку, если вычитаемое больше уменьшаемого (чтобы тест не крашился, можно убрать нижнюю строку)
+    //EXPECT_EQ(SUB_NDN_N(t1, k, t2), res);
+}
+
+TEST(N, DIV_NN_Dk) {
+    ULongNumber t1 = ULongNumber("77894387680438047568");
+    ULongNumber t2 = ULongNumber("135");
+    ULongNumber res = ULongNumber("500000000000000000");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    t1 = ULongNumber("25266254736776");
+    t2 = ULongNumber("1234567890634476375675757");
+    res = ULongNumber("20000");
+    //EXPECT_EQ(DIV_NN_Dk(t1, t2), res); - бросает ошибку, тк делитель больше делимого
+    t1 = ULongNumber("25266254736776");
+    t2 = ULongNumber("25266254736776");
+    res = ULongNumber("1");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    t1 = ULongNumber("4532652364385340438578947957432569435");
+    t2 = ULongNumber("0");
+    //EXPECT_EQ(DIV_NN_Dk(t1, t2), res); //- бросает ошибку, тк делим на ноль
+    t1 = ULongNumber("945894358932593459438594835943859839584395439689346936362356");
+    t2 = ULongNumber("932454654444652364582354875285872354823548213548235489");
+    res = ULongNumber("1000000");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    t1 = ULongNumber("945894358932593459438594835943859839584395439689346936362356");
+    t2 = ULongNumber("9324546544446523645823548752858723548235482135482354896565");
+    res = ULongNumber("100");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    t1 = ULongNumber("1000");
+    t2 = ULongNumber("5");
+    res = ULongNumber("200");
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+}
+
+TEST(N, DIV_NN_N) {
+	NLongNumber t1 = NLongNumber("10"), t2 = NLongNumber("2");
+	ULongNumber res = ULongNumber("5");
+	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+	
+	t1 = NLongNumber("100"), t2 = NLongNumber("5"), res = ULongNumber("20");
+	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("11"), t2 = NLongNumber("5"), res = ULongNumber("2");
+	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("15"), t2 = NLongNumber("5"), res = ULongNumber("3");
+	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("1119872938798719287398719831"), t2 = NLongNumber("519872"), res = ULongNumber("2154132053272188706833");
+	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+}
+
+TEST(N, MOD_NN_N) {
+	NLongNumber t1 = NLongNumber("10"), t2 = NLongNumber("2");
+	ULongNumber res = ULongNumber("0");
+	EXPECT_EQ(MOD_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("10"), t2 = NLongNumber("3"), res = ULongNumber("1");
+	EXPECT_EQ(MOD_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("100"), t2 = NLongNumber("99"), res = ULongNumber("1");
+	EXPECT_EQ(MOD_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("19348793456987398676293847698762239487"), t2 = NLongNumber("23876827364876"), res = ULongNumber("4717636538795");
+	EXPECT_EQ(MOD_NN_N(t1, t2).toString(), res.toString());
+}
+
+TEST(N, GCF_NN_N) {
+	ULongNumber t1 = ULongNumber("6"), t2 = ULongNumber("9");
+	ULongNumber res = ULongNumber("3");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber("1"), t2 = ULongNumber("0"); res = ULongNumber("1");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber("1"), t2 = ULongNumber("1"); res = ULongNumber("1");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber("15"), t2 = ULongNumber("5"); res = ULongNumber("5");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber("100"), t2 = ULongNumber("50"); res = ULongNumber("50");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber(
+		"128756324958643234583538564738338658"
+		"283756398586868686868634655938866369"
+		"387458668663845765385346583863483856"),
+	t2 = ULongNumber("1"); res = ULongNumber("1");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = ULongNumber(
+		"32659237493987349324984656949235684659629698495643075097"
+		"3409657079549546769573949867485929057067057057634964"),
+	t2 = ULongNumber("5732894686594587632784454678568237456438655754");
+	res = ULongNumber("22");
+	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
 }
