@@ -57,3 +57,14 @@ TEST(P, GCF_PP_P){
     EXPECT_EQ(res3.toString(), "1/45");
 }
 
+TEST(P, MUL_PQ_P){
+    Polynomial a;
+    a.addElement(1, (RationalFraction)1);
+    a.addElement(2, (RationalFraction)10);
+    a.addElement(3, RationalFraction::fromTwoInt(5,2));
+
+    auto b = RationalFraction::fromInt(2);
+    auto res1 = MUL_PQ_P(a, b);
+
+    EXPECT_EQ(res1.toString(), "10/2*x^3 20*x^2 2*x");
+}
