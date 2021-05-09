@@ -149,11 +149,10 @@ TEST(Polynomial, set){
     EXPECT_EQ(p.toString(), "1*x^4 90*x^3 3*x^2 4*x^1 5");
 }
 
-/*
 TEST(Polynomial, fromString){
 	auto p = Polynomial::fromString("1*x^4 90*x^3 3*x^2 4*x^1 5");
 	EXPECT_EQ(p.toString(), "1*x^4 90*x^3 3*x^2 4*x^1 5");
 
 	auto p2 = Polynomial::fromString("5");
-	EXPECT_EQ(p.toString(), "5");
-}*/
+	EXPECT_EQ(p2.toString(), "5");
+}
