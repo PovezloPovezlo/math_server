@@ -159,10 +159,12 @@ ULongNumber module::SUB_NN_N(ULongNumber& a, ULongNumber& b) {
 
 	ULongNumber res = ULongNumber::empty();
 
-	for (int i = 0; i < max.length(); i++) {
+	auto maxLen = max.length();
+
+	for (int i = 0; i < maxLen; i++) {
 		if (max[i] >= min[i])  res[i] = max[i] - min[i];
 		else {
-			if (i < max.length() - 1) {
+			if (i < maxLen - 1) {
 				if (max[i + 1] > 0) max[i + 1] = max[i + 1] - 1;
 				else {
 					int t = i + 1;
@@ -197,12 +199,14 @@ ULongNumber module::MUL_ND_N(ULongNumber& a, DIGIT b) {
 
 	int additional = 0;
 
-	for (int i = 0; i < a.length(); i++) {
+	auto len = a.length();
+
+	for (int i = 0; i < len; i++) {
 		res[i] = (a[i] * b + additional) % 10;
 		additional = (a[i] * b + additional) / 10;
 	}
 	if (additional != 0) {
-		res[a.length()] = additional;
+		res[len] = additional;
 	}
 
 	return res;
@@ -222,7 +226,9 @@ ULongNumber module::MUL_Nk_N(ULongNumber& a, size_t k) {
 	for (auto i = 0; i < k; ++i) {
 		res[i] = 0;
 	}
-	for (auto i = k; i < a.length() + k; ++i) {
+	auto len = a.length();
+
+	for (auto i = k; i < len + k; ++i) {
 		res[i] = a[i - k];
 	}
 	return res;
@@ -246,7 +252,8 @@ ULongNumber module::MUL_NN_N(ULongNumber& a, ULongNumber& b) {
 	if (module::COM_NN_D(a, b) == 2) { max = a; min = b; }
 	else { max = b; min = a; }
 
-	for (int i = 0; i < min.length(); ++i) {
+	auto len = min.length();
+	for (int i = 0; i < len; ++i) {
 		size_t newI = (i);
 		auto t = MUL_ND_N(max, min[i]);
 		temp = MUL_Nk_N(t, newI);
@@ -287,14 +294,17 @@ ULongNumber module::SUB_NDN_N(ULongNumber& a, DIGIT k, ULongNumber& b) {
 ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
 	ULongNumber firstdigit = ULongNumber::empty();   // первая цифра частного
 	ULongNumber temp = ULongNumber::empty();
-	for (size_t i = 0; i < b.length(); i++) { temp[b.length() - i - 1] = a[a.length() - i - 1]; }
+	auto bLen = b.length();
+	auto aLen = a.length();
+
+	for (size_t i = 0; i < bLen; i++) { temp[bLen - i - 1] = a[aLen - i - 1]; }
 	if (COM_NN_D(temp, b) == 1) {
 		temp = MUL_Nk_N(temp, 1);
-		ULongNumber digit = (ULongNumber)a[a.length() - b.length() - 1]; // занимаем следующую цифру от делимого
+		ULongNumber digit = (ULongNumber)a[aLen - bLen - 1]; // занимаем следующую цифру от делимого
 		temp = ADD_NN_N(temp, digit);
 	}
 
-	size_t rank = a.length() - temp.length();     // степень
+	size_t rank = aLen - temp.length();     // степень
 
 	while (COM_NN_D(temp, b) != 1) {
 		ADD_1N_N(firstdigit);
@@ -324,7 +334,8 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 		ULongNumber temp = DIV_NN_Dk(nA, nB);
 
 		res = ADD_NN_N(res, temp);
-		nA = SUB_NN_N(nA, MUL_NN_N(temp, nB));
+		auto t = MUL_NN_N(temp, nB);
+		nA = SUB_NN_N(nA, t);
 	}
 	return res;
 }
@@ -345,7 +356,8 @@ ULongNumber module::MOD_NN_N(NLongNumber& a, NLongNumber& b) {
 	if (COM_NN_D(nA, nB) == 1) return nA;
 	if (COM_NN_D(nA, nB) == 0) return (ULongNumber)"0";
 	ULongNumber temp = DIV_NN_N(a, b);
-	return SUB_NN_N(nA, MUL_NN_N(temp, nB));
+	auto t = MUL_NN_N(temp, nB);
+	return SUB_NN_N(nA, t);
 }
 
 /**
