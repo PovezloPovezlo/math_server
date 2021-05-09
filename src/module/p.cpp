@@ -88,7 +88,7 @@ Polynomial module::MUL_Pxk_P(Polynomial& a, ULongNumber& k) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * P-5
  *
  * Старший коэффициент многочлена
@@ -102,7 +102,7 @@ RationalFraction module::LED_P_Q(Polynomial& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * P-6
  *
  * Степень многочлена
@@ -170,7 +170,7 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Анастасия Аверьянова
  * P-11
  * Требуется: DEG_P_N, MOD_PP_P
  *
