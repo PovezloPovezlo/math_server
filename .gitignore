@@ -25,3 +25,4 @@ Release
 *.vbproj.user
 ipch
 *sdf
+lib/drogon
