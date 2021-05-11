@@ -330,7 +330,7 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 	ULongNumber nB = ULongNumber::fromLongNumber(b);
 	ULongNumber res = ULongNumber("0");
 	if (COM_NN_D(nA, nB) == 0) return ULongNumber("1");
-	while (COM_NN_D(nA, nB) == 2) {
+	while (COM_NN_D(nA, nB) != 1) {
 		ULongNumber temp = DIV_NN_Dk(nA, nB);
 
 		res = ADD_NN_N(res, temp);
