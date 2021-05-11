@@ -387,7 +387,7 @@ ULongNumber module::GCF_NN_N(ULongNumber& a, ULongNumber& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Артюх Алексей
  * N-14
  * Требуется: GCF_NN_N, MUL_NN_N
  *
@@ -396,6 +396,8 @@ ULongNumber module::GCF_NN_N(ULongNumber& a, ULongNumber& b) {
  * @param b
  * @return
  */
-NLongNumber module::LCM_NN_N(NLongNumber& a, NLongNumber& b) {
-	throw NotImplementedException();
+ULongNumber module::LCM_NN_N(NLongNumber& a, NLongNumber& b) {
+    auto product = (NLongNumber) MUL_NN_N(a,b).toString();
+    auto nod = (NLongNumber) GCF_NN_N(a, b).toString();
+    return DIV_NN_N(product, nod);
 }

@@ -423,3 +423,12 @@ TEST(N, GCF_NN_N) {
 	res = ULongNumber("22");
 	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
 }
+
+TEST (N, LCM_NN_N) {
+    NLongNumber t1 = NLongNumber("293"), t2 = NLongNumber("677"), res = NLongNumber("198361");
+    EXPECT_EQ(LCM_NN_N(t1, t2).toString(), res.toString());
+    t1 = NLongNumber("100"), t2 = NLongNumber("5"), res = NLongNumber("100");
+    EXPECT_EQ(LCM_NN_N(t1, t2).toString(), res.toString());
+    t1 = NLongNumber("24"), t2 = NLongNumber("42"), res = NLongNumber("168");
+    EXPECT_EQ(LCM_NN_N(t1, t2).toString(), res.toString());
+}
