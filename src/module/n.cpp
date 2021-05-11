@@ -291,8 +291,8 @@ ULongNumber module::SUB_NDN_N(ULongNumber& a, DIGIT k, ULongNumber& b) {
  * @param b
  * @return
  */
-ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
-	ULongNumber firstdigit = ULongNumber::empty();   // первая цифра частного
+ std::pair<DIGIT, size_t> DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
+	DIGIT firstdigit = 0; // первая цифра частного
 	ULongNumber temp = ULongNumber::empty();
 	auto bLen = b.length();
 	auto aLen = a.length();
@@ -307,11 +307,11 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
 	size_t rank = aLen - temp.length();     // степень
 
 	while (COM_NN_D(temp, b) != 1) {
-		ADD_1N_N(firstdigit);
+		firstdigit++;
 		temp = SUB_NN_N(temp, b);
 	}
 
-	return MUL_Nk_N(firstdigit, rank);
+	return std::make_pair(firstdigit, rank);
 }
 
 
