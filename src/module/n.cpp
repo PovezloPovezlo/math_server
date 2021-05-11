@@ -329,7 +329,7 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 	ULongNumber nA = ULongNumber::fromLongNumber(a);
 	ULongNumber nB = ULongNumber::fromLongNumber(b);
 	ULongNumber res = ULongNumber("0");
-	if (COM_NN_D(nA, nB) == 1) throw BaseException("Делимое меньше делителя");
+	if (COM_NN_D(nA, nB) == 0) return ULongNumber("1");
 	while (COM_NN_D(nA, nB) == 2) {
 		ULongNumber temp = DIV_NN_Dk(nA, nB);
 

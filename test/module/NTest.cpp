@@ -3,6 +3,7 @@
 #include <base/ULongNumber.h>
 #include <base/NLongNumber.h>
 #include <module/n.h>
+#include <string>
 
 using namespace base;
 using namespace module;
@@ -364,6 +365,10 @@ TEST(N, DIV_NN_N) {
 
 	t1 = NLongNumber("15"), t2 = NLongNumber("5"), res = ULongNumber("3");
 	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("16"), t2 = NLongNumber("5"), res = ULongNumber("3");
+	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+
 
 	t1 = NLongNumber("1119872938798719287398719831"), t2 = NLongNumber("519872"), res = ULongNumber("2154132053272188706833");
 	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
