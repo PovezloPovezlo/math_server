@@ -74,7 +74,8 @@ Polynomial module::MUL_PQ_P(Polynomial& a, RationalFraction& b) {
  */
 Polynomial module::MUL_Pxk_P(Polynomial& a, ULongNumber& k) {
 	Polynomial temporary;
-	if ((module::COM_NN_D(k, (ULongNumber)0)) == 0) return a;
+	auto zero = ULongNumber::empty();
+	if ((module::COM_NN_D(k, zero)) == 0) return a;
 	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
 		auto el = *i;
 		ULongNumber udeg = ULongNumber::fromInt(el->degree);
@@ -186,15 +187,16 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
 	auto lhs1 = module::DEG_P_N(a);
 	auto rhs1 = module::DEG_P_N(b);
 	if(module::COM_NN_D(lhs1, rhs1) == 1){
-		auto first = b;
-		auto second = a;
+		first = b;
+		second = a;
 	}
 	auto ost = module::MOD_PP_P(first,second);
 	first = second;
 	second = ost;
 	auto result = ost;
 	auto lhs2 = ULongNumber::fromLongNumber(ost.lastElement()->value.numerator);
-	while (module::COM_NN_D(lhs2, (ULongNumber)0) == 0) {
+	auto zero = ULongNumber::empty();
+	while (module::COM_NN_D(lhs2, zero) == 0) {
 		result = ost;
 		ost = module::MOD_PP_P(first, second);
 		first = second;
@@ -224,6 +226,10 @@ Polynomial module::DER_P_P(Polynomial& a) {
 			RationalFraction newval = module::MUL_QQ_Q(t, el->value);
 
 			temporary.addElement(el->degree - 1, newval);
+		}else{
+			if(temporary.coefficients.empty()){
+				temporary.addElement(0, RationalFraction::empty());
+			}
 		}
 	}
 

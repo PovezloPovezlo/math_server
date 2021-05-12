@@ -20,6 +20,7 @@ namespace base {
 		static RationalFraction fromInt(int value);
 		static RationalFraction fromInt(size_t value);
 		static RationalFraction fromTwoInt(int numerator, unsigned int denominator);
+		static RationalFraction fromString(std::string val);
 	};
 
 }
