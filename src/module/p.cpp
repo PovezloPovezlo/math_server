@@ -242,7 +242,12 @@ Polynomial module::DER_P_P(Polynomial& a) {
  */
 Polynomial module::NMR_P_P(Polynomial& a) {
 
-	
+	Polynomial der();
+	der = module::DER_P_P(a);
+	Polynomial gcf();
+	gcf = module::GCF_PP_P(a, der);
+	Polynomial res();
+	res = module::DIV_PP_P(a, gcf);
+	return res;
 
-	throw NotImplementedException();
 }
