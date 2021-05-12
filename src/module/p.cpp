@@ -247,7 +247,7 @@ Polynomial module::DER_P_P(Polynomial& a) {
  * @return
  */
 Polynomial module::NMR_P_P(Polynomial& a) {
-
+/*
 	Polynomial der();
 	der = module::DER_P_P(a);
 	Polynomial gcf();
@@ -255,5 +255,5 @@ Polynomial module::NMR_P_P(Polynomial& a) {
 	Polynomial res();
 	res = module::DIV_PP_P(a, gcf);
 	return res;
-
+*/
 }
