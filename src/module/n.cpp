@@ -336,12 +336,13 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 	if (COM_NN_D(nA, nB) == 0) return ULongNumber("1");
 	while (COM_NN_D(nA, nB) != 1) {
 		auto p = DIV_NN_Dk(nA, nB);
-		auto r = (ULongNumber)p.first;
-		ULongNumber temp = MUL_Nk_N(r, p.second);
+		auto r = p.first;
+		ULongNumber temp = MUL_ND_N(nB, r);
+		ULongNumber temp2 = MUL_Nk_N(temp, p.second);
 
-		res = ADD_NN_N(res, temp);
-		auto t = MUL_NN_N(temp, nB);
-		nA = SUB_NN_N(nA, t);
+		res[p.second] = p.first;
+
+		nA = SUB_NN_N(nA, temp2);
 	}
 	return res;
 }
