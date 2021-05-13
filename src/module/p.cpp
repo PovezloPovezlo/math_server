@@ -237,7 +237,7 @@ Polynomial module::DER_P_P(Polynomial& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Глеб Лях
  * P-13
  * Требуется: GCF_PP_P, DER_P_P, DIV_PP_P
  *
