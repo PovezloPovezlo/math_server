@@ -1,5 +1,6 @@
 #include "n.h"
 #include <base/NLongNumber.h>
+#include <utility>
 #include <base/NotImplementedException.h>
 #include <utility>
 #include <base/LongNumber.h>
@@ -334,13 +335,12 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 	ULongNumber res = ULongNumber("0");
 	if (COM_NN_D(nA, nB) == 0) return ULongNumber("1");
 	while (COM_NN_D(nA, nB) != 1) {
-		auto p = DIV_NN_Dk(nA, nB);
-		auto r = (ULongNumber)p.first;
-		ULongNumber temp = MUL_Nk_N(r, p.second);
+		std::pair<DIGIT, size_t> temp = DIV_NN_Dk(nA, nB);
+        auto temp2 = MUL_ND_N(nB, temp.first);
+        auto temp3 = MUL_Nk_N(temp2, temp.second);
+		res = ADD_NN_N(res, temp3);
 
-		res = ADD_NN_N(res, temp);
-		auto t = MUL_NN_N(temp, nB);
-		nA = SUB_NN_N(nA, t);
+		nA = SUB_NN_N(nA, temp3);
 	}
 	return res;
 }
