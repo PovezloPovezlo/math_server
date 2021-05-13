@@ -10,6 +10,8 @@
 #include <module/p.h>
 #include <base/Polynomial.h>
 
+#include <iostream>
+
 using namespace drogon;
 #else
 #   define RUN_WEBSERVER 0
@@ -142,8 +144,8 @@ void initNModule(){
 			auto t = module::DIV_NN_Dk(vA, vB);
 
 			Json::Value json;
-			json["response"]["digit"] = t.toString(); //t.first;
-			json["response"]["k"] = 0; //(long long)t.second;
+			json["response"]["digit"] = t.first; //t.first;
+			json["response"]["k"] = (long long)t.second; //(long long)t.second;
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
@@ -625,8 +627,27 @@ void initPModule(){
 
 #endif
 
+#ifdef WINDOWS
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#endif
+
+#include<iostream>
+using namespace std;
+
+std::string get_current_dir() {
+	char buff[FILENAME_MAX]; //create string buffer to hold path
+	GetCurrentDir( buff, FILENAME_MAX );
+	string current_working_dir(buff);
+	return current_working_dir;
+}
+
 int main() {
-#if RUN_WEBSERVER
+
+	#if RUN_WEBSERVER
 	initNModule();
 	initZModule();
 	initQModule();
@@ -643,6 +664,15 @@ int main() {
 			callback(HttpResponse::newHttpJsonResponse(json));
 		}
 	);
+
+	auto cur_dir = get_current_dir() + "/static";
+
+	std::cout << "Using static dir as \"" + cur_dir + "\"";
+
+	app()
+	.setDocumentRoot(cur_dir)
+	.addALocation("/", cur_dir)
+	.setFileTypes({"html", "js", "css"});
 
 	app()
 	.addListener("0.0.0.0", 3041)
