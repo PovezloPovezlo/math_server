@@ -3,6 +3,7 @@
 #include <base/ULongNumber.h>
 #include <base/NLongNumber.h>
 #include <module/n.h>
+#include <string>
 
 using namespace base;
 using namespace module;
@@ -325,30 +326,30 @@ TEST(N, DIV_NN_Dk) {
     ULongNumber t1 = ULongNumber("77894387680438047568");
     ULongNumber t2 = ULongNumber("135");
     ULongNumber res = ULongNumber("500000000000000000");
-    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    auto digitres = 5;
+    auto rankres = 17;
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).first, digitres);
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).second, rankres);
     t1 = ULongNumber("25266254736776");
     t2 = ULongNumber("1234567890634476375675757");
-    res = ULongNumber("20000");
     //EXPECT_EQ(DIV_NN_Dk(t1, t2), res); - бросает ошибку, тк делитель больше делимого
     t1 = ULongNumber("25266254736776");
     t2 = ULongNumber("25266254736776");
     res = ULongNumber("1");
-    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    digitres = 1;
+    rankres = 0;
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).first, digitres);
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).second, rankres);
     t1 = ULongNumber("4532652364385340438578947957432569435");
     t2 = ULongNumber("0");
     //EXPECT_EQ(DIV_NN_Dk(t1, t2), res); //- бросает ошибку, тк делим на ноль
-    t1 = ULongNumber("945894358932593459438594835943859839584395439689346936362356");
-    t2 = ULongNumber("932454654444652364582354875285872354823548213548235489");
-    res = ULongNumber("1000000");
-    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
-    t1 = ULongNumber("945894358932593459438594835943859839584395439689346936362356");
-    t2 = ULongNumber("9324546544446523645823548752858723548235482135482354896565");
-    res = ULongNumber("100");
-    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
     t1 = ULongNumber("1000");
     t2 = ULongNumber("5");
     res = ULongNumber("200");
-    EXPECT_EQ(DIV_NN_Dk(t1, t2).toString(), res.toString());
+    digitres = 2;
+    rankres = 2;
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).first, digitres);
+    EXPECT_EQ(DIV_NN_Dk(t1, t2).second, rankres);
 }
 
 TEST(N, DIV_NN_N) {
@@ -364,6 +365,13 @@ TEST(N, DIV_NN_N) {
 
 	t1 = NLongNumber("15"), t2 = NLongNumber("5"), res = ULongNumber("3");
 	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("16"), t2 = NLongNumber("5"), res = ULongNumber("3");
+	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+
+	t1 = NLongNumber("101"), t2 = NLongNumber("1"), res = ULongNumber("101");
+	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
+
 
 	t1 = NLongNumber("1119872938798719287398719831"), t2 = NLongNumber("519872"), res = ULongNumber("2154132053272188706833");
 	EXPECT_EQ(DIV_NN_N(t1, t2).toString(), res.toString());
@@ -414,4 +422,13 @@ TEST(N, GCF_NN_N) {
 	t2 = ULongNumber("5732894686594587632784454678568237456438655754");
 	res = ULongNumber("22");
 	EXPECT_EQ(GCF_NN_N(t1, t2).toString(), res.toString());
+}
+
+TEST (N, LCM_NN_N) {
+    NLongNumber t1 = NLongNumber("293"), t2 = NLongNumber("677"), res = NLongNumber("198361");
+    EXPECT_EQ(LCM_NN_N(t1, t2).toString(), res.toString());
+    t1 = NLongNumber("100"), t2 = NLongNumber("5"), res = NLongNumber("100");
+    EXPECT_EQ(LCM_NN_N(t1, t2).toString(), res.toString());
+    t1 = NLongNumber("24"), t2 = NLongNumber("42"), res = NLongNumber("168");
+    EXPECT_EQ(LCM_NN_N(t1, t2).toString(), res.toString());
 }

@@ -291,8 +291,8 @@ ULongNumber module::SUB_NDN_N(ULongNumber& a, DIGIT k, ULongNumber& b) {
  * @param b
  * @return
  */
-ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
-	ULongNumber firstdigit = ULongNumber::empty();   // первая цифра частного
+ std::pair<DIGIT, size_t> DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
+	DIGIT firstdigit = 0; // первая цифра частного
 	ULongNumber temp = ULongNumber::empty();
 	auto bLen = b.length();
 	auto aLen = a.length();
@@ -307,11 +307,11 @@ ULongNumber module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
 	size_t rank = aLen - temp.length();     // степень
 
 	while (COM_NN_D(temp, b) != 1) {
-		ADD_1N_N(firstdigit);
+		firstdigit++;
 		temp = SUB_NN_N(temp, b);
 	}
 
-	return MUL_Nk_N(firstdigit, rank);
+	return std::make_pair(firstdigit, rank);
 }
 
 
@@ -329,11 +329,11 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 	ULongNumber nA = ULongNumber::fromLongNumber(a);
 	ULongNumber nB = ULongNumber::fromLongNumber(b);
 	ULongNumber res = ULongNumber("0");
-	if (COM_NN_D(nA, nB) == 1){
-		std::swap(nA, nB);
-	}
-	while (COM_NN_D(nA, nB) == 2) {
-		ULongNumber temp = DIV_NN_Dk(nA, nB);
+	if (COM_NN_D(nA, nB) == 0) return ULongNumber("1");
+	while (COM_NN_D(nA, nB) != 1) {
+		auto p = DIV_NN_Dk(nA, nB);
+		auto r = (ULongNumber)p.first;
+		ULongNumber temp = MUL_Nk_N(r, p.second);
 
 		res = ADD_NN_N(res, temp);
 		auto t = MUL_NN_N(temp, nB);
@@ -355,10 +355,7 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 ULongNumber module::MOD_NN_N(NLongNumber& a, NLongNumber& b) {
 	ULongNumber nA = ULongNumber::fromLongNumber(a);
 	ULongNumber nB = ULongNumber::fromLongNumber(b);
-	if (COM_NN_D(nA, nB) == 1){
-		std::swap(nA, nB);
-	}
-	if (COM_NN_D(nA, nB) == 0) return (ULongNumber)"0";
+	if (COM_NN_D(nA, nB) == 0) return ULongNumber("0");
 	ULongNumber temp = DIV_NN_N(a, b);
 	auto t = MUL_NN_N(temp, nB);
 	return SUB_NN_N(nA, t);
@@ -392,7 +389,7 @@ ULongNumber module::GCF_NN_N(ULongNumber& a, ULongNumber& b) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Артюх Алексей
  * N-14
  * Требуется: GCF_NN_N, MUL_NN_N
  *
@@ -401,6 +398,8 @@ ULongNumber module::GCF_NN_N(ULongNumber& a, ULongNumber& b) {
  * @param b
  * @return
  */
-NLongNumber module::LCM_NN_N(NLongNumber& a, NLongNumber& b) {
-	throw NotImplementedException();
+ULongNumber module::LCM_NN_N(NLongNumber& a, NLongNumber& b) {
+    auto product = (NLongNumber) MUL_NN_N(a,b).toString();
+    auto nod = (NLongNumber) GCF_NN_N(a, b).toString();
+    return DIV_NN_N(product, nod);
 }
