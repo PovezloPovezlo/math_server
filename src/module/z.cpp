@@ -167,7 +167,7 @@ LongNumber module::SUB_ZZ_Z(LongNumber& a, LongNumber& b) {
 /**
  * @authors Лях Глеб
  * Z-8
- * Требуется: POZ_Z_D, ABS_Z_N, MUL_NN_N, MUL_ZN_Z
+ * Требуется: POZ_Z_D, ABS_Z_N, MUL_NN_N, MUL_ZM_Z
  *
  * Умножение целых чисел
  * @param a
