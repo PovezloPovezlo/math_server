@@ -1,6 +1,9 @@
 #pragma once
 
 #include <base/NLongNumber.h>
+#include <utility>
+#include <base/LongNumber.h>
+#include <cstddef>
 
 namespace module {
 
