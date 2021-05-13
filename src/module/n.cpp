@@ -329,7 +329,9 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 	ULongNumber nA = ULongNumber::fromLongNumber(a);
 	ULongNumber nB = ULongNumber::fromLongNumber(b);
 	ULongNumber res = ULongNumber("0");
-	if (COM_NN_D(nA, nB) == 1) throw BaseException("Делимое меньше делителя");
+	if (COM_NN_D(nA, nB) == 1){
+		std::swap(nA, nB);
+	}
 	while (COM_NN_D(nA, nB) == 2) {
 		ULongNumber temp = DIV_NN_Dk(nA, nB);
 
@@ -353,7 +355,9 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 ULongNumber module::MOD_NN_N(NLongNumber& a, NLongNumber& b) {
 	ULongNumber nA = ULongNumber::fromLongNumber(a);
 	ULongNumber nB = ULongNumber::fromLongNumber(b);
-	if (COM_NN_D(nA, nB) == 1) return nA;
+	if (COM_NN_D(nA, nB) == 1){
+		std::swap(nA, nB);
+	}
 	if (COM_NN_D(nA, nB) == 0) return (ULongNumber)"0";
 	ULongNumber temp = DIV_NN_N(a, b);
 	auto t = MUL_NN_N(temp, nB);

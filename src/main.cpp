@@ -142,8 +142,8 @@ void initNModule(){
 			auto t = module::DIV_NN_Dk(vA, vB);
 
 			Json::Value json;
-			json["response"]["digit"] = t.first;
-			json["response"]["k"] = (long long)t.second;
+			json["response"]["digit"] = t.toString(); //t.first;
+			json["response"]["k"] = 0; //(long long)t.second;
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
@@ -632,6 +632,18 @@ int main() {
 	initQModule();
 	initPModule();
 	std::cout << "Running web server..." << std::endl;
+	app().setExceptionHandler(
+		[](
+			const std::exception &exception,
+			const HttpRequestPtr& req,
+	        std::function<void (const HttpResponsePtr &)> &&callback
+	    ){
+			Json::Value json;
+			json["error"]["message"] = exception.what();
+			callback(HttpResponse::newHttpJsonResponse(json));
+		}
+	);
+
 	app()
 	.addListener("0.0.0.0", 3041)
 	.setThreadNum(8)
