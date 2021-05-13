@@ -335,12 +335,13 @@ ULongNumber module::DIV_NN_N(NLongNumber& a, NLongNumber& b) {
 	ULongNumber res = ULongNumber("0");
 	if (COM_NN_D(nA, nB) == 0) return ULongNumber("1");
 	while (COM_NN_D(nA, nB) != 1) {
-		std::pair<DIGIT, size_t> temp = DIV_NN_Dk(nA, nB);
-        auto temp2 = MUL_ND_N(nB, temp.first);
-        auto temp3 = MUL_Nk_N(temp2, temp.second);
-		res = ADD_NN_N(res, temp3);
+		auto p = DIV_NN_Dk(nA, nB);
+		auto r = (ULongNumber)p.first;
+		ULongNumber temp = MUL_Nk_N(r, p.second);
 
-		nA = SUB_NN_N(nA, temp3);
+		res = ADD_NN_N(res, temp);
+		auto t = MUL_NN_N(temp, nB);
+		nA = SUB_NN_N(nA, t);
 	}
 	return res;
 }
@@ -402,7 +403,11 @@ ULongNumber module::GCF_NN_N(ULongNumber& a, ULongNumber& b) {
  * @return
  */
 ULongNumber module::LCM_NN_N(NLongNumber& a, NLongNumber& b) {
-    auto product = (NLongNumber) MUL_NN_N(a,b).toString();
-    auto nod = (NLongNumber) GCF_NN_N(a, b).toString();
+	auto t = MUL_NN_N(a,b);
+
+    auto product = NLongNumber::fromLongNumber(t);
+
+    t = GCF_NN_N(a, b);
+    auto nod = NLongNumber::fromLongNumber(t);
     return DIV_NN_N(product, nod);
 }
