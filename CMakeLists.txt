@@ -11,7 +11,7 @@ add_subdirectory(test)
 
 set(CMAKE_MACOSX_RPATH 1)
 
-set(ENABLE_DROGON 0)
+set(ENABLE_DROGON 1)
 IF(ENABLE_DROGON)
     IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/lib/drogon)
         message(STATUS "Drogon library found. You will be able to run web server")
