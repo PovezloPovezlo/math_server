@@ -1,6 +1,9 @@
 #include "n.h"
 #include <base/NLongNumber.h>
 #include <base/NotImplementedException.h>
+#include <utility>
+#include <base/LongNumber.h>
+#include <cstddef>
 
 using namespace base;
 using namespace module;
@@ -291,7 +294,7 @@ ULongNumber module::SUB_NDN_N(ULongNumber& a, DIGIT k, ULongNumber& b) {
  * @param b
  * @return
  */
- std::pair<DIGIT, size_t> DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
+ std::pair<DIGIT, size_t> module::DIV_NN_Dk(ULongNumber& a, ULongNumber& b) {
 	DIGIT firstdigit = 0; // первая цифра частного
 	ULongNumber temp = ULongNumber::empty();
 	auto bLen = b.length();
