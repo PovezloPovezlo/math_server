@@ -47,21 +47,17 @@ LongNumber::LongNumber(size_t size, bool isPositive) : isPositive(isPositive) {
 }
 
 size_t LongNumber::length() const {
-    size_t c = 0;
-
-    bool deleteZeros = true;
+	size_t zerosCount = 0;
 
     for(auto i = this->digits.rbegin(); i != this->digits.rend(); ++i){
-        if(deleteZeros) {
-            if (*i != 0) {
-                deleteZeros = false;
-            }else{
-                continue;
-            }
+        if (*i == 0) {
+            ++zerosCount;
+        }else{
+            break;
         }
-
-        ++c;
     }
+
+    auto c = this->realLength() - zerosCount;
 
     return c > 1 ? c : 1;
 }
