@@ -652,7 +652,7 @@ int main() {
 	initZModule();
 	initQModule();
 	initPModule();
-	std::cout << "Running web server..." << std::endl;
+	std::cout << "Running web server #..." << std::endl;
 	app().setExceptionHandler(
 		[](
 			const std::exception &exception,
