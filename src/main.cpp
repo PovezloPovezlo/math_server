@@ -668,7 +668,7 @@ int main() {
 	std::cout << "set exception handler\n";
 	auto cur_dir = get_current_dir() + "/static";
 
-	std::cout << "Using static dir as \"" + cur_dir + "\"";
+	std::cout << "Using static dir as \"" + cur_dir + "\"\n";
 
 	app()
 	.setDocumentRoot(cur_dir)
@@ -677,12 +677,15 @@ int main() {
 
 	std::cout << "Starting\n";
 
-	app()
-	.addListener("0.0.0.0", 3041)
-	.setThreadNum(8)
+	app().addListener("0.0.0.0", 3041);
+	std::cout << "set listener\n";
+
+	app().setThreadNum(1);
+	std::cout << "set thread num\n";
 	//.enableRunAsDaemon()
 	//.enableReusePort()
-	.run();
+	std::cout << "Run\n";
+	app().run();
 #else
 	std::cout << "I cant run webserver due to no drogon lib";
 #endif
