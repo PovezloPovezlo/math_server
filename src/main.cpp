@@ -665,6 +665,7 @@ int main() {
 		}
 	);
 
+	std::cout << "set exception handler\n";
 	auto cur_dir = get_current_dir() + "/static";
 
 	std::cout << "Using static dir as \"" + cur_dir + "\"";
@@ -673,6 +674,8 @@ int main() {
 	.setDocumentRoot(cur_dir)
 	.addALocation("/", cur_dir)
 	.setFileTypes({"html", "js", "css"});
+
+	std::cout << "Starting\n";
 
 	app()
 	.addListener("0.0.0.0", 3041)
