@@ -87,10 +87,10 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
  */
 RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	RationalFraction res = RationalFraction::empty();
-	res.denominator = NLongNumber::fromLongNumber(MUL_ZZ_Z(a.denominator, b.denominator));
-	LongNumber temp_1 = MUL_ZZ_Z(a.numerator, b.denominator);
-	LongNumber temp_2 = MUL_ZZ_Z(b.numerator, a.denominator);
-	res.numerator = NLongNumber::fromLongNumber(ADD_ZZ_Z(temp_1, temp_2));
+	LongNumber res_denom = MUL_ZZ_Z(a.denominator, b.denominator);
+	res.denominator = NLongNumber::fromLongNumber(res_denom);
+	LongNumber res_num = ADD_ZZ_Z(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(b.numerator, a.denominator));
+	res.numerator = NLongNumber::fromLongNumber(res_num);
 	RED_Q_Q(res);
 	return res;
 }
@@ -107,10 +107,10 @@ RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
  */
 RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	RationalFraction res = RationalFraction::empty();
-	res.denominator = NLongNumber::fromLongNumber(MUL_ZZ_Z(a.denominator, b.denominator));
-	LongNumber temp_1 = MUL_ZZ_Z(a.numerator, b.denominator);
-	LongNumber temp_2 = MUL_ZZ_Z(b.numerator, a.denominator);
-	res.numerator = NLongNumber::fromLongNumber(SUB_ZZ_Z(temp_1, temp_2));
+	LongNumber res_denom = MUL_ZZ_Z(a.denominator, b.denominator);
+	res.denominator = NLongNumber::fromLongNumber(res_denom);
+	LongNumber res_num = SUB_ZZ_Z(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(b.numerator, a.denominator));
+	res.numerator = NLongNumber::fromLongNumber(res_num);
 	RED_Q_Q(res);
 	return res;
 }
