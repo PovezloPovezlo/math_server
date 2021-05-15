@@ -12,7 +12,7 @@ using namespace module;
 // Многочлен с рациональными коэффициентами
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Артюх Алексей
  * P-1
  * Требуется: ADD_QQ_Q
  *
@@ -22,11 +22,20 @@ using namespace module;
  * @return
  */
 Polynomial module::ADD_PP_P(Polynomial& a, Polynomial& b) {
-	throw NotImplementedException();
+	Polynomial temp;
+	auto coff1 = RationalFraction::empty();
+	auto coff2 = RationalFraction::empty();
+    auto len = a.lastElement()->degree + 1 >= b.lastElement()->degree + 1 ? a.lastElement()->degree + 1 : b.lastElement()->degree + 1;
+    for (auto i = 0; i < len; i++) {
+        coff1 = a.getCoefficient(i);
+        coff2 = b.getCoefficient(i);
+        temp.addElement(i, ADD_QQ_Q(coff1, coff2));
+    }
+    return temp;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Артюх Алексей
  * P-2
  * Требуется: SUB_QQ_Q
  *
@@ -36,7 +45,16 @@ Polynomial module::ADD_PP_P(Polynomial& a, Polynomial& b) {
  * @return
  */
 Polynomial module::SUB_PP_P(Polynomial& a, Polynomial& b) {
-	throw NotImplementedException();
+	Polynomial temp;
+	auto coff1 = RationalFraction::empty();
+	auto coff2 = RationalFraction::empty();
+	auto len = a.lastElement()->degree + 1 >= b.lastElement()->degree + 1 ? a.lastElement()->degree + 1 : b.lastElement()->degree + 1;
+	for (auto i = 0; i < len; i++) {
+	    coff1 = a.getCoefficient(i);
+	    coff2 = b.getCoefficient(i);
+	    temp.addElement(i, SUB_QQ_Q(coff1, coff2));
+	}
+    return temp;
 }
 
 /**
