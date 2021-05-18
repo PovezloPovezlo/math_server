@@ -73,3 +73,28 @@ TEST(P, MUL_PQ_P){
 
     EXPECT_EQ(res1.toString(), "10/2*x^3 20*x^2 2*x^1");
 }
+
+TEST(P, ADD_PP_P) {
+    Polynomial a;
+    Polynomial b;
+    a.addElement(0, RationalFraction::fromTwoInt(1, 2));
+    b.addElement(0, RationalFraction::fromTwoInt(1, 3));
+    a.addElement(1, (RationalFraction)7);
+    b.addElement(1, (RationalFraction)4);
+    b.addElement(2, (RationalFraction)5);
+    Polynomial res = ADD_PP_P(a, b);
+    EXPECT_EQ(res.toString(), "5*x^2 11*x^1 5/6");
+}
+
+TEST(P, SUB_PP_P) {
+    Polynomial a;
+    Polynomial b;
+    a.addElement(0, RationalFraction::fromTwoInt(1, 2));
+    b.addElement(0, RationalFraction::fromTwoInt(1, 3));
+    a.addElement(1, (RationalFraction)7);
+    b.addElement(1, (RationalFraction)4);
+    b.addElement(2, (RationalFraction)5);
+    Polynomial res = SUB_PP_P(a, b);
+    EXPECT_EQ(res.toString(), "-5*x^2 3*x^1 1/6");
+}
+

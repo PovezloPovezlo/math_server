@@ -10,6 +10,8 @@
 #include <module/p.h>
 #include <base/Polynomial.h>
 
+#include <iostream>
+
 using namespace drogon;
 #else
 #   define RUN_WEBSERVER 0
@@ -142,8 +144,8 @@ void initNModule(){
 			auto t = module::DIV_NN_Dk(vA, vB);
 
 			Json::Value json;
-			json["response"]["digit"] = t.toString(); //t.first;
-			json["response"]["k"] = 0; //(long long)t.second;
+			json["response"]["digit"] = t.first; //t.first;
+			json["response"]["k"] = (long long)t.second; //(long long)t.second;
 			callback(HttpResponse::newHttpJsonResponse(json));
 		},{Get}
 	)
@@ -625,13 +627,32 @@ void initPModule(){
 
 #endif
 
+#ifdef WINDOWS
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#endif
+
+#include<iostream>
+using namespace std;
+
+std::string get_current_dir() {
+	char buff[FILENAME_MAX]; //create string buffer to hold path
+	GetCurrentDir( buff, FILENAME_MAX );
+	string current_working_dir(buff);
+	return current_working_dir;
+}
+
 int main() {
-#if RUN_WEBSERVER
+
+	#if RUN_WEBSERVER
 	initNModule();
 	initZModule();
 	initQModule();
 	initPModule();
-	std::cout << "Running web server..." << std::endl;
+	std::cout << "Running web server #..." << std::endl;
 	app().setExceptionHandler(
 		[](
 			const std::exception &exception,
@@ -644,12 +665,27 @@ int main() {
 		}
 	);
 
+	std::cout << "set exception handler\n";
+	auto cur_dir = get_current_dir() + "/static";
+
+	std::cout << "Using static dir as \"" + cur_dir + "\"\n";
+
 	app()
-	.addListener("0.0.0.0", 3041)
-	.setThreadNum(8)
+	.setDocumentRoot(cur_dir)
+	.addALocation("/", cur_dir)
+	.setFileTypes({"html", "js", "css"});
+
+	std::cout << "Starting\n";
+
+	app().addListener("0.0.0.0", 3041);
+	std::cout << "set listener\n";
+
+	app().setThreadNum(4);
+	std::cout << "set thread num\n";
 	//.enableRunAsDaemon()
 	//.enableReusePort()
-	.run();
+	std::cout << "Run\n";
+	app().run();
 #else
 	std::cout << "I cant run webserver due to no drogon lib";
 #endif
