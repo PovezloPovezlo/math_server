@@ -87,7 +87,7 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Береза Кирилл
  * Q-5
  * Требуется: LCM_NN_N, MUL_ZZ_Z, ADD_ZZ_Z
  *
@@ -97,11 +97,17 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
  * @return
  */
 RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	throw NotImplementedException();
+	RationalFraction res = RationalFraction::empty();
+	LongNumber res_denom = MUL_ZZ_Z(a.denominator, b.denominator);
+	res.denominator = NLongNumber::fromLongNumber(res_denom);
+	LongNumber res_num = ADD_ZZ_Z(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(b.numerator, a.denominator));
+	res.numerator = NLongNumber::fromLongNumber(res_num);
+	RED_Q_Q(res);
+	return res;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Береза Кирилл
  * Q-6
  * Требуется: LCM_NN_N, MUL_ZZ_Z, SUB_ZZ_Z
  *
@@ -111,7 +117,13 @@ RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @return
  */
 RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	throw NotImplementedException();
+	RationalFraction res = RationalFraction::empty();
+	LongNumber res_denom = MUL_ZZ_Z(a.denominator, b.denominator);
+	res.denominator = NLongNumber::fromLongNumber(res_denom);
+	LongNumber res_num = SUB_ZZ_Z(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(b.numerator, a.denominator));
+	res.numerator = NLongNumber::fromLongNumber(res_num);
+	RED_Q_Q(res);
+	return res;
 }
 
 /**
