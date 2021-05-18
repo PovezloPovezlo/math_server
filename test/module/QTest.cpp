@@ -60,8 +60,8 @@ TEST(Q, RED_Q_Q){
     RationalFraction c(LongNumber(16), NLongNumber(24));
     RationalFraction d(LongNumber(2), NLongNumber(3));
 
-    EXPECT_EQ(RED_Q_Q(a), b);
-    EXPECT_EQ(RED_Q_Q(c), d);
+    EXPECT_EQ(RED_Q_Q(a).toString(), b.toString());
+    EXPECT_EQ(RED_Q_Q(c).toString(), d.toString());
 
 
 }

@@ -27,9 +27,10 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
 
     auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
 
-    a.numenator = DIV_ZZ_Z(a.numenator, nod); //делим числитель и знаменатель на нод
+    a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
     auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
-    a.denumenator = (NLongNumber)DIV_ZZ_Z(den_z, nod);
+    auto t = DIV_ZZ_Z(den_z, nod);
+    a.denominator = NLongNumber::fromLongNumber(t);
 
     return a;
 	//throw NotImplementedException();
@@ -100,7 +101,11 @@ RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	RationalFraction res = RationalFraction::empty();
 	LongNumber res_denom = MUL_ZZ_Z(a.denominator, b.denominator);
 	res.denominator = NLongNumber::fromLongNumber(res_denom);
-	LongNumber res_num = ADD_ZZ_Z(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(b.numerator, a.denominator));
+
+	auto t1 = MUL_ZZ_Z(a.numerator, b.denominator);
+	auto t2 = MUL_ZZ_Z(b.numerator, a.denominator);
+
+	LongNumber res_num = ADD_ZZ_Z(t1, t2);
 	res.numerator = NLongNumber::fromLongNumber(res_num);
 	RED_Q_Q(res);
 	return res;
@@ -120,8 +125,12 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	RationalFraction res = RationalFraction::empty();
 	LongNumber res_denom = MUL_ZZ_Z(a.denominator, b.denominator);
 	res.denominator = NLongNumber::fromLongNumber(res_denom);
-	LongNumber res_num = SUB_ZZ_Z(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(b.numerator, a.denominator));
-	res.numerator = NLongNumber::fromLongNumber(res_num);
+
+	auto t1 = MUL_ZZ_Z(a.numerator, b.denominator);
+	auto t2 = MUL_ZZ_Z(b.numerator, a.denominator);
+
+	LongNumber res_num = SUB_ZZ_Z(t1, t2);
+	res.numerator = res_num;
 	RED_Q_Q(res);
 	return res;
 }
