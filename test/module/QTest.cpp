@@ -52,3 +52,16 @@ TEST(Q, SUB_QQ_Q) {
     //c.numerator = LongNumber(214539458); c.denominator = NLongNumber(7262001967);
     //EXPECT_EQ(SUB_QQ_Q(a, c), c);
 }
+
+TEST(Q, RED_Q_Q){
+    RationalFraction a(LongNumber(-15), NLongNumber(25));
+    RationalFraction b(LongNumber(-3), NLongNumber(5));
+
+    RationalFraction c(LongNumber(16), NLongNumber(24));
+    RationalFraction d(LongNumber(2), NLongNumber(3));
+
+    EXPECT_EQ(RED_Q_Q(a), b);
+    EXPECT_EQ(RED_Q_Q(c), d);
+
+
+}
