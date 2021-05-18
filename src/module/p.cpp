@@ -129,7 +129,7 @@ RationalFraction module::FAC_P_Q(Polynomial& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Алиса Петрова
  * P-8
  * Требуется: MUL_PQ_P, MUL_Pxk_P, ADD_PP_P
  *
@@ -139,6 +139,19 @@ RationalFraction module::FAC_P_Q(Polynomial& a) {
  * @return
  */
 Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
+    /*Polynomial temp;
+Polynomial res;
+
+for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
+    auto el = *i;
+
+    temp = MUL_PQ_P(b, el->value);
+    temp =  MUL_Pxk_P(temp, el->degree);
+    res = ADD_PP_P(res, temp);
+
+}
+
+return res;*/
 	throw NotImplementedException();
 }
 
