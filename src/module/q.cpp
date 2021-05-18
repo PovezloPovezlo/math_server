@@ -12,7 +12,7 @@ using namespace module;
 // Рациональные числа (дроби)
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Басин Илья, Петрова Алиса (правки)
  * Q-1
  * Требуется: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z
  *
@@ -21,7 +21,18 @@ using namespace module;
  * @return
  */
 RationalFraction module::RED_Q_Q(RationalFraction& a) {
-	throw NotImplementedException();
+
+    auto num_n = ABS_Z_N(a.numerator); //создаём натуральные копии числителя и знаменателя
+    auto den_n = ABS_Z_N(a.denominator);
+
+    auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
+
+    a.numenator = DIV_ZZ_Z(a.numenator, nod); //делим числитель и знаменатель на нод
+    auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
+    a.denumenator = (NLongNumber)DIV_ZZ_Z(den_z, nod);
+
+    return a;
+	//throw NotImplementedException();
 }
 
 /**
@@ -76,7 +87,7 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Береза Кирилл
  * Q-5
  * Требуется: LCM_NN_N, MUL_ZZ_Z, ADD_ZZ_Z
  *
@@ -86,11 +97,17 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
  * @return
  */
 RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	throw NotImplementedException();
+	RationalFraction res = RationalFraction::empty();
+	LongNumber res_denom = MUL_ZZ_Z(a.denominator, b.denominator);
+	res.denominator = NLongNumber::fromLongNumber(res_denom);
+	LongNumber res_num = ADD_ZZ_Z(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(b.numerator, a.denominator));
+	res.numerator = NLongNumber::fromLongNumber(res_num);
+	RED_Q_Q(res);
+	return res;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Береза Кирилл
  * Q-6
  * Требуется: LCM_NN_N, MUL_ZZ_Z, SUB_ZZ_Z
  *
@@ -100,7 +117,13 @@ RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @return
  */
 RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	throw NotImplementedException();
+	RationalFraction res = RationalFraction::empty();
+	LongNumber res_denom = MUL_ZZ_Z(a.denominator, b.denominator);
+	res.denominator = NLongNumber::fromLongNumber(res_denom);
+	LongNumber res_num = SUB_ZZ_Z(MUL_ZZ_Z(a.numerator, b.denominator), MUL_ZZ_Z(b.numerator, a.denominator));
+	res.numerator = NLongNumber::fromLongNumber(res_num);
+	RED_Q_Q(res);
+	return res;
 }
 
 /**
