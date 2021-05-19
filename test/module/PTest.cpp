@@ -66,12 +66,12 @@ TEST(P, MUL_PQ_P){
     Polynomial a;
     a.addElement(1, (RationalFraction)1);
     a.addElement(2, (RationalFraction)10);
-    a.addElement(3, RationalFraction::fromTwoInt(5,2));
+    a.addElement(3, RationalFraction(LongNumber(5), NLongNumber(4)));
 
-    auto b = RationalFraction::fromInt(2);
+    auto b = RationalFraction(2);
     auto res1 = MUL_PQ_P(a, b);
 
-    EXPECT_EQ(res1.toString(), "10/2*x^3 20*x^2 2*x^1");
+    EXPECT_EQ(res1.toString(), "5/2*x^3 20*x^2 2*x^1");
 }
 
 TEST(P, ADD_PP_P) {
@@ -126,4 +126,14 @@ TEST(P, MOD_PP_P){
 
     auto res = MOD_PP_P(a, b);
     EXPECT_EQ(res.toString(), "0");
+}
+
+TEST(P, MUL_PP_P) {
+    Polynomial a, b;
+    a.addElement(4, RationalFraction(45));
+    b.addElement(1, RationalFraction(LongNumber(-1), NLongNumber(5)));
+    b.addElement(2, RationalFraction(1));
+
+    auto res = MUL_PP_P(a, b);
+    EXPECT_EQ(res.toString(), "45*x^6 -9*x^5");
 }

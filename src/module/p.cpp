@@ -21,7 +21,7 @@ using namespace module;
  * @param b
  * @return
  */
-Polynomial module::ADD_PP_P(Polynomial &a, Polynomial &b)
+Polynomial module::ADD_PP_P(Polynomial& a, Polynomial& b)
 {
 	Polynomial temp;
 	auto coff1 = RationalFraction::empty();
@@ -46,7 +46,7 @@ Polynomial module::ADD_PP_P(Polynomial &a, Polynomial &b)
  * @param b
  * @return
  */
-Polynomial module::SUB_PP_P(Polynomial &a, Polynomial &b)
+Polynomial module::SUB_PP_P(Polynomial& a, Polynomial& b)
 {
 	Polynomial temp;
 	auto coff1 = RationalFraction::empty();
@@ -62,7 +62,7 @@ Polynomial module::SUB_PP_P(Polynomial &a, Polynomial &b)
 }
 
 /**
- * @authors Денис Медведев
+ * @authors Денис Медведев, правки Лях глуи
  * P-3
  * Требуется: MUL_QQ_Q
  *
@@ -71,7 +71,7 @@ Polynomial module::SUB_PP_P(Polynomial &a, Polynomial &b)
  * @param b
  * @return
  */
-Polynomial module::MUL_PQ_P(Polynomial &a, RationalFraction &b)
+Polynomial module::MUL_PQ_P(Polynomial& a, RationalFraction& b)
 {
 	Polynomial temporary;
 	if (b.numerator == LongNumber(0))
@@ -79,17 +79,18 @@ Polynomial module::MUL_PQ_P(Polynomial &a, RationalFraction &b)
 		temporary.addElement(0, (RationalFraction)0);
 		return temporary;
 	}
-	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++)
+	for (auto i = a.coefficients.begin(); i != a.coefficients.end(); i++)
 	{
 		auto el = *i;
 		RationalFraction newval = module::MUL_QQ_Q(el->value, b);
+		newval = module::RED_Q_Q(newval);
 		temporary.addElement(el->degree, newval);
 	}
 	return temporary;
 }
 
 /**
- * @authors Денис Медведев
+ * @authors Денис Медведев, правки Лях Глеб
  * P-4
  *
  * Умножение многочлена на x^k
@@ -97,7 +98,7 @@ Polynomial module::MUL_PQ_P(Polynomial &a, RationalFraction &b)
  * @param k
  * @return
  */
-Polynomial module::MUL_Pxk_P(Polynomial &a, ULongNumber &k)
+Polynomial module::MUL_Pxk_P(Polynomial& a, ULongNumber& k)
 {
 	Polynomial temporary;
 	auto zero = ULongNumber::empty();
@@ -109,7 +110,7 @@ Polynomial module::MUL_Pxk_P(Polynomial &a, ULongNumber &k)
 		ULongNumber udeg = ULongNumber::fromInt(el->degree);
 		ULongNumber newdeg = module::ADD_NN_N(udeg, k);
 		std::string nds = newdeg.toString();
-		const char *ndcc = nds.c_str();
+		const char* ndcc = nds.c_str();
 		size_t ndn = atoi(ndcc);
 		temporary.addElement(ndn, el->value);
 	}
@@ -124,7 +125,7 @@ Polynomial module::MUL_Pxk_P(Polynomial &a, ULongNumber &k)
  * @param a
  * @return
  */
-RationalFraction module::LED_P_Q(Polynomial &a)
+RationalFraction module::LED_P_Q(Polynomial& a)
 {
 
 	return a.lastElement()->value;
@@ -139,7 +140,7 @@ RationalFraction module::LED_P_Q(Polynomial &a)
  * @param a
  * @return
  */
-ULongNumber module::DEG_P_N(Polynomial &a)
+ULongNumber module::DEG_P_N(Polynomial& a)
 {
 	return (ULongNumber)a.lastElement()->degree;
 	//throw NotImplementedException();
@@ -187,7 +188,7 @@ RationalFraction module::FAC_P_Q(Polynomial& a) {
 }
 
 /**
- * @authors Алиса Петрова
+ * @authors Алиса Петрова, правки Лях Глеб
  * P-8
  * Требуется: MUL_PQ_P, MUL_Pxk_P, ADD_PP_P
  *
@@ -199,18 +200,18 @@ RationalFraction module::FAC_P_Q(Polynomial& a) {
 Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
 	Polynomial temp;
 	Polynomial res;
-
-	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
+	res.addElement(0, RationalFraction::empty());
+	for (auto i = a.coefficients.begin(); i != a.coefficients.end(); i++) {
 		auto el = *i;
 
 		temp = MUL_PQ_P(b, el->value);
 
 		auto degree_new = ULongNumber(el->degree);
-		temp =  MUL_Pxk_P(temp, degree_new);
-		if (i == a.coefficients.rbegin()) res = temp;
+		temp = MUL_Pxk_P(temp, degree_new);
 		res = ADD_PP_P(res, temp);
 	}
 	return res;
+
 }
 
 /**
@@ -239,10 +240,10 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 	while (comparison == 2 || comparison == 0)
 	{
 		auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
-		
+
 		auto a_value = a.lastElement()->value;
 		auto b_value = b.lastElement()->value;
-		
+
 		auto res_value = DIV_QQ_Q(a_value, b_value);
 
 		res_polynomial.addElement(deg_diff, res_value);
@@ -271,7 +272,7 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::MOD_PP_P(Polynomial &a, Polynomial &b)
+Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 {
 	Polynomial res_polynomial;
 	auto deg_a = module::DEG_P_N(a);
@@ -288,10 +289,10 @@ Polynomial module::MOD_PP_P(Polynomial &a, Polynomial &b)
 	while (comparison == 2 || comparison == 0)
 	{
 		auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
-		
+
 		auto a_value = a.lastElement()->value;
 		auto b_value = b.lastElement()->value;
-		
+
 		auto res_value = DIV_QQ_Q(a_value, b_value);
 
 		res_polynomial.addElement(deg_diff, res_value);
@@ -311,7 +312,7 @@ Polynomial module::MOD_PP_P(Polynomial &a, Polynomial &b)
 }
 
 /**
- * @authors Анастасия Аверьянова
+ * @authors Анастасия Аверьяноваб правки Лях Глеб
  * P-11
  * Требуется: DEG_P_N, MOD_PP_P
  *
@@ -320,7 +321,7 @@ Polynomial module::MOD_PP_P(Polynomial &a, Polynomial &b)
  * @param b
  * @return
  */
-Polynomial module::GCF_PP_P(Polynomial &a, Polynomial &b)
+Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b)
 {
 
 	auto first = a;
@@ -358,7 +359,7 @@ Polynomial module::GCF_PP_P(Polynomial &a, Polynomial &b)
  * @param b
  * @return
  */
-Polynomial module::DER_P_P(Polynomial &a)
+Polynomial module::DER_P_P(Polynomial& a)
 {
 
 	Polynomial temporary;
@@ -395,7 +396,7 @@ Polynomial module::DER_P_P(Polynomial &a)
  * @param b
  * @return
  */
-Polynomial module::NMR_P_P(Polynomial &a)
+Polynomial module::NMR_P_P(Polynomial& a)
 {
 
 	Polynomial der;
