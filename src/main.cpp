@@ -677,6 +677,8 @@ int main() {
 
 	std::cout << "Starting\n";
 
+	app().setIdleConnectionTimeout(10);
+
 	app().addListener("0.0.0.0", 3041);
 	std::cout << "set listener\n";
 
