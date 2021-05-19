@@ -223,8 +223,8 @@ Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
  * @param b
  * @return
  */
-Polynomial module::DIV_PP_P(Polynomial &a, Polynomial &b)
-{
+Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
+
 	Polynomial res_polynomial;
 	auto deg_a = module::DEG_P_N(a);
 	auto deg_b = module::DEG_P_N(b);
