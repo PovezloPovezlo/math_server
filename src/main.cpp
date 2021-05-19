@@ -684,7 +684,7 @@ int main() {
 	std::cout << "set thread num\n";
 	//.enableRunAsDaemon()
 	//.enableReusePort()
-	std::cout << "Run\n";
+	std::cout << "Run ###\n";
 	app().run();
 #else
 	std::cout << "I cant run webserver due to no drogon lib";
