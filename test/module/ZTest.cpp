@@ -129,12 +129,12 @@ TEST(Z, DIV_ZZ_Z)
 {
     LongNumber a("4444");
     LongNumber b("-2222");
-    //EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "-2");
+    EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "-2");
 }
 
 TEST(Z, MOD_ZZ_Z)
 {
     LongNumber a("4448");
     LongNumber b("2222");
-    //EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "4");
+    EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "4");
 }

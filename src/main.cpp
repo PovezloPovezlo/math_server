@@ -631,6 +631,7 @@ void initPModule(){
 #include <direct.h>
 #define GetCurrentDir _getcwd
 
+
 #include<iostream>
 using namespace std;
 
@@ -672,6 +673,8 @@ int main() {
 	.setFileTypes({"html", "js", "css"});
 
 	std::cout << "Starting\n";
+
+	app().setIdleConnectionTimeout(10);
 
 	app().addListener("0.0.0.0", 3041);
 	std::cout << "set listener\n";
