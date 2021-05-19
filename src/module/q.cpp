@@ -28,6 +28,7 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
     auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
 
     a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
+    a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
     auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
     auto t = DIV_ZZ_Z(den_z, nod);
     a.denominator = NLongNumber::fromLongNumber(t);
