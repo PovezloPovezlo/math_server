@@ -235,18 +235,26 @@ Polynomial module::DIV_PP_P(Polynomial &a, Polynomial &b)
 		return res_polynomial;
 	}
 
-	auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
 
 	while (comparison == 2 || comparison == 0)
 	{
+		auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
+		
 		auto a_value = a.lastElement()->value;
 		auto b_value = b.lastElement()->value;
+		
 		auto res_value = DIV_QQ_Q(a_value, b_value);
 
 		res_polynomial.addElement(deg_diff, res_value);
 
-		auto mul_val = MUL_PP_P(res_polynomial, b);
+		auto sub = module::SUB_NN_N(deg_a, deg_b);
+
+		auto mul_val = module::MUL_Pxk_P(b, sub);
+		mul_val = module::MUL_PQ_P(mul_val, res_value);
+
 		a = module::SUB_PP_P(a, mul_val);
+		a.remove(a.lastElement()->degree);
+		deg_a = module::DEG_P_N(a);
 		comparison = module::COM_NN_D(deg_a, deg_b);
 	}
 
@@ -279,14 +287,23 @@ Polynomial module::MOD_PP_P(Polynomial &a, Polynomial &b)
 
 	while (comparison == 2 || comparison == 0)
 	{
+		auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
+		
 		auto a_value = a.lastElement()->value;
 		auto b_value = b.lastElement()->value;
+		
 		auto res_value = DIV_QQ_Q(a_value, b_value);
 
 		res_polynomial.addElement(deg_diff, res_value);
 
-		auto mul_val = MUL_PP_P(res_polynomial, b);
+		auto sub = module::SUB_NN_N(deg_a, deg_b);
+
+		auto mul_val = module::MUL_Pxk_P(b, sub);
+		mul_val = module::MUL_PQ_P(mul_val, res_value);
+
 		a = module::SUB_PP_P(a, mul_val);
+		a.remove(a.lastElement()->degree);
+		deg_a = module::DEG_P_N(a);
 		comparison = module::COM_NN_D(deg_a, deg_b);
 	}
 
