@@ -174,7 +174,7 @@ return res;*/
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Лях Глеб
  * P-9
  * Требуется: DIV_QQ_Q, DEG_P_N, MUL_Pxk_P, SUB_PP_P, ADD_PP_P
  *
@@ -184,11 +184,34 @@ return res;*/
  * @return
  */
 Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
-	throw NotImplementedException();
+	Polynomial res_polynomial;
+	auto deg_a = module::DEG_P_N(a);
+	auto deg_b = module::DEG_P_N(b);
+	auto comparison = module::COM_NN_D(deg_a, deg_b);
+	if(comparison == 1){
+		res_polynomial.addElement(0, RationalFraction::empty());
+		return res_polynomial;
+	}
+
+	auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
+
+	while(comparison == 2 || comparison == 0){
+		auto a_value = a.lastElement()->value;
+		auto b_value = b.lastElement()->value;
+		auto res_value = DIV_QQ_Q(a_value, b_value);
+
+		res_polynomial.addElement(deg_diff, res_value);
+
+		auto mul_val = MUL_PP_P(res_polynomial, b);
+		a = module::SUB_PP_P(a, mul_val);
+		comparison = module::COM_NN_D(deg_a, deg_b);
+	}
+
+	return res_polynomial;
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Глеб Лях
  * P-10
  * Требуется: DIV_PP_P, MUL_PP_P, SUB_PP_P
  *
@@ -198,7 +221,31 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
  * @return
  */
 Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b) {
-	throw NotImplementedException();
+	Polynomial res_polynomial;
+	auto deg_a = module::DEG_P_N(a);
+	auto deg_b = module::DEG_P_N(b);
+	auto comparison = module::COM_NN_D(deg_a, deg_b);
+	if(comparison == 1){
+		res_polynomial.addElement(0, RationalFraction::empty());
+		return res_polynomial;
+	}
+
+	auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
+
+	while(comparison == 2 || comparison == 0){
+		auto a_value = a.lastElement()->value;
+		auto b_value = b.lastElement()->value;
+		auto res_value = DIV_QQ_Q(a_value, b_value);
+
+		res_polynomial.addElement(deg_diff, res_value);
+
+		auto mul_val = MUL_PP_P(res_polynomial, b);
+		a = module::SUB_PP_P(a, mul_val);
+		comparison = module::COM_NN_D(deg_a, deg_b);
+	}
+
+	return a;
+
 }
 
 /**
