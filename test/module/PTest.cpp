@@ -98,3 +98,32 @@ TEST(P, SUB_PP_P) {
     EXPECT_EQ(res.toString(), "-5*x^2 3*x^1 1/6");
 }
 
+TEST(P, DIV_PP_P){
+    Polynomial a, b;
+    a.addElement(0, RationalFraction(-4));
+    a.addElement(1, RationalFraction(6));
+    a.addElement(2, RationalFraction::empty());
+    a.addElement(3, RationalFraction(-3));
+    a.addElement(4, RationalFraction(1));
+
+    b.addElement(0, RationalFraction(-1));
+    b.addElement(1, RationalFraction(1));
+
+    auto res = DIV_PP_P(a, b);
+    EXPECT_EQ(res.toString(), "1*x^3 -2*x^2 -2*x^1 4");
+}
+
+TEST(P, MOD_PP_P){
+    Polynomial a, b;
+    a.addElement(0, RationalFraction(-4));
+    a.addElement(1, RationalFraction(6));
+    a.addElement(2, RationalFraction::empty());
+    a.addElement(3, RationalFraction(-3));
+    a.addElement(4, RationalFraction(1));
+
+    b.addElement(0, RationalFraction(-1));
+    b.addElement(1, RationalFraction(1));
+
+    auto res = MOD_PP_P(a, b);
+    EXPECT_EQ(res.toString(), "0");
+}
