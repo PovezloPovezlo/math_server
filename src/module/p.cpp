@@ -185,8 +185,6 @@ RationalFraction module::FAC_P_Q(Polynomial& a) {
  * @return
  */
 Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
-	throw NotImplementedException();
-
 	Polynomial temp;
 	Polynomial res;
 
@@ -214,7 +212,7 @@ Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
  * @return
  */
 Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
-	throw NotImplementedException();
+	//throw NotImplementedException();
 
 	Polynomial res_polynomial;
 	auto deg_a = module::DEG_P_N(a);
