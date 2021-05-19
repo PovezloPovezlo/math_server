@@ -62,7 +62,7 @@ Polynomial module::SUB_PP_P(Polynomial& a, Polynomial& b)
 }
 
 /**
- * @authors Денис Медведев
+ * @authors Денис Медведев, правки Лях глуи
  * P-3
  * Требуется: MUL_QQ_Q
  *
@@ -90,7 +90,7 @@ Polynomial module::MUL_PQ_P(Polynomial& a, RationalFraction& b)
 }
 
 /**
- * @authors Денис Медведев
+ * @authors Денис Медведев, правки Лях Глеб
  * P-4
  *
  * Умножение многочлена на x^k
@@ -188,7 +188,7 @@ RationalFraction module::FAC_P_Q(Polynomial& a) {
 }
 
 /**
- * @authors Алиса Петрова
+ * @authors Алиса Петрова, правки Лях Глеб
  * P-8
  * Требуется: MUL_PQ_P, MUL_Pxk_P, ADD_PP_P
  *
@@ -312,7 +312,7 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 }
 
 /**
- * @authors Анастасия Аверьянова
+ * @authors Анастасия Аверьяноваб правки Лях Глеб
  * P-11
  * Требуется: DEG_P_N, MOD_PP_P
  *

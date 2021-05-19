@@ -32,7 +32,7 @@ TEST(Q, ADD_QQ_Q) {
     a.numerator = LongNumber(12410); a.denominator = NLongNumber(324566);
     b.numerator = LongNumber(15456); b.denominator = NLongNumber(178996);
     c.numerator = LongNumber(904729057); c.denominator = NLongNumber(7262001967);
-    EXPECT_EQ(ADD_QQ_Q(a, b).toString(), c.toString());
+    EXPECT_EQ(ADD_QQ_Q(a, b).toString(), "904729057/7262001967");
 }
 
 TEST(Q, SUB_QQ_Q) {
@@ -45,12 +45,12 @@ TEST(Q, SUB_QQ_Q) {
     a.numerator = LongNumber(120); a.denominator = NLongNumber(326);
     b.numerator = LongNumber(16); b.denominator = NLongNumber(196);
     c.numerator = LongNumber(2288); c.denominator = NLongNumber(7987);
-    EXPECT_EQ(SUB_QQ_Q(a, c).toString(), c.toString());
+    EXPECT_EQ(SUB_QQ_Q(a, b).toString(), c.toString());
 
     a.numerator = LongNumber(12410); a.denominator = NLongNumber(324566);
     b.numerator = LongNumber(1556); b.denominator = NLongNumber(178996);
     c.numerator = LongNumber(214539458); c.denominator = NLongNumber(7262001967);
-    EXPECT_EQ(SUB_QQ_Q(a, c).toString(), c.toString());
+    EXPECT_EQ(SUB_QQ_Q(a, b).toString(), "214539458/7262001967");
 }
 
 TEST(Q, RED_Q_Q){

@@ -88,7 +88,7 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
 }
 
 /**
- * @authors Береза Кирилл
+ * @authors Береза Кирилл, правки Лях Глеб
  * Q-5
  * Требуется: LCM_NN_N, MUL_ZZ_Z, ADD_ZZ_Z
  *
@@ -136,7 +136,7 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
 }
 
 /**
- * @authors Анастасия Аверьянова
+ * @authors Анастасия Аверьянова, правки Лях Глеб
  * Q-7
  * Требуется: MUL_ZZ_Z
  *
@@ -155,7 +155,7 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 }
 
 /**
- * @authors Анастасия Аверьянова
+ * @authors Анастасия Аверьянова, правки Лях Глеб
  * Q-8
  * Требуется: MUL_ZZ_Z
  *
