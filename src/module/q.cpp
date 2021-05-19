@@ -22,18 +22,17 @@ using namespace module;
  */
 RationalFraction module::RED_Q_Q(RationalFraction& a) {
 
-    auto num_n = ABS_Z_N(a.numerator); //создаём натуральные копии числителя и знаменателя
-    auto den_n = ABS_Z_N(a.denominator);
+	auto num_n = ABS_Z_N(a.numerator); //создаём натуральные копии числителя и знаменателя
+	auto den_n = ABS_Z_N(a.denominator);
 
-    auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
+	auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
 
-    a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
-    a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
-    auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
-    auto t = DIV_ZZ_Z(den_z, nod);
-    a.denominator = NLongNumber::fromLongNumber(t);
+	a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
+	auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
+	auto t = DIV_ZZ_Z(den_z, nod);
+	a.denominator = NLongNumber::fromLongNumber(t);
 
-    return a;
+	return a;
 }
 
 /**
@@ -45,7 +44,8 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
  * @return если рациональное число является целым, то «да», иначе «нет»
  */
 bool module::INT_Q_B(base::RationalFraction& a) {
-	if(module::MOD_ZZ_Z(a.numerator, a.denominator) == LongNumber::empty()){
+	auto r = module::RED_Q_Q(a).denominator;
+	if(r == NLongNumber(1)){
 		return true;
 	}
 	else return false;
@@ -107,7 +107,7 @@ RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
 
 	LongNumber res_num = ADD_ZZ_Z(t1, t2);
 	res.numerator = res_num;
-	RED_Q_Q(res);
+	res = RED_Q_Q(res);
 	return res;
 }
 
@@ -131,7 +131,7 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
 
 	LongNumber res_num = SUB_ZZ_Z(t1, t2);
 	res.numerator = res_num;
-	RED_Q_Q(res);
+	res = RED_Q_Q(res);
 	return res;
 }
 
@@ -147,9 +147,8 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
  */
 RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	auto t = module::MUL_NN_N(a.denominator, b.denominator);
-	auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator),
-	                           (NLongNumber)module::TRANS_Z_N(t));
-	RED_Q_Q(res);
+	auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator), module::TRANS_Z_N(t));
+	res = RED_Q_Q(res);
 	return res;
 	
 	//throw NotImplementedException();
