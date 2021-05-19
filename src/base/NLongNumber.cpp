@@ -19,7 +19,7 @@ NLongNumber NLongNumber::fromInt(unsigned int value) {
 
 NLongNumber NLongNumber::fromLongNumber(LongNumber &value) {
     if(!value.isPositive){
-        throw BaseException("Cant convert negative LongNumber to ULongNumber");
+        throw BaseException("Cant convert negative LongNumber to NLongNumber");
     }
 
     if (value.length() == 1 && value[0] == 0)

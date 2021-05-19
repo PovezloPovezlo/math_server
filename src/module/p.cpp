@@ -146,7 +146,7 @@ ULongNumber module::DEG_P_N(Polynomial &a)
 }
 
 /**
- * @authors Имя Фамилия авторов
+ * @authors Алиса Петрова
  * P-7
  * Требуется: ABS_Z_N, TRANS_Z_N, LCM_NN_N, GCF_NN_N, TRANS_N_Z, DIV_ZZ_Z
  *
@@ -154,9 +154,36 @@ ULongNumber module::DEG_P_N(Polynomial &a)
  * @param a
  * @return
  */
-RationalFraction module::FAC_P_Q(Polynomial &a)
-{
-	throw NotImplementedException();
+RationalFraction module::FAC_P_Q(Polynomial& a) {
+	auto nod = ULongNumber("1");
+	auto nok = NLongNumber("1");
+
+	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) { //найдём нок и нод
+		auto el = *i;
+
+		auto num = TRANS_Z_N(el->value.numerator);
+		if (i == a.coefficients.rbegin()) nod = num;
+		else nod = GCF_NN_N(nod, num);
+
+		auto denom = el->value.denominator;
+		auto t = LCM_NN_N(nok, denom);
+		nok = NLongNumber::fromLongNumber(t);
+	}
+
+	auto tmp = NLongNumber::fromLongNumber(nod);
+	auto nod_upgr = TRANS_N_Z(tmp); //числитель целый => нам нужен целый аналог НОД
+
+	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) { //выносим НОД и НОК
+		auto el = *i;
+
+		el->value.numerator = DIV_ZZ_Z(el->value.numerator, nod_upgr);
+		auto tmp = DIV_NN_N(nok, el->value.denominator);
+		el->value.denominator = NLongNumber::fromLongNumber(tmp);
+	}
+
+	auto res = RationalFraction(nod_upgr, nok);
+
+	return res;
 }
 
 /**
@@ -169,22 +196,21 @@ RationalFraction module::FAC_P_Q(Polynomial &a)
  * @param b
  * @return
  */
-Polynomial module::MUL_PP_P(Polynomial &a, Polynomial &b)
-{
-	/*Polynomial temp;
-Polynomial res;
+Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
+	Polynomial temp;
+	Polynomial res;
 
-for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
-    auto el = *i;
+	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
+		auto el = *i;
 
-    temp = MUL_PQ_P(b, el->value);
-    temp =  MUL_Pxk_P(temp, el->degree);
-    res = ADD_PP_P(res, temp);
+		temp = MUL_PQ_P(b, el->value);
 
-}
-
-return res;*/
-	throw NotImplementedException();
+		auto degree_new = ULongNumber(el->degree);
+		temp =  MUL_Pxk_P(temp, degree_new);
+		if (i == a.coefficients.rbegin()) res = temp;
+		res = ADD_PP_P(res, temp);
+	}
+	return res;
 }
 
 /**
