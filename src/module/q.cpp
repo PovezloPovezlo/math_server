@@ -33,7 +33,6 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
     a.denominator = NLongNumber::fromLongNumber(t);
 
     return a;
-	//throw NotImplementedException();
 }
 
 /**
@@ -106,7 +105,7 @@ RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	auto t2 = MUL_ZZ_Z(b.numerator, a.denominator);
 
 	LongNumber res_num = ADD_ZZ_Z(t1, t2);
-	res.numerator = NLongNumber::fromLongNumber(res_num);
+	res.numerator = res_num;
 	RED_Q_Q(res);
 	return res;
 }
@@ -147,8 +146,10 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
  */
 RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	auto t = module::MUL_NN_N(a.denominator, b.denominator);
-	return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator),
-		(NLongNumber)module::TRANS_Z_N(t));
+	auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator),
+	                           (NLongNumber)module::TRANS_Z_N(t));
+	RED_Q_Q(res);
+	return res;
 	
 	//throw NotImplementedException();
 }
@@ -172,9 +173,11 @@ RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
 		}
 		auto additional = (ULongNumber)module::TRANS_Z_N(b.numerator);
 		auto t = module::MUL_NN_N(a.denominator, additional);
-		return RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator), 
-			(NLongNumber)module::TRANS_Z_N(t));
+		auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator),
+		                            (NLongNumber)module::TRANS_Z_N(t));
+		RED_Q_Q(res);
+		return res;
 	}
-	
-	throw NotImplementedException();
+
+	throw BaseException("Cant divide by zero");
 }
