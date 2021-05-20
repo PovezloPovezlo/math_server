@@ -339,7 +339,7 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b)
 	auto result = ost;
 	auto lhs2 = ULongNumber::fromLongNumber(ost.lastElement()->value.numerator);
 	auto zero = ULongNumber::empty();
-	while (module::COM_NN_D(lhs2, zero) != 0)
+	while (module::COM_NN_D(lhs2, zero) == 0)
 	{
 		result = ost;
 		ost = module::MOD_PP_P(first, second);
