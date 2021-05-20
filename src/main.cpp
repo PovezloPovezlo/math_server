@@ -682,7 +682,7 @@ int main() {
 	app().addListener("0.0.0.0", 3041);
 	std::cout << "set listener\n";
 
-	app().setThreadNum(4);
+	app().setThreadNum(512);
 	std::cout << "set thread num\n";
 	//.enableRunAsDaemon()
 	//.enableReusePort()
