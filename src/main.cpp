@@ -1,5 +1,7 @@
 #include <iostream>
 
+#define WINDOWS
+
 #if __has_include(<drogon/drogon.h>)
 #   define RUN_WEBSERVER 1
 #   include <drogon/drogon.h>
