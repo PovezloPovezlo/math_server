@@ -25,6 +25,10 @@ TEST(Z, MUL_ZZ_Z){
     EXPECT_EQ(t2.toString(), "-24691358024691358024691358024641975308641975308641975308642");
     EXPECT_EQ(t3.toString(), "333333333333333333333333333333");
     EXPECT_EQ(t4.toString(), "-333333333333333333333333333333");
+
+	LongNumber l(120), j(196), v(326), o(156);
+	EXPECT_EQ(MUL_ZZ_Z(l, j).toString(), "23520");
+	EXPECT_EQ(MUL_ZZ_Z(v, o).toString(), "50856");
 }
 
 TEST(Z, ABS_Z_N)
@@ -116,19 +120,21 @@ TEST(Z, ADD_ZZ_Z)
 {
 	LongNumber a("123");
 	LongNumber b("456");
-	//EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "579");
+	EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "579");
+	LongNumber c(23520), d(50856);
+	EXPECT_EQ(ADD_ZZ_Z(c, d).toString(), "74376");
 }
 
 TEST(Z, DIV_ZZ_Z)
 {
     LongNumber a("4444");
     LongNumber b("-2222");
-    //EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "-2");
+    EXPECT_EQ(DIV_ZZ_Z(a, b).toString(), "-2");
 }
 
 TEST(Z, MOD_ZZ_Z)
 {
     LongNumber a("4448");
     LongNumber b("2222");
-    //EXPECT_EQ(ADD_ZZ_Z(a, b).toString(), "4");
+    EXPECT_EQ(MOD_ZZ_Z(a, b).toString(), "4");
 }
