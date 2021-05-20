@@ -627,6 +627,8 @@ void initPModule(){
 
 #endif
 
+#define WINDOWS 1
+
 #ifdef WINDOWS
 #include <direct.h>
 #define GetCurrentDir _getcwd
