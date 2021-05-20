@@ -41,7 +41,7 @@ TEST(P, GCF_PP_P){
     b.addElement(3, (RationalFraction)2);
     auto res1 = GCF_PP_P(a, b);
 
-    EXPECT_EQ(res1.toString(), "1*x^1 22222222221");
+    EXPECT_EQ(res1.toString(), "1*x^1 1");
 
     Polynomial a1, b1;
     a1.addElement(0, RationalFraction::fromTwoInt(1,2));
