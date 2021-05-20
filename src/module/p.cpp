@@ -312,7 +312,7 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 }
 
 /**
- * @authors Анастасия Аверьяноваб правки Лях Глеб
+ * @authors Анастасия Аверьянова, правки Лях Глеб
  * P-11
  * Требуется: DEG_P_N, MOD_PP_P
  *
