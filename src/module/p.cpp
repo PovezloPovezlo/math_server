@@ -238,7 +238,7 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 		return res_polynomial;
 	}
 
-
+	auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
 	auto aDegree = std::stoi(module::DEG_P_N(a).toString().c_str());
 
 	while(comparison != 1){
