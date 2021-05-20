@@ -238,11 +238,11 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 		return res_polynomial;
 	}
 
-	auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
+	auto deg_diff = std::stoi(module::SUB_NN_N(deg_a, deg_b).toString());
 	auto aDegree = std::stoi(module::DEG_P_N(a).toString().c_str());
 
-	while(comparison != 1){
-
+	while(deg_diff >= 0){
+		
 	
 		auto a_value = a.getCoefficient(aDegree--);
 		auto b_value = b.lastElement()->value;
@@ -255,11 +255,11 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 
 		deg_diff--;
 		auto mul_val = MUL_PP_P(temp_polynomial, b);
+		
+
 		a = module::SUB_PP_P(a, mul_val);
 		deg_a = ULongNumber(aDegree);
-		deg_b = module::DEG_P_N(b);
 
-		comparison = module::COM_NN_D(deg_a, deg_b);
 	}
 
 	return res_polynomial;
