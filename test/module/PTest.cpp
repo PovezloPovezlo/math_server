@@ -71,7 +71,7 @@ TEST(P, MUL_PQ_P){
     auto b = RationalFraction::fromInt(2);
     auto res1 = MUL_PQ_P(a, b);
 
-    EXPECT_EQ(res1.toString(), "10/2*x^3 20*x^2 2*x^1");
+    EXPECT_EQ(res1.toString(), "5*x^3 20*x^2 2*x^1");
 }
 
 TEST(P, ADD_PP_P) {
@@ -111,6 +111,24 @@ TEST(P, DIV_PP_P){
 
     auto res = DIV_PP_P(a, b);
     EXPECT_EQ(res.toString(), "1*x^3 -2*x^2 -2*x^1 4");
+
+    Polynomial a1, b1;
+    a1.addElement(0, RationalFraction(1488));
+    a1.addElement(1, RationalFraction(1448));
+    a1.addElement(2, RationalFraction(228));
+    a1.addElement(3, RationalFraction(23));
+    a1.addElement(4, RationalFraction(31));
+    a1.addElement(5, RationalFraction(12));
+    a1.addElement(6, RationalFraction(5));
+    a1.addElement(7, RationalFraction(10));
+    a1.addElement(8, RationalFraction(1));
+
+    b1.addElement(0, RationalFraction(-1));
+    b1.addElement(1, RationalFraction(1));
+
+    res = DIV_PP_P(a1, b1);
+    EXPECT_EQ(res.toString(), "1*x^7 11*x^6 16*x^5 28*x^4 59*x^3 82*x^2 310*x^1 1758");
+
 }
 
 TEST(P, MOD_PP_P){
@@ -125,5 +143,25 @@ TEST(P, MOD_PP_P){
     b.addElement(1, RationalFraction(1));
 
     auto res = MOD_PP_P(a, b);
-    EXPECT_EQ(res.toString(), "0");
+    EXPECT_EQ(res.toString(), "0*x^4 0*x^3 0*x^2 0*x^1 0");
+
+
+    Polynomial a1, b1;
+    a1.addElement(0, RationalFraction(1488));
+    a1.addElement(1, RationalFraction(1448));
+    a1.addElement(2, RationalFraction(228));
+    a1.addElement(3, RationalFraction(23));
+    a1.addElement(4, RationalFraction(31));
+    a1.addElement(5, RationalFraction(12));
+    a1.addElement(6, RationalFraction(5));
+    a1.addElement(7, RationalFraction(10));
+    a1.addElement(8, RationalFraction(1));
+
+    b1.addElement(0, RationalFraction(-1));
+    b1.addElement(1, RationalFraction(1));
+
+    res = MOD_PP_P(a1, b1);
+    EXPECT_EQ(res.toString(), "0*x^8 0*x^7 0*x^6 0*x^5 0*x^4 0*x^3 0*x^2 0*x^1 3246");
+
+
 }

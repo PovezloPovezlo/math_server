@@ -188,16 +188,18 @@ Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
 	Polynomial temp;
 	Polynomial res;
 
+
 	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
 		auto el = *i;
 
 		temp = MUL_PQ_P(b, el->value);
-
 		auto degree_new = ULongNumber(el->degree);
 		temp =  MUL_Pxk_P(temp, degree_new);
 		if (i == a.coefficients.rbegin()) res = temp;
-		res = ADD_PP_P(res, temp);
+		else res = ADD_PP_P(res, temp);
 	}
+	
+	
 	return res;
 }
 
@@ -223,15 +225,26 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 
 	auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
 
-	while(comparison == 2 || comparison == 0){
-		auto a_value = a.lastElement()->value;
-		auto b_value = b.lastElement()->value;
-		auto res_value = DIV_QQ_Q(a_value, b_value);
+	auto aDegree = std::stoi(module::DEG_P_N(a).toString().c_str());
 
+	while(comparison != 1){
+
+	
+		auto a_value = a.getCoefficient(aDegree--);
+		auto b_value = b.lastElement()->value;
+
+	
+		auto res_value = DIV_QQ_Q(a_value, b_value);
 		res_polynomial.addElement(deg_diff, res_value);
 
-		auto mul_val = MUL_PP_P(res_polynomial, b);
+		Polynomial temp_polynomial;
+		temp_polynomial.addElement(deg_diff, res_value);
+
+		deg_diff--;
+		auto mul_val = MUL_PP_P(temp_polynomial, b);
 		a = module::SUB_PP_P(a, mul_val);
+		deg_a = ULongNumber(aDegree);
+		deg_b = module::DEG_P_N(b);
 		comparison = module::COM_NN_D(deg_a, deg_b);
 	}
 
@@ -258,21 +271,11 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b) {
 		return res_polynomial;
 	}
 
-	auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
-
-	while(comparison == 2 || comparison == 0){
-		auto a_value = a.lastElement()->value;
-		auto b_value = b.lastElement()->value;
-		auto res_value = DIV_QQ_Q(a_value, b_value);
-
-		res_polynomial.addElement(deg_diff, res_value);
-
-		auto mul_val = MUL_PP_P(res_polynomial, b);
-		a = module::SUB_PP_P(a, mul_val);
-		comparison = module::COM_NN_D(deg_a, deg_b);
-	}
-
-	return a;
+	auto aCopy = a;
+	auto temp_div = module::DIV_PP_P(aCopy, b);
+	auto temp_mul = module::MUL_PP_P(temp_div, b);
+	auto result = module::SUB_PP_P(a, temp_mul);
+	return result;
 
 }
 
