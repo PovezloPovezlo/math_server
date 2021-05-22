@@ -283,8 +283,8 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 	auto comparison = module::COM_NN_D(deg_a, deg_b);
 	if (comparison == 1)
 	{
-		res_polynomial.addElement(0, RationalFraction::empty());
-		return res_polynomial;
+		//res_polynomial.addElement(0, RationalFraction::empty());
+		return b;
 	}
 
 	auto aCopy = a;
