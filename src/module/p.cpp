@@ -227,7 +227,6 @@ Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
  * @return
  */
 Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
-
 	Polynomial res_polynomial;
 	auto deg_a = module::DEG_P_N(a);
 	auto deg_b = module::DEG_P_N(b);
@@ -237,18 +236,40 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 		res_polynomial.addElement(0, RationalFraction::empty());
 		return res_polynomial;
 	}
+/*
+	if (module::COM_NN_D(deg_b, ULongNumber(0)) == 0) {
+		auto additional = module::TRANS_Z_N(module::ABS_Z_N(b.get(0)->value.numerator));
+		b.get(0)->value.numerator.isPositive?
+			res_polynomial = module::MUL_PQ_P(a, RationalFraction(LongNumber(b.get(0)->value.denominator), additional)) :
+			res_polynomial = module::MUL_PQ_P(a, RationalFraction(module::MUL_ZM_Z(LongNumber(b.get(0)->value.denominator)), additional));
+	}
 
+	auto deg_diff = a.lastElement()->degree - b.lastElement()->degree;
+	auto aDegree = std::stoi(module::DEG_P_N(a).toString().c_str());
+
+	while (comparison != 1) {
+
+*/
 	auto deg_diff = std::stoi(module::SUB_NN_N(deg_a, deg_b).toString());
 	auto aDegree = std::stoi(module::DEG_P_N(a).toString().c_str());
 
 	while(deg_diff >= 0){
-		
 	
 		auto a_value = a.getCoefficient(aDegree--);
 		auto b_value = b.lastElement()->value;
 	
 		auto res_value = DIV_QQ_Q(a_value, b_value);
 		res_polynomial.addElement(deg_diff, res_value);
+/*
+		Polynomial temp_polynomial;
+		temp_polynomial.addElement(deg_diff, res_value);
+		deg_diff--;
+		auto mul_val = MUL_PP_P(temp_polynomial, b);
+		a = module::SUB_PP_P(a, mul_val);
+		deg_a = ULongNumber(aDegree);
+		deg_b = module::DEG_P_N(b);
+		comparison = module::COM_NN_D(deg_a, deg_b);
+*/
 
 		Polynomial temp_polynomial;
 		temp_polynomial.addElement(deg_diff, res_value);
@@ -259,12 +280,9 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 
 		a = module::SUB_PP_P(a, mul_val);
 		deg_a = ULongNumber(aDegree);
-
 	}
-
 	return res_polynomial;
 }
-
 /**
  * @authors Глеб Лях
  * P-10
@@ -283,8 +301,7 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 	auto comparison = module::COM_NN_D(deg_a, deg_b);
 	if (comparison == 1)
 	{
-		//res_polynomial.addElement(0, RationalFraction::empty());
-		return b;
+		return a;
 	}
 
 	auto aCopy = a;
