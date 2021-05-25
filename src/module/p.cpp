@@ -200,16 +200,18 @@ RationalFraction module::FAC_P_Q(Polynomial& a) {
 Polynomial module::MUL_PP_P(Polynomial& a, Polynomial& b) {
 	Polynomial temp;
 	Polynomial res;
-	res.addElement(0, RationalFraction::empty());
-	for (auto i = a.coefficients.begin(); i != a.coefficients.end(); i++) {
+	for (auto i = a.coefficients.rbegin(); i != a.coefficients.rend(); i++) {
+
 		auto el = *i;
 
 		temp = MUL_PQ_P(b, el->value);
-
 		auto degree_new = ULongNumber(el->degree);
-		temp = MUL_Pxk_P(temp, degree_new);
-		res = ADD_PP_P(res, temp);
+		temp =  MUL_Pxk_P(temp, degree_new);
+		if (i == a.coefficients.rbegin()) res = temp;
+		else res = ADD_PP_P(res, temp);
 	}
+	
+	
 	return res;
 
 }
@@ -234,7 +236,7 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 		res_polynomial.addElement(0, RationalFraction::empty());
 		return res_polynomial;
 	}
-
+/*
 	if (module::COM_NN_D(deg_b, ULongNumber(0)) == 0) {
 		auto additional = module::TRANS_Z_N(module::ABS_Z_N(b.get(0)->value.numerator));
 		b.get(0)->value.numerator.isPositive?
@@ -247,11 +249,18 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 
 	while (comparison != 1) {
 
+*/
+	auto deg_diff = std::stoi(module::SUB_NN_N(deg_a, deg_b).toString());
+	auto aDegree = std::stoi(module::DEG_P_N(a).toString().c_str());
+
+	while(deg_diff >= 0){
+	
 		auto a_value = a.getCoefficient(aDegree--);
 		auto b_value = b.lastElement()->value;
-
+	
 		auto res_value = DIV_QQ_Q(a_value, b_value);
 		res_polynomial.addElement(deg_diff, res_value);
+/*
 		Polynomial temp_polynomial;
 		temp_polynomial.addElement(deg_diff, res_value);
 		deg_diff--;
@@ -260,6 +269,17 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 		deg_a = ULongNumber(aDegree);
 		deg_b = module::DEG_P_N(b);
 		comparison = module::COM_NN_D(deg_a, deg_b);
+*/
+
+		Polynomial temp_polynomial;
+		temp_polynomial.addElement(deg_diff, res_value);
+
+		deg_diff--;
+		auto mul_val = MUL_PP_P(temp_polynomial, b);
+		
+
+		a = module::SUB_PP_P(a, mul_val);
+		deg_a = ULongNumber(aDegree);
 	}
 	return res_polynomial;
 }
@@ -282,7 +302,7 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 }
 
 /**
- * @authors Анастасия Аверьяноваб правки Лях Глеб
+ * @authors Анастасия Аверьянова, правки Лях Глеб
  * P-11
  * Требуется: DEG_P_N, MOD_PP_P
  *
