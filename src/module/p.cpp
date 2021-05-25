@@ -275,19 +275,10 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
  */
 Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 {
-	Polynomial res_polynomial;
-	auto deg_a = module::DEG_P_N(a);
-	auto deg_b = module::DEG_P_N(b);
-	auto comparison = module::COM_NN_D(deg_a, deg_b);
-	if (comparison == 1)
-	{
-		return a;
-	}
-	auto aCopy = a;
-	auto temp_div = module::DIV_PP_P(aCopy, b);
-	auto temp_mul = module::MUL_PP_P(temp_div, b);
-	auto result = module::SUB_PP_P(a, temp_mul);
-	return result;
+	Polynomial quotient = module::DIV_PP_P(a, b);
+
+	auto res = module::SUB_PP_P(a, module::MUL_PP_P(a, quotient));
+	return res;
 }
 
 /**
@@ -300,33 +291,55 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
  * @param b
  * @return
  */
+/*
+	LongP GCFofPPtoP(const LongP& P_dividend , const LongP& P_divider)
+{
+	LongP dividend = P_dividend , divider = P_divider;
+    while (!(degPtoN(divider) == 0 && divider.odds[0].num.deg == 0 &&
+        divider.odds[0].num.arrOfNums[0] == 0))
+    {
+        LongP temp = divider;
+        divider = modPPtoP(dividend , divider);
+        dividend = temp;
+    }
+    return dividend;
+*/
 Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b)
 {
 
-	auto first = a;
-	auto second = b;
-	auto lhs1 = module::DEG_P_N(a);
-	auto rhs1 = module::DEG_P_N(b);
-	if (module::COM_NN_D(lhs1, rhs1) == 1)
-	{
-		first = b;
-		second = a;
-	}
-	auto ost = module::MOD_PP_P(first, second);
-	first = second;
-	second = ost;
-	auto result = ost;
-	auto lhs2 = ULongNumber::fromLongNumber(ost.lastElement()->value.numerator);
-	auto zero = ULongNumber::empty();
-	while (module::COM_NN_D(lhs2, zero) != 0)
-	{
-		result = ost;
-		ost = module::MOD_PP_P(first, second);
-		first = second;
-		second = ost;
-	}
-	return result;
-	//throw NotImplementedException();
+	auto divided = a, divider = b;
+	while(!(module::DEG_P_N(divider).toString() == "0" &&
+		divider.get(0)->degree == 0 && divider.get(0)->value.numerator.toString() == "0")){
+		auto temp = divider;
+		divider = module::MOD_PP_P(divided, divider);
+		divided = temp;
+		}
+		return divided;
+
+		// auto first = a;
+		// auto second = b;
+		// auto lhs1 = module::DEG_P_N(a);
+		// auto rhs1 = module::DEG_P_N(b);
+		// if (module::COM_NN_D(lhs1, rhs1) == 1)
+		// {
+		// 	first = b;
+		// 	second = a;
+		// }
+		// auto ost = module::MOD_PP_P(first, second);
+		// first = second;
+		// second = ost;
+		// auto result = ost;
+		// auto lhs2 = ULongNumber::fromLongNumber(ost.lastElement()->value.numerator);
+		// auto zero = ULongNumber::empty();
+		// while (module::COM_NN_D(lhs2, zero) != 0)
+		// {
+		// 	result = ost;
+		// 	ost = module::MOD_PP_P(first, second);
+		// 	first = second;
+		// 	second = ost;
+		// }
+		// return result;
+		// //throw NotImplementedException();
 }
 
 /**
