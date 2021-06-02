@@ -339,7 +339,7 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 	 return dividend;
  */
 Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
-	/*auto first = a;
+	auto first = a;
 	auto second = b;
 	if (module::COM_NN_D(module::DEG_P_N(a), module::DEG_P_N(b)) == 1) {
 		auto first = b;
@@ -359,19 +359,8 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
 	}
 
 	return result;
-	*/
+	
 
-	auto a_copy = a, b_copy = b;
-	while (a_copy.lastElement()->degree != 0) {
-		auto temp = a_copy;
-		auto rem = MOD_PP_P(a, b);
-		a_copy = rem;
-		b_copy = a_copy;
-		for (auto& k : a_copy.coefficients)
-			if (k->value.toString() == "0")
-				a_copy.remove(k->degree);
-	}
-	return a_copy;
 }
 
 /**
