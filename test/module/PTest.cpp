@@ -61,40 +61,6 @@ TEST(P, GCF_PP_P) {
     auto res3 = GCF_PP_P(a,b1);
 
     EXPECT_EQ(res3.toString(), "1/45");
-
-	Polynomial a;
-	a.addElement(0, (RationalFraction)3);
-	a.addElement(1, (RationalFraction)6);
-	a.addElement(2, (RationalFraction)2);
-	a.addElement(3, (RationalFraction)3);
-	a.addElement(4, (RationalFraction)4);
-
-	Polynomial b;
-	b.addElement(0, (RationalFraction)3);
-	b.addElement(1, (RationalFraction)6);
-	b.addElement(2, (RationalFraction)5);
-	b.addElement(3, (RationalFraction)2);
-	auto res1 = GCF_PP_P(a, b);
-
-	EXPECT_EQ(res1.toString(), "x 1");
-
-	Polynomial a1, b1;
-	a1.addElement(0, RationalFraction::fromTwoInt(1, 2));
-	a1.addElement(1, RationalFraction::fromTwoInt(3, 1));
-	a1.addElement(2, RationalFraction::fromTwoInt(7, 8));
-	a1.addElement(3, RationalFraction::fromTwoInt(2, 3));
-	a1.addElement(4, RationalFraction::fromTwoInt(5, 4));
-
-	b1.addElement(0, RationalFraction::fromTwoInt(4, 9));
-	b1.addElement(1, RationalFraction::fromTwoInt(1, 1));
-	b1.addElement(2, RationalFraction::fromTwoInt(2, 5));
-	auto res2 = GCF_PP_P(a1, b1);
-
-	EXPECT_EQ(res2.toString(), "1/360");
-
-	auto res3 = GCF_PP_P(a, b1);
-
-	EXPECT_EQ(res3.toString(), "1/45");
 }
 
 TEST(P, MUL_PQ_P) {
@@ -207,6 +173,28 @@ TEST(P, MOD_PP_P) {
 
 	res = MOD_PP_P(a1, b1);
 	EXPECT_EQ(res.toString(), "3246");
+
+	Polynomial a3, b3;
+	a3.addElement(0, RationalFraction::fromTwoInt(1, 2));
+	a3.addElement(1, RationalFraction::fromTwoInt(3, 1));
+	a3.addElement(2, RationalFraction::fromTwoInt(7, 8));
+	a3.addElement(3, RationalFraction::fromTwoInt(2, 3));
+	a3.addElement(4, RationalFraction::fromTwoInt(5, 4));
+
+	b3.addElement(0, RationalFraction::fromTwoInt(4, 9));
+	b3.addElement(1, RationalFraction::fromTwoInt(1, 1));
+	b3.addElement(2, RationalFraction::fromTwoInt(2, 5));
+
+	res = MOD_PP_P(a3, b3);
+
+	EXPECT_EQ(res.toString(), "-7213/864*x^1 -3731/648");
+
+	Polynomial k1, k2;
+	k1.addElement(0, RationalFraction(6));
+	k2.addElement(3, RationalFraction(3));
+
+	res = MOD_PP_P(k1, k2);
+	EXPECT_EQ(res.toString(), "6");
 }
 
 TEST(P, MUL_PP_P) {
