@@ -325,19 +325,6 @@ Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
  * @param b
  * @return
  */
- /*
-	 LongP GCFofPPtoP(const LongP& P_dividend , const LongP& P_divider)
- {
-	 LongP dividend = P_dividend , divider = P_divider;
-	 while (!(degPtoN(divider) == 0 && divider.odds[0].num.deg == 0 &&
-		 divider.odds[0].num.arrOfNums[0] == 0))
-	 {
-		 LongP temp = divider;
-		 divider = modPPtoP(dividend , divider);
-		 dividend = temp;
-	 }
-	 return dividend;
- */
 Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b) {
 	auto first = a;
 	auto second = b;
