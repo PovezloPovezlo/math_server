@@ -127,14 +127,42 @@ TEST(Z, ADD_ZZ_Z)
 
 TEST(Z, DIV_ZZ_Z)
 {
-    LongNumber a("4444");
-    LongNumber b("-2222");
-    EXPECT_EQ(DIV_ZZ_Z(a, b).toString(), "-2");
+	LongNumber a = (LongNumber)("6");
+	LongNumber b = (LongNumber)("-5");
+	EXPECT_EQ(DIV_ZZ_Z(a, b).toString(), "-1");
+
+	a = (LongNumber)("10");
+	b = (LongNumber)("-5");
+	EXPECT_EQ(DIV_ZZ_Z(a, b).toString(), "-2");
+
+	a = (LongNumber)("20");
+	b = (LongNumber)("-6");
+	EXPECT_EQ(DIV_ZZ_Z(a, b).toString(), "-3");
+
+	a = (LongNumber)("-20");
+	b = (LongNumber)("6");
+	EXPECT_EQ(DIV_ZZ_Z(a, b).toString(), "-4");
+
+	a = (LongNumber)("100");
+	b = (LongNumber)("-3");
+	EXPECT_EQ(DIV_ZZ_Z(a, b).toString(), "-33");
+
+	a = (LongNumber)("-100");
+	b = (LongNumber)("3");
+	EXPECT_EQ(DIV_ZZ_Z(a, b).toString(), "-34");
 }
 
 TEST(Z, MOD_ZZ_Z)
 {
-    LongNumber a("4448");
-    LongNumber b("2222");
-    EXPECT_EQ(MOD_ZZ_Z(a, b).toString(), "4");
+	LongNumber a = (LongNumber)("20");
+	LongNumber b = (LongNumber)("6");
+	EXPECT_EQ(MOD_ZZ_Z(a, b).toString(), "2");
+
+	a = (LongNumber)("20");
+	b = (LongNumber)("-6");
+	EXPECT_EQ(MOD_ZZ_Z(a, b).toString(), "2");
+
+	a = (LongNumber)("-20");
+	b = (LongNumber)("6");
+	EXPECT_EQ(MOD_ZZ_Z(a, b).toString(), "4");
 }
