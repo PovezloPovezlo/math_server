@@ -186,7 +186,8 @@ RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
 		RationalFraction res(1);
 
 		res.numerator = MUL_ZZ_Z(a.numerator, b.denominator);
-		res.denominator = NLongNumber(MUL_ZZ_Z(a.denominator, module::ABS_Z_N(b.numerator)).toString());
+		ULongNumber temp = module::ABS_Z_N(b.numerator);
+		res.denominator = NLongNumber(MUL_ZZ_Z(a.denominator, temp).toString());
 
 		if (module::POZ_Z_D(b.numerator) == 1) {
 			res.numerator = module::MUL_ZM_Z(res.numerator);
