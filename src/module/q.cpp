@@ -12,7 +12,7 @@ using namespace module;
 // Рациональные числа (дроби)
 
 /**
- * @authors Басин Илья, Петрова Алиса (правки)
+ * @authors Басин Илья, Петрова Алиса (правки), Береза Кирилл (правки)
  * Q-1
  * Требуется: ABS_Z_N, GCF_NN_N, DIV_ZZ_Z
  *
@@ -24,14 +24,16 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
 
 	auto num_n = ABS_Z_N(a.numerator); //создаём натуральные копии числителя и знаменателя
 	auto den_n = ABS_Z_N(a.denominator);
-
 	auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
 
-	a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
-	auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
-	auto t = DIV_ZZ_Z(den_z, nod);
-	a.denominator = NLongNumber::fromLongNumber(t);
-
+	if (POZ_Z_D(a.numerator) == 1) {
+		a.numerator = MUL_ZM_Z(DIV_ZZ_Z(num_n, nod));
+	}
+	else {
+		a.numerator = DIV_ZZ_Z(num_n, nod);
+	}
+	auto tmp = DIV_ZZ_Z(den_n, nod);
+	a.denominator = NLongNumber::fromLongNumber(tmp);
 	return a;
 }
 
