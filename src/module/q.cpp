@@ -22,18 +22,17 @@ using namespace module;
  */
 RationalFraction module::RED_Q_Q(RationalFraction& a) {
 
-    auto num_n = ABS_Z_N(a.numerator); //создаём натуральные копии числителя и знаменателя
-    auto den_n = ABS_Z_N(a.denominator);
+	auto num_n = ABS_Z_N(a.numerator); //создаём натуральные копии числителя и знаменателя
+	auto den_n = ABS_Z_N(a.denominator);
 
-    auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
+	auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
 
-    a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
-    a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
-    auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
-    auto t = DIV_ZZ_Z(den_z, nod);
-    a.denominator = NLongNumber::fromLongNumber(t);
+	a.numerator = DIV_ZZ_Z(a.numerator, nod); //делим числитель и знаменатель на нод
+	auto den_z = (LongNumber)a.denominator; //копия нужна тк знаменатель NLongNumber
+	auto t = DIV_ZZ_Z(den_z, nod);
+	a.denominator = NLongNumber::fromLongNumber(t);
 
-    return a;
+	return a;
 }
 
 /**
@@ -45,11 +44,12 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
  * @return если рациональное число является целым, то «да», иначе «нет»
  */
 bool module::INT_Q_B(base::RationalFraction& a) {
-	if(module::MOD_ZZ_Z(a.numerator, a.denominator) == LongNumber::empty()){
+	auto r = module::RED_Q_Q(a).denominator;
+	if (r == NLongNumber(1)) {
 		return true;
 	}
 	else return false;
-	
+
 	//throw NotImplementedException();
 }
 
@@ -62,9 +62,9 @@ bool module::INT_Q_B(base::RationalFraction& a) {
  * @return
  */
 RationalFraction module::TRANS_Z_Q(LongNumber& a) {
-	
+
 	return RationalFraction(a, NLongNumber(1));
-	
+
 	//throw NotImplementedException();
 }
 
@@ -73,13 +73,13 @@ RationalFraction module::TRANS_Z_Q(LongNumber& a) {
  * Q-4
  *
  * Преобразование дробного в целое (если знаменатель равен 1)
- * Комментарий от архитектора: полагаю, что имелось в виду под "если знаменатель равен 1" 
+ * Комментарий от архитектора: полагаю, что имелось в виду под "если знаменатель равен 1"
  * уже после выполнения сокращения дробей. А то иначе у нас эта функция не сможет обработать например 6/2
  * @param a
  * @return
  */
 LongNumber module::TRANS_Q_Z(RationalFraction& a) {
-	
+
 	module::RED_Q_Q(a);
 	if (a.denominator == NLongNumber(1)) return a.numerator;
 	throw BaseException("Denominator != 1");
@@ -88,7 +88,7 @@ LongNumber module::TRANS_Q_Z(RationalFraction& a) {
 }
 
 /**
- * @authors Береза Кирилл
+ * @authors Береза Кирилл, правки Лях Глеб
  * Q-5
  * Требуется: LCM_NN_N, MUL_ZZ_Z, ADD_ZZ_Z
  *
@@ -107,7 +107,7 @@ RationalFraction module::ADD_QQ_Q(RationalFraction& a, RationalFraction& b) {
 
 	LongNumber res_num = ADD_ZZ_Z(t1, t2);
 	res.numerator = res_num;
-	RED_Q_Q(res);
+	res = RED_Q_Q(res);
 	return res;
 }
 
@@ -131,12 +131,12 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
 
 	LongNumber res_num = SUB_ZZ_Z(t1, t2);
 	res.numerator = res_num;
-	RED_Q_Q(res);
+	res = RED_Q_Q(res);
 	return res;
 }
 
 /**
- * @authors Анастасия Аверьянова
+ * @authors Анастасия Аверьянова, правки Лях Глеб
  * Q-7
  * Требуется: MUL_ZZ_Z
  *
@@ -147,16 +147,15 @@ RationalFraction module::SUB_QQ_Q(RationalFraction& a, RationalFraction& b) {
  */
 RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	auto t = module::MUL_NN_N(a.denominator, b.denominator);
-	auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator),
-	                           (NLongNumber)module::TRANS_Z_N(t));
-	RED_Q_Q(res);
+	auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator), module::TRANS_Z_N(t));
+	res = RED_Q_Q(res);
 	return res;
-	
+
 	//throw NotImplementedException();
 }
 
 /**
- * @authors Анастасия Аверьянова
+ * @authors Анастасия Аверьянова, правки Лях Глеб(Наконец-то правильно сделал Даниил Кушко + Кирилл Береза)
  * Q-8
  * Требуется: MUL_ZZ_Z
  *
@@ -167,18 +166,34 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @return
  */
 RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	
-	if (b.numerator != LongNumber(0)) {
-		if (module::POZ_Z_D(b.numerator) == 1){
-			b.numerator = module::MUL_ZM_Z(b.numerator);
+
+	//if (b.numerator != LongNumber(0)) {
+	//	if (module::POZ_Z_D(b.numerator) == 1){
+	//		b.numerator = module::MUL_ZM_Z(b.numerator);
+	//	}
+	//	auto additional = (ULongNumber)module::TRANS_Z_N(b.numerator);
+	//	auto t = module::MUL_NN_N(a.denominator, additional);
+	//	auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator),
+	//	                            (NLongNumber)module::TRANS_Z_N(t));
+	//	RED_Q_Q(res);
+	//	return res;
+	//}
+
+	if (b.numerator == LongNumber(0)) {
+		throw BaseException("Cant divide by zero");
+	}
+	else {
+		RationalFraction res(1);
+
+		res.numerator = MUL_ZZ_Z(a.numerator, b.denominator);
+		ULongNumber temp = module::ABS_Z_N(b.numerator);
+		res.denominator = NLongNumber(MUL_ZZ_Z(a.denominator, temp).toString());
+
+		if (module::POZ_Z_D(b.numerator) == 1) {
+			res.numerator = module::MUL_ZM_Z(res.numerator);
 		}
-		auto additional = (ULongNumber)module::TRANS_Z_N(b.numerator);
-		auto t = module::MUL_NN_N(a.denominator, additional);
-		auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator),
-		                            (NLongNumber)module::TRANS_Z_N(t));
 		RED_Q_Q(res);
 		return res;
 	}
 
-	throw BaseException("Cant divide by zero");
 }

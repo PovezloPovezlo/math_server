@@ -92,6 +92,7 @@ std::string Polynomial::toString() {
 
 	std::string result;
 	for(auto i = this->coefficients.rbegin(); i != end; ++i, j = i != end ? (*i)->degree : 0){
+        if ((*i)->value.numerator.isZero()) continue;
 		result += (*i)->value.toString();
 		if(j != 0) {
             result += "*x^" + std::to_string(j);
@@ -100,7 +101,8 @@ std::string Polynomial::toString() {
 		    result += " ";
 		}
 	}
-
+    if (result.empty()) result += "0";
+    if (result[result.size() - 1] == ' ') result.pop_back();
 	return result;
 }
 
