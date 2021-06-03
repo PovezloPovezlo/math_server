@@ -25,43 +25,6 @@ TEST(P, DER_P_P) {
 	EXPECT_EQ(DER_P_P(p2).toString(), "0");
 }
 
-TEST(P, GCF_PP_P) {
-	return; // todo MOD_PP_P еще не сделан
-	Polynomial a;
-	a.addElement(0, (RationalFraction)3);
-	a.addElement(1, (RationalFraction)6);
-	a.addElement(2, (RationalFraction)2);
-	a.addElement(3, (RationalFraction)3);
-	a.addElement(4, (RationalFraction)4);
-
-	Polynomial b;
-	b.addElement(0, (RationalFraction)3);
-	b.addElement(1, (RationalFraction)6);
-	b.addElement(2, (RationalFraction)5);
-	b.addElement(3, (RationalFraction)2);
-	auto res1 = GCF_PP_P(a, b);
-
-	EXPECT_EQ(res1.toString(), "x 1");
-
-	Polynomial a1, b1;
-	a1.addElement(0, RationalFraction::fromTwoInt(1, 2));
-	a1.addElement(1, RationalFraction::fromTwoInt(3, 1));
-	a1.addElement(2, RationalFraction::fromTwoInt(7, 8));
-	a1.addElement(3, RationalFraction::fromTwoInt(2, 3));
-	a1.addElement(4, RationalFraction::fromTwoInt(5, 4));
-
-	b1.addElement(0, RationalFraction::fromTwoInt(4, 9));
-	b1.addElement(1, RationalFraction::fromTwoInt(1, 1));
-	b1.addElement(2, RationalFraction::fromTwoInt(2, 5));
-	auto res2 = GCF_PP_P(a1, b1);
-
-	EXPECT_EQ(res2.toString(), "1/360");
-
-	auto res3 = GCF_PP_P(a, b1);
-
-	EXPECT_EQ(res3.toString(), "1/45");
-}
-
 TEST(P, MUL_PQ_P) {
 	Polynomial a;
 	a.addElement(1, (RationalFraction)1);
@@ -138,9 +101,46 @@ TEST(P, DIV_PP_P) {
 	res = DIV_PP_P(a2, b2);
 	EXPECT_EQ(res.toString(), "1*x^1 1");
 
+	//DIV_PP_P(1*x^4 2*x^3 5*x^2 6*x^1 3, -5*x^3 -18*x^2 -18*x^1 -9)
+
+	Polynomial a3, b3;
+	a3.addElement(0, RationalFraction(3));
+	a3.addElement(1, RationalFraction(6));
+	a3.addElement(2, RationalFraction(5));
+	a3.addElement(3, RationalFraction(2));
+	a3.addElement(4, RationalFraction(1));
+
+	b3.addElement(0, RationalFraction(-9));
+	b3.addElement(1, RationalFraction(-18));
+	b3.addElement(2, RationalFraction(-18));
+	b3.addElement(3, RationalFraction(-5));
+
+	res = DIV_PP_P(a3, b3);
+	EXPECT_EQ(res.toString(), "-1/5*x^1 8/25");
+
 }
 
 TEST(P, MOD_PP_P) {
+
+	Polynomial t1;
+	t1.addElement(0, (RationalFraction)3);
+	t1.addElement(1, (RationalFraction)6);
+	t1.addElement(2, (RationalFraction)5);
+	t1.addElement(3, (RationalFraction)2);
+	t1.addElement(4, (RationalFraction)1);
+
+	Polynomial t2;
+	t2.addElement(0, (RationalFraction)-9);
+	t2.addElement(1, (RationalFraction)-18);
+	t2.addElement(2, (RationalFraction)-18);
+	t2.addElement(3, (RationalFraction)-5);
+	auto res1 = MOD_PP_P(t1, t2);
+
+	EXPECT_EQ(res1.toString(), "179/25*x^2 249/25*x^1 147/25");
+
+
+
+
 	Polynomial a, b;
 	a.addElement(0, RationalFraction(-4));
 	a.addElement(1, RationalFraction(6));
@@ -172,7 +172,83 @@ TEST(P, MOD_PP_P) {
 
 	res = MOD_PP_P(a1, b1);
 	EXPECT_EQ(res.toString(), "3246");
+
 }
+
+TEST(P, GCF_PP_P) {
+	//return; // todo MOD_PP_P еще не сделан
+	Polynomial a;
+	a.addElement(0, (RationalFraction)3);
+	a.addElement(1, (RationalFraction)6);
+	a.addElement(2, (RationalFraction)2);
+	a.addElement(3, (RationalFraction)3);
+	a.addElement(4, (RationalFraction)4);
+
+	Polynomial b;
+	b.addElement(0, (RationalFraction)3);
+	b.addElement(1, (RationalFraction)6);
+	b.addElement(2, (RationalFraction)5);
+	b.addElement(3, (RationalFraction)2);
+	b.addElement(4, (RationalFraction)1);
+	auto res1 = GCF_PP_P(a, b);
+
+	//TODO CHANGE TEST	
+	EXPECT_EQ(res1.toString(), "1");
+
+	Polynomial x;
+	x.addElement(0, (RationalFraction)3);
+	x.addElement(1, (RationalFraction)6);
+	x.addElement(2, (RationalFraction)2);
+	x.addElement(3, (RationalFraction)3);
+	x.addElement(4, (RationalFraction)4);
+
+	Polynomial y;
+	y.addElement(0, (RationalFraction)3);
+	y.addElement(1, (RationalFraction)6);
+	y.addElement(2, (RationalFraction)5);
+	y.addElement(3, (RationalFraction)2);
+	auto res2 = GCF_PP_P(x, y);
+
+	EXPECT_EQ(res2.toString(), "x 1");
+
+
+
+	Polynomial a1, b1;
+	a1.addElement(0, RationalFraction::fromTwoInt(1, 2));
+	a1.addElement(1, RationalFraction::fromTwoInt(3, 1));
+	a1.addElement(2, RationalFraction::fromTwoInt(7, 8));
+	a1.addElement(3, RationalFraction::fromTwoInt(2, 3));
+	a1.addElement(4, RationalFraction::fromTwoInt(5, 4));
+
+	b1.addElement(0, RationalFraction::fromTwoInt(4, 9));
+	b1.addElement(1, RationalFraction::fromTwoInt(1, 1));
+	b1.addElement(2, RationalFraction::fromTwoInt(2, 5));
+	res2 = GCF_PP_P(a1, b1);
+
+	EXPECT_EQ(res2.toString(), "1/360");
+
+	auto res3 = GCF_PP_P(a, b1);
+
+	EXPECT_EQ(res3.toString(), "1/45");
+
+	Polynomial a2, b2;
+	a2.addElement(0, RationalFraction(-4));
+	a2.addElement(1, RationalFraction(-15));
+	a2.addElement(2, RationalFraction(-20));
+	a2.addElement(3, RationalFraction(-10));
+	a2.addElement(4, RationalFraction(0));
+	a2.addElement(5, RationalFraction(1));
+
+	b2.addElement(0, RationalFraction(-3));
+	b2.addElement(1, RationalFraction(-8));
+	b2.addElement(2, RationalFraction(-6));
+	b2.addElement(3, RationalFraction(0));
+	b2.addElement(4, RationalFraction(1));
+
+	auto res = GCF_PP_P(a2, b2);
+	EXPECT_EQ(res.toString(), "x^3 3x^2 3x 1");
+}
+
 
 TEST(P, MUL_PP_P) {
 	Polynomial a, b;

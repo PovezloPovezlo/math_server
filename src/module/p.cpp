@@ -141,8 +141,29 @@ RationalFraction module::LED_P_Q(Polynomial& a)
  * @return
  */
 ULongNumber module::DEG_P_N(Polynomial& a)
-{
-	return (ULongNumber)a.lastElement()->degree;
+{	
+
+	int counter = 0;
+
+	auto iter = a.coefficients.rbegin();
+	while (iter != a.coefficients.rend()) {
+		if ((*iter)->value.numerator != LongNumber(0)) {
+			break;
+		}
+		iter++;
+	}
+	if (iter == a.coefficients.rend()) {
+		counter = 1;
+		return ULongNumber(0);
+	}
+	while(iter != a.coefficients.rend()) {
+		counter++;
+		iter++;
+	}
+
+	return ULongNumber(--counter);
+	
+
 	//throw NotImplementedException();
 }
 
@@ -232,20 +253,21 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
 	auto deg_a = module::DEG_P_N(a);
 	auto deg_b = module::DEG_P_N(b);
 	auto comparison = module::COM_NN_D(deg_a, deg_b);
-	if (comparison == 1)
-	{
+	if (comparison == 1){
 		res_polynomial.addElement(0, RationalFraction::empty());
 		return res_polynomial;
 	}
 
 	auto deg_diff = std::stoi(module::SUB_NN_N(deg_a, deg_b).toString());
-	auto aDegree = std::stoi(module::DEG_P_N(a).toString().c_str());
+	auto aDegree = std::stoi(module::DEG_P_N(a).toString());
+	auto bDegree = std::stoi(module::DEG_P_N(b).toString());
 
 	while(deg_diff >= 0){
-		
+
 	
 		auto a_value = a.getCoefficient(aDegree--);
-		auto b_value = b.lastElement()->value;
+		
+		auto b_value = b.getCoefficient(bDegree);
 	
 		auto res_value = DIV_QQ_Q(a_value, b_value);
 		res_polynomial.addElement(deg_diff, res_value);
@@ -277,6 +299,7 @@ Polynomial module::DIV_PP_P(Polynomial& a, Polynomial& b) {
  */
 Polynomial module::MOD_PP_P(Polynomial& a, Polynomial& b)
 {
+
 	Polynomial res_polynomial;
 	auto deg_a = module::DEG_P_N(a);
 	auto deg_b = module::DEG_P_N(b);
@@ -309,27 +332,31 @@ Polynomial module::GCF_PP_P(Polynomial& a, Polynomial& b)
 
 	auto first = a;
 	auto second = b;
-	auto lhs1 = module::DEG_P_N(a);
-	auto rhs1 = module::DEG_P_N(b);
-	if (module::COM_NN_D(lhs1, rhs1) == 1)
+	auto degFirst = module::DEG_P_N(first);
+	auto degSecond = module::DEG_P_N(second);
+	if (module::COM_NN_D(degFirst, degSecond) == 1)
 	{
-		first = b;
-		second = a;
+		std::swap(first, second);
 	}
-	auto ost = module::MOD_PP_P(first, second);
-	first = second;
-	second = ost;
-	auto result = ost;
-	auto lhs2 = ULongNumber::fromLongNumber(ost.lastElement()->value.numerator);
-	auto zero = ULongNumber::empty();
-	while (module::COM_NN_D(lhs2, zero) != 0)
-	{
-		result = ost;
-		ost = module::MOD_PP_P(first, second);
+	
+	Polynomial result;
+	Polynomial mod;
+
+
+	while (DEG_P_N(second) != ULongNumber(0)) {
+		mod = MOD_PP_P(first, second);
 		first = second;
-		second = ost;
+		second = mod;
+		degFirst = module::DEG_P_N(first);
+		degSecond = module::DEG_P_N(second);
 	}
-	return result;
+
+	if (second.toString() == "0") {
+		return first;
+	}
+	else {
+		return second;
+	}
 	//throw NotImplementedException();
 }
 

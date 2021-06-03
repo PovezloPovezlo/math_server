@@ -45,11 +45,11 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
  */
 bool module::INT_Q_B(base::RationalFraction& a) {
 	auto r = module::RED_Q_Q(a).denominator;
-	if(r == NLongNumber(1)){
+	if (r == NLongNumber(1)) {
 		return true;
 	}
 	else return false;
-	
+
 	//throw NotImplementedException();
 }
 
@@ -62,9 +62,9 @@ bool module::INT_Q_B(base::RationalFraction& a) {
  * @return
  */
 RationalFraction module::TRANS_Z_Q(LongNumber& a) {
-	
+
 	return RationalFraction(a, NLongNumber(1));
-	
+
 	//throw NotImplementedException();
 }
 
@@ -73,13 +73,13 @@ RationalFraction module::TRANS_Z_Q(LongNumber& a) {
  * Q-4
  *
  * Преобразование дробного в целое (если знаменатель равен 1)
- * Комментарий от архитектора: полагаю, что имелось в виду под "если знаменатель равен 1" 
+ * Комментарий от архитектора: полагаю, что имелось в виду под "если знаменатель равен 1"
  * уже после выполнения сокращения дробей. А то иначе у нас эта функция не сможет обработать например 6/2
  * @param a
  * @return
  */
 LongNumber module::TRANS_Q_Z(RationalFraction& a) {
-	
+
 	module::RED_Q_Q(a);
 	if (a.denominator == NLongNumber(1)) return a.numerator;
 	throw BaseException("Denominator != 1");
@@ -150,12 +150,12 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
 	auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.numerator), module::TRANS_Z_N(t));
 	res = RED_Q_Q(res);
 	return res;
-	
+
 	//throw NotImplementedException();
 }
 
 /**
- * @authors Анастасия Аверьянова, правки Лях Глеб
+ * @authors Анастасия Аверьянова, правки Лях Глеб(Наконец-то правильно сделал Даниил Кушко + Кирилл Береза)
  * Q-8
  * Требуется: MUL_ZZ_Z
  *
@@ -166,18 +166,33 @@ RationalFraction module::MUL_QQ_Q(RationalFraction& a, RationalFraction& b) {
  * @return
  */
 RationalFraction module::DIV_QQ_Q(RationalFraction& a, RationalFraction& b) {
-	
-	if (b.numerator != LongNumber(0)) {
-		if (module::POZ_Z_D(b.numerator) == 1){
-			b.numerator = module::MUL_ZM_Z(b.numerator);
+
+	//if (b.numerator != LongNumber(0)) {
+	//	if (module::POZ_Z_D(b.numerator) == 1){
+	//		b.numerator = module::MUL_ZM_Z(b.numerator);
+	//	}
+	//	auto additional = (ULongNumber)module::TRANS_Z_N(b.numerator);
+	//	auto t = module::MUL_NN_N(a.denominator, additional);
+	//	auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator),
+	//	                            (NLongNumber)module::TRANS_Z_N(t));
+	//	RED_Q_Q(res);
+	//	return res;
+	//}
+
+	if (b.numerator == LongNumber(0)) {
+		throw BaseException("Cant divide by zero");
+	}
+	else {
+		RationalFraction res(1);
+
+		res.numerator = MUL_ZZ_Z(a.numerator, b.denominator);
+		res.denominator = NLongNumber(MUL_ZZ_Z(a.denominator, module::ABS_Z_N(b.numerator)).toString());
+
+		if (module::POZ_Z_D(b.numerator) == 1) {
+			res.numerator = module::MUL_ZM_Z(res.numerator);
 		}
-		auto additional = (ULongNumber)module::TRANS_Z_N(b.numerator);
-		auto t = module::MUL_NN_N(a.denominator, additional);
-		auto res = RationalFraction(module::MUL_ZZ_Z(a.numerator, b.denominator),
-		                            (NLongNumber)module::TRANS_Z_N(t));
 		RED_Q_Q(res);
 		return res;
 	}
 
-	throw BaseException("Cant divide by zero");
 }
