@@ -217,8 +217,13 @@ LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
 	else {
 		auto c = (LongNumber)DIV_NN_N(t1, t2);
 		//проверка на наличие остатка, чтобы правильно делились отрицательные числа
-		t1 = NLongNumber::fromLongNumber(MUL_ZZ_Z(ABS_Z_N(b), c));
-		t2 = NLongNumber::fromLongNumber(ABS_Z_N(a));
+
+		auto r1 = ABS_Z_N(b);
+		auto r2 = MUL_ZZ_Z(r1, c);
+		auto r3 = ABS_Z_N(a);
+
+		t1 = NLongNumber::fromLongNumber(r2);
+		t2 = NLongNumber::fromLongNumber(r3);
 		if (COM_NN_D(t1, t2) == 0) {//нет остатка
 			if (poz_a != poz_b) return MUL_ZM_Z(c);
 			else return c;
@@ -229,7 +234,9 @@ LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
 					return MUL_ZM_Z(c);
 				}
 				else {
-					return MUL_ZM_Z(ADD_ZZ_Z(c, (LongNumber)"1"));
+					auto num = (LongNumber)"1";
+					num = ADD_ZZ_Z(c, num);
+					return MUL_ZM_Z(num);
 				}
 			}
 			else return c;
