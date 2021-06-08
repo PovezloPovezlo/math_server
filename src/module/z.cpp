@@ -187,7 +187,7 @@ LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
 }
 
 /**
- * @authors Петрова Алиса (правка Береза Кирилл)
+ * @authors Петрова Алиса (правка Береза Кирилл), (правка Береза Кирилл)
  * Z-9
  * Требуется: ABS_Z_N, POZ_Z_D, DIV_NN_N, ADD_1N_N
  *
@@ -197,6 +197,7 @@ LongNumber module::MUL_ZZ_Z(LongNumber& a, LongNumber& b) {
  * @return
  */
 LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
+
 	DIGIT poz_a = POZ_Z_D(a), poz_b = POZ_Z_D(b);
 	if (poz_b == 0) throw BaseException("Second number can't be 0!");
 	if (poz_a == 0) {
@@ -210,38 +211,26 @@ LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
 	auto t1 = NLongNumber::fromLongNumber(a1);
 	auto t2 = NLongNumber::fromLongNumber(a2);
 
-	if (COM_NN_D(t1, t2) == 1) {
-		LongNumber tmp = (LongNumber)0;
-		return tmp;
-	}
-	else {
-		auto c = (LongNumber)DIV_NN_N(t1, t2);
-		//проверка на наличие остатка, чтобы правильно делились отрицательные числа
+	auto c = (LongNumber)DIV_NN_N(t1, t2);
+	LongNumber res = LongNumber::empty();
 
-		auto r1 = ABS_Z_N(b);
-		auto r2 = MUL_ZZ_Z(r1, c);
-		auto r3 = ABS_Z_N(a);
-
-		t1 = NLongNumber::fromLongNumber(r2);
-		t2 = NLongNumber::fromLongNumber(r3);
-		if (COM_NN_D(t1, t2) == 0) {//нет остатка
-			if (poz_a != poz_b) return MUL_ZM_Z(c);
-			else return c;
-		}
-		else {//есть остаток
-			if (poz_a != poz_b) {
-				if (poz_a == 2) {
-					return MUL_ZM_Z(c);
-				}
-				else {
-					auto num = (LongNumber)"1";
-					num = ADD_ZZ_Z(c, num);
-					return MUL_ZM_Z(num);
-				}
-			}
-			else return c;
-		}
+	if (poz_a == 1 && poz_b == 2) {//деление отрицательного на положительное
+		res = MUL_ZM_Z(ADD_ZZ_Z(c, (LongNumber)"1"));
 	}
+
+	if (poz_a == 2 && poz_b == 1) {//деление положительного на отрицательное
+		res = MUL_ZM_Z(c);
+	}
+
+	if (poz_a == 2 && poz_b == 2) {//деление положительного на положительное
+		res = c;
+	}
+
+	if (poz_a == 1 && poz_b == 1) {//деление отрицательного на отрицательное
+		res = ADD_ZZ_Z(c, (LongNumber)"1");
+	}
+	//printf("result: %s\n", res.toString().c_str());
+	return res;
 }
 
 /**
