@@ -27,7 +27,8 @@ RationalFraction module::RED_Q_Q(RationalFraction& a) {
 	auto nod = (LongNumber)GCF_NN_N(num_n, den_n);
 
 	if (POZ_Z_D(a.numerator) == 1) {
-		a.numerator = MUL_ZM_Z(DIV_ZZ_Z(num_n, nod));
+		auto t = DIV_ZZ_Z(num_n, nod);
+		a.numerator = MUL_ZM_Z(t);
 	}
 	else {
 		a.numerator = DIV_ZZ_Z(num_n, nod);

@@ -215,7 +215,9 @@ LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
 	LongNumber res = LongNumber::empty();
 
 	if (poz_a == 1 && poz_b == 2) {//деление отрицательного на положительное
-		res = MUL_ZM_Z(ADD_ZZ_Z(c, (LongNumber)"1"));
+		auto one = (LongNumber)"1";
+		auto t = ADD_ZZ_Z(c, one);
+		res = MUL_ZM_Z(t);
 	}
 
 	if (poz_a == 2 && poz_b == 1) {//деление положительного на отрицательное
@@ -227,7 +229,8 @@ LongNumber module::DIV_ZZ_Z(LongNumber& a, LongNumber& b) {
 	}
 
 	if (poz_a == 1 && poz_b == 1) {//деление отрицательного на отрицательное
-		res = ADD_ZZ_Z(c, (LongNumber)"1");
+		auto one = (LongNumber)"1";
+		res = ADD_ZZ_Z(c, one);
 	}
 	//printf("result: %s\n", res.toString().c_str());
 	return res;
